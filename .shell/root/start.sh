@@ -32,6 +32,22 @@ ntpd -dd -n -q -p ntp.kam.vniiftri.net
 /opt/config/mod/.shell/root/S65moonraker start
 /opt/config/mod/.shell/root/S70httpd start
 
+test_file()
+{
+    DIR="/opt/config/mod_data/save"
+    DT=$(date '+%Y%m%d_%H%M')
+
+    mkdir -p $DIR
+
+    if ! [ -f "$DIR/$1" ] || ! diff -q /opt/config/$1 "$DIR/$1"; then
+        cp /opt/config/$1 "$DIR/$1"
+        cp /opt/config/$1 "$DIR/$1.$DT.cfg"
+    fi
+}
+
+test_file printer.base.cfg
+test_file printer.cfg
+
 sleep 15
 cd /opt/config/mod/
 git log | head -3|grep Date >/opt/config/mod_data/date.txt
