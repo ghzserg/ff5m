@@ -3,6 +3,8 @@
 SWAP="$1"
 echo "SWAP=$SWAP"
 
+mv /tmp/localtime /etc/localtime
+
 if ! [ -f /root/swap ]; then dd if=/dev/zero of=/root/swap bs=1024 count=131072; mkswap /root/swap; fi;
 
 if [ "$SWAP" == "/root/swap" ]

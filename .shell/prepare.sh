@@ -141,6 +141,9 @@ start_prepare()
                     fi
             fi
     fi
+
+    cat /etc/localtime >/tmp/localtime
+
     VER=$(cat /root/version)
     chroot $MOD /opt/config/mod/.shell/root/start.sh "$SWAP" "$VER" &
 
