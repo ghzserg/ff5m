@@ -16,6 +16,8 @@ VER="FF5M $2"
 grep -q VERSION_CODENAME /etc/os-release || echo "VERSION_CODENAME=\"${VER}\"" >>/etc/os-release
 grep -q "VERSION_CODENAME=\"${VER}\"" /etc/os-release || sed -i "s|VERSION_CODENAME=.*|VERSION_CODENAME=\"${VER}\"|" /etc/os-release
 
+mkdir -p /data/tmp
+
 mount --bind /data/lost+found /data/.mod
 
 date 2024.01.01-00:00:00
