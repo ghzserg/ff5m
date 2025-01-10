@@ -11,8 +11,8 @@ if [ "$SWAP" == "/root/swap" ]
 fi
 
 VER="FF5M $2"
-grep -q VERSION_CODENAME /etc/os-release || echo "VERSION_CODENAME=${VER}" >>/etc/os-release
-grep -q "VERSION_CODENAME=${VER}" /etc/os-release || sed -i "s|VERSION_CODENAME=.*|VERSION_CODENAME=${VER}|" /etc/os-release
+grep -q VERSION_CODENAME /etc/os-release || echo "VERSION_CODENAME=\"${VER}\"" >>/etc/os-release
+grep -q "VERSION_CODENAME=\"${VER}\"" /etc/os-release || sed -i "s|VERSION_CODENAME=.*|VERSION_CODENAME=\"${VER}\"|" /etc/os-release
 
 mount --bind /data/lost+found /data/.mod
 
