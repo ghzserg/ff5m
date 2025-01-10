@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SWAP=$1
+SWAP="$1"
 echo "SWAP=$SWAP"
 
 if ! [ -f /root/swap ]; then dd if=/dev/zero of=/root/swap bs=1024 count=131072; mkswap /root/swap; fi;
@@ -9,6 +9,10 @@ if [ "$SWAP" == "/root/swap" ]
     then
         grep -q "use_swap = 0" /opt/config/mod_data/variables.cfg || swapon $SWAP
 fi
+
+VER="FF5M $2"
+grep -q VERSION_CODENAME /etc/os-release || echo "VERSION_CODENAME=${VER}" >>/etc/os-release
+grep -q "VERSION_CODENAME=${VER}" /etc/os-release || sed -i "s|VERSION_CODENAME=.*|VERSION_CODENAME=${VER}|" /etc/os-release
 
 mount --bind /data/lost+found /data/.mod
 

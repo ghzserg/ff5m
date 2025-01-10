@@ -141,8 +141,8 @@ start_prepare()
                     fi
             fi
     fi
-
-    chroot $MOD /opt/config/mod/.shell/root/start.sh "$SWAP" &
+    VER=$(cat /root/version)
+    chroot $MOD /opt/config/mod/.shell/root/start.sh "$SWAP" "$VER" &
 
     mkdir -p /data/lost+found
     sleep 10
