@@ -597,7 +597,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "color": "",
             "disabledWhilePrinting": false,
             "name": "leveling_print_file",
-            "visible": true
+            "visible": false
         },
         {
             "alias": "",
@@ -605,7 +605,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "color": "",
             "disabledWhilePrinting": false,
             "name": "noleveling_print_file",
-            "visible": true
+            "visible": false
         },
         {
             "alias": "Быстро закрыть диалоги",
@@ -716,9 +716,9 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                     "color": "group",
                     "name": "LEVELING_PRINT_FILE",
                     "pos": 8,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
+                    "showInPause": false,
+                    "showInPrinting": false,
+                    "showInStandby": false
                 },
                 {
                     "color": "group",
