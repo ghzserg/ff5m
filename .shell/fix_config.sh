@@ -23,21 +23,21 @@ fix_config()
 
     grep -q zmod_1.0 /opt/klipper/klippy/extras/gcode_shell_command.py || cp /opt/config/mod/.shell/gcode_shell_command.py /opt/klipper/klippy/extras/gcode_shell_command.py
 
-    grep -q 'include check_md5.cfg'   ${PRINTER_CFG} && sed -i '/include check_md5.cfg/d' ${PRINTER_CFG} && NEED_REBOOT=1
+    grep -q '^include check_md5.cfg'   ${PRINTER_CFG} && sed -i '/include check_md5.cfg/d' ${PRINTER_CFG} && NEED_REBOOT=1
 
     sed -i 's|\[include ./mod/display_off.cfg\]|\[include ./mod/mod.cfg\]|' ${PRINTER_CFG}
 
-    ! grep -q 'include ./mod/mod.cfg' ${PRINTER_CFG} && sed -i '2 i\[include ./mod/mod.cfg]' ${PRINTER_CFG} && NEED_REBOOT=1
+    ! grep -q '^include ./mod/mod.cfg' ${PRINTER_CFG} && sed -i '2 i\[include ./mod/mod.cfg]' ${PRINTER_CFG} && NEED_REBOOT=1
 
-    grep -q 'include mod.user.cfg' ${PRINTER_CFG} && sed -i 's|\[include mod.user.cfg\]|\[include ./mod_data/user.cfg\]|' ${PRINTER_CFG} && NEED_REBOOT=1
+    grep -q '^include mod.user.cfg' ${PRINTER_CFG} && sed -i 's|\[include mod.user.cfg\]|\[include ./mod_data/user.cfg\]|' ${PRINTER_CFG} && NEED_REBOOT=1
 
-    ! grep -q 'include ./mod_data/user.cfg'  ${PRINTER_CFG} && sed -i '3 i\[include ./mod_data/user.cfg]' ${PRINTER_CFG} && NEED_REBOOT=1
-    if ! grep -q '\[heater_bed' ${PRINTER_CFG}
+    ! grep -q '^include ./mod_data/user.cfg'  ${PRINTER_CFG} && sed -i '3 i\[include ./mod_data/user.cfg]' ${PRINTER_CFG} && NEED_REBOOT=1
+    if ! grep -q '^\[heater_bed' ${PRINTER_CFG}
         then
             NEED_REBOOT=1
 
             # Copy and remove from printer.base.cfg
-            if grep -q '\[heater_bed' ${PRINTER_BASE}
+            if grep -q '^\[heater_bed' ${PRINTER_BASE}
                 then
                     sed -e '/^\[heater_bed/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
                     diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
@@ -75,7 +75,7 @@ max_temp: 130
             rm heater_bed.txt || echo "Not heater_bed.txt"
     fi
 
-    if grep -q '\[heater_bed' ${PRINTER_BASE}
+    if grep -q '^\[heater_bed' ${PRINTER_BASE}
         then
             NEED_REBOOT=1
 
@@ -90,7 +90,7 @@ max_temp: 130
     fi
 
     # Удаляем fan_generic pcb_fan
-    if grep -q '\[fan_generic pcb_fan' ${PRINTER_BASE}
+    if grep -q '^\[fan_generic pcb_fan' ${PRINTER_BASE}
         then
             NEED_REBOOT=1
 
@@ -104,8 +104,23 @@ max_temp: 130
             rm -f heater_bed.txt printer.base.tmp
     fi
 
+    # Удаляем controller_fan pcb_fan
+    if grep -q '^\[controller_fan pcb_fan' ${PRINTER_BASE}
+        then
+            NEED_REBOOT=1
+
+            sed -e '/^\[controller_fan pcb_fan/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
+            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
+            sed -i '$d' heater_bed.txt
+            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
+            num=$(($num-1))
+            sed -e "/^\[controller_fan pcb_fan/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
+            cat printer.base.tmp >${PRINTER_BASE}
+            rm -f heater_bed.txt printer.base.tmp
+    fi
+
     # Добавляем controller_fan driver_fan
-    if ! grep -q '\[controller_fan driver_fan' ${PRINTER_BASE}
+    if ! grep -q '^\[controller_fan driver_fan' ${PRINTER_BASE}
         then
             NEED_REBOOT=1
             echo '
@@ -123,11 +138,6 @@ stepper: stepper_x, stepper_y, stepper_z
             sync
             cat ${PRINTER_CFG} >${PRINTER_CFG_ORIG}
             sync
-
-#            sleep 5
-#            sync
-#
-#            reboot
             exit 0
     fi
     echo "END fix_config"
