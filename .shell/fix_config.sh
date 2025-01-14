@@ -2,6 +2,16 @@
 
 set -x
 
+ns_off()
+{
+    grep -q "$1" /etc/hosts && sed -i "|$1|d" /etc/hosts
+}
+
+ns_on()
+{
+    grep -q "$1" /etc/hosts || sed -i "2 i\127.0.0.1 $1" /etc/hosts
+}
+
 fix_config()
 {
     echo "START fix_config"
@@ -20,13 +30,27 @@ fix_config()
 
     # Rem стукач
     if [ grep -q "china_cloud = 1" /opt/config/mod_data/variables.cfg ]; then
-        grep -q qvs.qiniuapi.com /etc/hosts && sed -i '|qvs.qiniuapi.com|d' /etc/hosts
-        grep -q cloud.sz3dp.com /etc/hosts  && sed -i '|cloud.sz3dp.com|d' /etc/hosts
-        grep -q api.fdmcloud.flashforge.com /etc/hosts && sed -i '|api.fdmcloud.flashforge.com|d' /etc/hosts
+        ns_off api.cloud.flashforge.com
+        ns_off api.fdmcloud.flashforge.com
+        ns_off cloud.sz3dp.com
+        ns_off hz.sz3dp.com
+        ns_off printer2.polar3d.com
+        ns_off qvs.qiniuapi.com
+        ns_off update.cn.sz3dp.com
+        ns_off update.sz3dp.com
+        ns_off cloud.sz3dp.com
+        ns_off polar3d.com
     else
-        grep -q qvs.qiniuapi.com /etc/hosts || sed -i '2 i\127.0.0.1 qvs.qiniuapi.com' /etc/hosts
-        grep -q cloud.sz3dp.com /etc/hosts || sed -i '2 i\127.0.0.1 cloud.sz3dp.com' /etc/hosts
-        grep -q api.fdmcloud.flashforge.com /etc/hosts || sed -i '2 i\127.0.0.1 api.fdmcloud.flashforge.com' /etc/hosts
+        ns_on api.cloud.flashforge.com
+        ns_on api.fdmcloud.flashforge.com
+        ns_on cloud.sz3dp.com
+        ns_on hz.sz3dp.com
+        ns_on printer2.polar3d.com
+        ns_on qvs.qiniuapi.com
+        ns_on update.cn.sz3dp.com
+        ns_on update.sz3dp.com
+        ns_on cloud.sz3dp.com
+        ns_on polar3d.com
     fi
 
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py || cp /opt/config/mod/.shell/save_variables.py /opt/klipper/klippy/extras/save_variables.py

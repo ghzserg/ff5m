@@ -2,12 +2,28 @@
 
 set -x
 
+ns_off()
+{
+    grep -q "$1" /etc/hosts && sed -i "|$1|d" /etc/hosts
+}
+
 restore_base()
 {
     grep -q '^\[include mod.user.cfg' /opt/config/printer.cfg && sed -i '|include mod.user.cfg|d' /opt/config/printer.cfg
     grep -q '^\[include ./mod/mod.cfg' /opt/config/printer.cfg && sed -i '|include mod.cfg|d' /opt/config/printer.cfg
     grep -q '^\[include ./mod/display_off.cfg' /opt/config/printer.cfg && sed -i '|display_off.cfg|d' /opt/config/printer.cfg
-    grep -q qvs.qiniuapi.com /etc/hosts && sed -i '|qvs.qiniuapi.com|d' /etc/hosts
+
+    ns_off api.cloud.flashforge.com
+    ns_off api.fdmcloud.flashforge.com
+    ns_off cloud.sz3dp.com
+    ns_off hz.sz3dp.com
+    ns_off printer2.polar3d.com
+    ns_off qvs.qiniuapi.com
+    ns_off update.cn.sz3dp.com
+    ns_off update.sz3dp.com
+    ns_off cloud.sz3dp.com
+    ns_off polar3d.com
+
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py && cp /opt/config/mod/.shell/save_variables.py.orig /opt/klipper/klippy/extras/save_variables.py
 
     # Удаляем controller_fan driver_fan
