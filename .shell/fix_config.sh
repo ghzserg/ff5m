@@ -177,6 +177,13 @@ stepper: stepper_x, stepper_y, stepper_z
             sync
             cat ${PRINTER_CFG} >${PRINTER_CFG_ORIG}
             sync
+            if [ "$1" == "start" ]; then
+                echo "Reboot"
+                sync
+                killall firmwareExe
+                sync
+                reboot
+            fi
             exit 0
     fi
     echo "END fix_config"
@@ -191,6 +198,6 @@ mv /opt/config/mod_data/log/fix_config.log.2 /opt/config/mod_data/log/fix_config
 mv /opt/config/mod_data/log/fix_config.log.1 /opt/config/mod_data/log/fix_config.log.2
 mv /opt/config/mod_data/log/fix_config.log /opt/config/mod_data/log/fix_config.log.1
 
-fix_config &>/opt/config/mod_data/log/fix_config.log
+fix_config "$1" &>/opt/config/mod_data/log/fix_config.log
 
 sync
