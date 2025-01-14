@@ -126,6 +126,36 @@ max_temp: 130
             rm -f heater_bed.txt printer.base.tmp
     fi
 
+    # Удаляем filament_switch_sensor e0_sensor
+    if grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
+        then
+            NEED_REBOOT=1
+
+            sed -e '/^\[filament_switch_sensor e0_sensor/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
+            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
+            sed -i '$d' heater_bed.txt
+            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
+            num=$(($num-1))
+            sed -e "/^\[filament_switch_sensor e0_sensor/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
+            cat printer.base.tmp >${PRINTER_BASE}
+            rm -f heater_bed.txt printer.base.tmp
+    fi
+
+    # Удаляем gcode_button check_level_pin
+    if grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
+        then
+            NEED_REBOOT=1
+
+            sed -e '/^\[gcode_button check_level_pin/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
+            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
+            sed -i '$d' heater_bed.txt
+            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
+            num=$(($num-1))
+            sed -e "/^\[gcode_button check_level_pin/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
+            cat printer.base.tmp >${PRINTER_BASE}
+            rm -f heater_bed.txt printer.base.tmp
+    fi
+
     # Добавляем controller_fan driver_fan
     if ! grep -q '^\[controller_fan driver_fan' ${PRINTER_BASE}
         then

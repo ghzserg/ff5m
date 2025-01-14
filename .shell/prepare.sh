@@ -11,7 +11,7 @@ restore_base()
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py && cp /opt/config/mod/.shell/save_variables.py.orig /opt/klipper/klippy/extras/save_variables.py
 
     # Удаляем controller_fan driver_fan
-    if grep -q '\[controller_fan driver_fan' /opt/config/printer.base.cfg
+    if grep -q '^\[controller_fan driver_fan' /opt/config/printer.base.cfg
         then
             cd /opt/config/
             sed -e '/^\[controller_fan driver_fan/,/^\[/d' printer.base.cfg >printer.base.tmp
@@ -25,10 +25,32 @@ restore_base()
     fi
 
     # Возвращаем fan_generic pcb_fan
-    if ! grep -q '\[fan_generic pcb_fan' /opt/config/printer.base.cfg
+    if ! grep -q '^\[fan_generic pcb_fan' /opt/config/printer.base.cfg
         then
             echo '
 [fan_generic pcb_fan]
+pause_on_runout: False
+switch_pin: !PB14
+event_delay: 1.0
+' >>/opt/config/printer.base.cfg
+    fi
+
+    # Возвращаем gcode_button check_level_pin
+    if ! grep -q '^\[gcode_button check_level_pin' /opt/config/printer.base.cfg
+        then
+            echo '
+[gcode_button check_level_pin]
+pin: !PE0
+press_gcode:
+    M105
+' >>/opt/config/printer.base.cfg
+    fi
+
+    # Возвращаем filament_switch_sensor e0_sensor
+    if ! grep -q '\[filament_switch_sensor e0_sensor' /opt/config/printer.base.cfg
+        then
+            echo '
+[filament_switch_sensor e0_sensor]
 pin:PB7
 ' >>/opt/config/printer.base.cfg
     fi
