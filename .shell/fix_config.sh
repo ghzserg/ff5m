@@ -19,7 +19,15 @@ fix_config()
     cat ${PRINTER_CFG}
 
     # Rem стукач
-    grep -q qvs.qiniuapi.com /etc/hosts || sed -i '2 i\127.0.0.1 qvs.qiniuapi.com' /etc/hosts
+    if [ grep -q "china_cloud = 1" /opt/config/mod_data/variables.cfg ]; then
+        grep -q qvs.qiniuapi.com /etc/hosts && sed -i '|qvs.qiniuapi.com|d' /etc/hosts
+        grep -q cloud.sz3dp.com /etc/hosts  && sed -i '|cloud.sz3dp.com|d' /etc/hosts
+        grep -q api.fdmcloud.flashforge.com /etc/hosts && sed -i '|api.fdmcloud.flashforge.com|d' /etc/hosts
+    else
+        grep -q qvs.qiniuapi.com /etc/hosts || sed -i '2 i\127.0.0.1 qvs.qiniuapi.com' /etc/hosts
+        grep -q cloud.sz3dp.com /etc/hosts || sed -i '2 i\127.0.0.1 cloud.sz3dp.com' /etc/hosts
+        grep -q api.fdmcloud.flashforge.com /etc/hosts || sed -i '2 i\127.0.0.1 api.fdmcloud.flashforge.com' /etc/hosts
+    fi
 
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py || cp /opt/config/mod/.shell/save_variables.py /opt/klipper/klippy/extras/save_variables.py
 
