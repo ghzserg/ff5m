@@ -23,15 +23,15 @@ fix_config()
 
     grep -q zmod_1.0 /opt/klipper/klippy/extras/gcode_shell_command.py || cp /opt/config/mod/.shell/gcode_shell_command.py /opt/klipper/klippy/extras/gcode_shell_command.py
 
-    grep -q '^\[include check_md5.cfg\]'   ${PRINTER_CFG} && sed -i '|^\[include check_md5.cfg\]|d' ${PRINTER_CFG} && NEED_REBOOT=1
+    grep -q '^\[include check_md5.cfg\]' ${PRINTER_CFG} && sed -i '|^\[include check_md5.cfg\]|d' ${PRINTER_CFG} && NEED_REBOOT=1
 
     #sed -i 's|\[include ./mod/display_off.cfg\]|\[include ./mod/mod.cfg\]|' ${PRINTER_CFG}
 
     cnt=$(grep '^\[include ./mod_data/user.cfg\]' ${PRINTER_CFG} |wc -l)
-    [ "$cnt" -gt 1 ] && sed '/^\[include .\/mod_data\/user.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
+    [ "$cnt" -gt 1 ] && sed -i '/^\[include .\/mod_data\/user.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
 
     cnt=$(grep '^\[include ./mod/mod.cfg\]' ${PRINTER_CFG} |wc -l)
-    [ "$cnt" -gt 1 ] && sed '/^\[include .\/mod\/mod.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
+    [ "$cnt" -gt 1 ] && sed -i '/^\[include .\/mod\/mod.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
 
     ! grep -q '^\[include ./mod/mod.cfg\]' ${PRINTER_CFG} && sed -i '2 i\[include ./mod/mod.cfg]' ${PRINTER_CFG} && NEED_REBOOT=1
 
