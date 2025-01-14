@@ -112,7 +112,8 @@ start_prepare()
       exit
     fi
 
-    /opt/config/mod/.shell/fix_config.sh
+    #/opt/config/mod/.shell/fix_config.sh
+    ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
     echo "System start" >/data/logFiles/ssh.log
     mount -t proc /proc $MOD/proc
     mount --rbind /sys $MOD/sys
