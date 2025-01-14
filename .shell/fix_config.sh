@@ -16,9 +16,7 @@ fix_config()
     cp ${PRINTER_BASE_ORIG} ${PRINTER_BASE}
     cp ${PRINTER_CFG_ORIG} ${PRINTER_CFG}
     cat ${PRINTER_BASE}
-    wc -l ${PRINTER_BASE}
     cat ${PRINTER_CFG}
-    wc -l ${PRINTER_CFG}
 
     # Rem стукач
     grep -q qvs.qiniuapi.com /etc/hosts || sed -i '2 i\127.0.0.1 qvs.qiniuapi.com' /etc/hosts
@@ -178,24 +176,27 @@ stepper: stepper_x, stepper_y, stepper_z
     wc -l ${PRINTER_BASE}
     wc -l ${PRINTER_CFG}
 
+
     if [ ${NEED_REBOOT} -eq 1 ]
         then
+            echo "Kill firmwareExe"
+            sync
+            killall firmwareExe
+            sync
             cat ${PRINTER_BASE} >${PRINTER_BASE_ORIG}
             sync
             cat ${PRINTER_CFG} >${PRINTER_CFG_ORIG}
             sync
+            diff -u ${PRINTER_BASE} ${PRINTER_BASE_ORIG}
+            diff -u ${PRINTER_CFG} ${PRINTER_CFG_ORIG}
             if [ "$1" == "start" ]; then
                 echo "Reboot"
-                sync
-                killall firmwareExe
                 sync
                 reboot
             fi
     fi
-    cat ${PRINTER_BASE_ORIG}
-    wc -l ${PRINTER_BASE_ORIG}
-    cat ${PRINTER_CFG_ORIG}
-    wc -l ${PRINTER_CFG_ORIG}
+    diff -u ${PRINTER_BASE} ${PRINTER_BASE_ORIG}
+    diff -u ${PRINTER_CFG} ${PRINTER_CFG_ORIG}
     echo "END fix_config"
 }
 
