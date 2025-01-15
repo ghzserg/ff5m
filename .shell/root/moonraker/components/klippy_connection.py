@@ -44,6 +44,7 @@ if TYPE_CHECKING:
 # These endpoints are reserved for klippy/moonraker communication only and are
 # not exposed via http or the websocket
 RESERVED_ENDPOINTS = [
+    "objects/list",
     "list_endpoints",
     "gcode/subscribe_output",
     "register_remote_method",

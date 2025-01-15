@@ -327,7 +327,7 @@ class FileManager:
         if isinstance(req_path, str):
             req_path = pathlib.Path(req_path)
         req_path = req_path.expanduser().resolve()
-        if ".git" in req_path.parts:
+        if ".git" in req_path.parts or ".shell" in req_path.parts or ".mod" in req_path.parts or "lost+found" in req_path.parts:
             if raise_error:
                 raise self.server.error(
                     "Access to .git folders is forbidden", 403
@@ -742,6 +742,8 @@ class FileManager:
         flist: Dict[str, Any] = {'dirs': [], 'files': []}
         for fname in os.listdir(path):
             full_path = os.path.join(path, fname)
+            if fname == ".shell" or fname == ".mod" or fname == "lost+found" or fname == "logFiles" or fname == "uploadThumbnail" or fname == "tmp"or fname == "camera" or fname == "3mf":
+                continue
             if not os.path.exists(full_path):
                 continue
             path_info = self.get_path_info(full_path, root)
@@ -782,7 +784,7 @@ class FileManager:
             if raise_error:
                 raise
             return {"modified": 0, "size": 0, "permissions": ""}
-        if ".git" in real_path.parts:
+        if ".git" in real_path.parts or ".shell" in real_path.parts or ".mod" in real_path.parts or "lost+found" in real_path.parts:
             permissions = ""
         else:
             permissions = "rw"
