@@ -280,6 +280,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "visible": true
         },
         {
+            "alias": "Перезапустить ZMOD камеру",
+            "categoryId": "0077449b-cd10-4059-aebd-bf17be6cb270",
+            "color": "",
+            "disabledWhilePrinting": false,
+            "name": "camera_restart",
+            "visible": true
+        },
+        {
             "alias": "Включить ZMOD камеру",
             "categoryId": "0077449b-cd10-4059-aebd-bf17be6cb270",
             "color": "",
@@ -878,7 +886,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "CAMERA_OFF",
+                    "name": "CAMERA_RESTART",
                     "pos": 8,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -886,7 +894,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "DATE_GET",
+                    "name": "CAMERA_OFF",
                     "pos": 9,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -894,7 +902,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "DATE_SET",
+                    "name": "DATE_GET",
                     "pos": 10,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -902,7 +910,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "SET_TIMEZONE",
+                    "name": "DATE_SET",
                     "pos": 11,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -910,7 +918,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "TAR_CONFIG",
+                    "name": "SET_TIMEZONE",
                     "pos": 12,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -918,7 +926,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "GET_ZMOD_DATA",
+                    "name": "TAR_CONFIG",
                     "pos": 13,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -926,7 +934,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "SAVE_ZMOD_DATA",
+                    "name": "GET_ZMOD_DATA",
                     "pos": 14,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -934,7 +942,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "START_ZMOD",
+                    "name": "SAVE_ZMOD_DATA",
                     "pos": 15,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -942,7 +950,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "STOP_ZMOD",
+                    "name": "START_ZMOD",
                     "pos": 16,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -950,7 +958,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "SKIP_ZMOD",
+                    "name": "STOP_ZMOD",
                     "pos": 17,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -958,7 +966,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "REMOVE_ZMOD",
+                    "name": "SKIP_ZMOD",
                     "pos": 18,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -966,7 +974,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "SOFT_REMOVE",
+                    "name": "REMOVE_ZMOD",
                     "pos": 19,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -974,31 +982,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "ZSSH_RESTART",
-                    "pos": 22,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "TEST_EMMC",
-                    "pos": 24,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "CLEAR_EMMC",
-                    "pos": 25,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "ZSSH_ON",
+                    "name": "SOFT_REMOVE",
                     "pos": 20,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -1006,7 +990,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "ZSSH_OFF",
+                    "name": "ZSSH_RESTART",
                     "pos": 21,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -1014,8 +998,40 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "ZSSH_RELOAD",
+                    "name": "TEST_EMMC",
+                    "pos": 22,
+                    "showInPause": true,
+                    "showInPrinting": true,
+                    "showInStandby": true
+                },
+                {
+                    "color": "group",
+                    "name": "CLEAR_EMMC",
                     "pos": 23,
+                    "showInPause": true,
+                    "showInPrinting": true,
+                    "showInStandby": true
+                },
+                {
+                    "color": "group",
+                    "name": "ZSSH_ON",
+                    "pos": 24,
+                    "showInPause": true,
+                    "showInPrinting": true,
+                    "showInStandby": true
+                },
+                {
+                    "color": "group",
+                    "name": "ZSSH_OFF",
+                    "pos": 25,
+                    "showInPause": true,
+                    "showInPrinting": true,
+                    "showInStandby": true
+                },
+                {
+                    "color": "group",
+                    "name": "ZSSH_RELOAD",
+                    "pos": 26,
                     "showInPause": true,
                     "showInPrinting": true,
                     "showInStandby": true
