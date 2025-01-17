@@ -9,13 +9,12 @@ import stepper
 class CoreXZKinematics:
     def __init__(self, toolhead, config):
         # Setup axis rails
-        self.rails = [ stepper.PrinterRail(config.getsection('stepper_x')),
-                       stepper.PrinterRail(config.getsection('stepper_y')),
-                       stepper.PrinterRail(config.getsection('stepper_z')) ]
-        self.rails[0].get_endstops()[0][0].add_stepper(
-            self.rails[2].get_steppers()[0])
-        self.rails[2].get_endstops()[0][0].add_stepper(
-            self.rails[0].get_steppers()[0])
+        self.rails = [stepper.LookupMultiRail(config.getsection('stepper_' + n))
+                      for n in 'xyz']
+        for s in self.rails[0].get_steppers():
+            self.rails[2].get_endstops()[0][0].add_stepper(s)
+        for s in self.rails[2].get_steppers():
+            self.rails[0].get_endstops()[0][0].add_stepper(s)
         self.rails[0].setup_itersolve('corexz_stepper_alloc', b'+')
         self.rails[1].setup_itersolve('cartesian_stepper_alloc', b'y')
         self.rails[2].setup_itersolve('corexz_stepper_alloc', b'-')
@@ -44,9 +43,10 @@ class CoreXZKinematics:
             rail.set_position(newpos)
             if i in homing_axes:
                 self.limits[i] = rail.get_range()
-    def note_z_not_homed(self):
-        # Helper for Safe Z Home
-        self.limits[2] = (1.0, -1.0)
+    def clear_homing_state(self, axes):
+        for i, _ in enumerate(self.limits):
+            if i in axes:
+                self.limits[i] = (1.0, -1.0)
     def home(self, homing_state):
         # Each axis is homed independently and in order
         for axis in homing_state.get_axes():
@@ -64,7 +64,7 @@ class CoreXZKinematics:
             # Perform homing
             homing_state.home_rails([rail], forcepos, homepos)
     def _motor_off(self, print_time):
-        self.limits = [(1.0, -1.0)] * 3
+        self.clear_homing_state((0, 1, 2))
     def _check_endstops(self, move):
         end_pos = move.end_pos
         for i in (0, 1, 2):

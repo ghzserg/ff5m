@@ -65,6 +65,8 @@ class DeltaKinematics:
         self.min_z = config.getfloat('minimum_z_position', 0, maxval=self.max_z)
         self.limit_z = min([ep - arm
                             for ep, arm in zip(self.abs_endstops, arm_lengths)])
+        self.min_arm_length = min_arm_length = min(arm_lengths)
+        self.min_arm2 = min_arm_length**2
         logging.info(
             "Delta max build height %.2fmm (radius tapered above %.2fmm)"
             % (self.max_z, self.limit_z))
@@ -103,6 +105,11 @@ class DeltaKinematics:
         self.limit_xy2 = -1.
         if tuple(homing_axes) == (0, 1, 2):
             self.need_home = False
+    def clear_homing_state(self, axes):
+        # Clearing homing state for each axis individually is not implemented
+        if 0 in axes or 1 in axes or 2 in axes:
+            self.limit_xy2 = -1
+            self.need_home = True
     def home(self, homing_state):
         # All axes are homed simultaneously
         homing_state.set_axes([0, 1, 2])
@@ -110,8 +117,7 @@ class DeltaKinematics:
         forcepos[2] = -1.5 * math.sqrt(max(self.arm2)-self.max_xy2)
         homing_state.home_rails(self.rails, forcepos, self.home_position)
     def _motor_off(self, print_time):
-        self.limit_xy2 = -1.
-        self.need_home = True
+        self.clear_homing_state((0, 1, 2))
     def check_move(self, move):
         end_pos = move.end_pos
         end_xy2 = end_pos[0]**2 + end_pos[1]**2
@@ -123,7 +129,11 @@ class DeltaKinematics:
         end_z = end_pos[2]
         limit_xy2 = self.max_xy2
         if end_z > self.limit_z:
-            limit_xy2 = min(limit_xy2, (self.max_z - end_z)**2)
+            above_z_limit = end_z - self.limit_z
+            allowed_radius = self.radius - math.sqrt(
+                self.min_arm2 - (self.min_arm_length - above_z_limit)**2
+            )
+            limit_xy2 = min(limit_xy2, allowed_radius**2)
         if end_xy2 > limit_xy2 or end_z > self.max_z or end_z < self.min_z:
             # Move out of range - verify not a homing move
             if (end_pos[:2] != self.home_position[:2]
