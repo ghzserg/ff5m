@@ -194,9 +194,9 @@ def get_git_version(from_file=True):
 
     # Obtain version info from "git" program
     gitdir = os.path.join(klippy_src, '..')
-    prog_desc = ('git', '-C', gitdir, 'describe', '--always',
+    prog_desc = ('git_none', '-C', gitdir, 'describe', '--always',
                  '--tags', '--long', '--dirty')
-    prog_status = ('git', '-C', gitdir, 'status', '--porcelain', '--ignored')
+    prog_status = ('git_none', '-C', gitdir, 'status', '--porcelain', '--ignored')
     try:
         process = subprocess.Popen(prog_desc, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE)

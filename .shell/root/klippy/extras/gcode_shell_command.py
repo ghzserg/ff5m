@@ -3,6 +3,7 @@
 # Copyright (C) 2019  Eric Callahan <arksine.code@gmail.com>
 #
 # This file may be distributed under the terms of the GNU GPLv3 license.
+# zmod_1.0
 import os
 import shlex
 import subprocess
@@ -58,7 +59,7 @@ class ShellCommand:
             raise self.gcode.error("Error running command {%s}" % (self.name))
         if self.verbose:
             self.proc_fd = proc.stdout.fileno()
-            self.gcode.respond_info("Running Command {%s}...:" % (self.name))
+            self.gcode.respond_info("%s:" % (self.name))
             hdl = reactor.register_fd(self.proc_fd, self._process_output)
         eventtime = reactor.monotonic()
         endtime = eventtime + self.timeout
@@ -74,11 +75,9 @@ class ShellCommand:
             if self.partial_output:
                 self.gcode.respond_info(self.partial_output)
                 self.partial_output = ""
-            if complete:
-                msg = "Command {%s} finished\n" % (self.name)
-            else:
+            if not complete:
                 msg = "Command {%s} timed out" % (self.name)
-            self.gcode.respond_info(msg)
+                self.gcode.respond_info(msg)
             reactor.unregister_fd(hdl)
             self.proc_fd = None
 
