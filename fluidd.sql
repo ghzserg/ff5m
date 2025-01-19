@@ -172,6 +172,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "categoryId": "0",
             "color": "",
             "disabledWhilePrinting": false,
+            "name": "g28",
+            "visible": false
+        },
+        {
+            "alias": "",
+            "categoryId": "0",
+            "color": "",
+            "disabledWhilePrinting": false,
             "name": "set_fan_speed",
             "visible": false
         },
@@ -748,6 +756,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                     "color": "group",
                     "name": "NOLEVELING_PRINT_FILE",
                     "pos": 11,
+                    "showInPause": false,
+                    "showInPrinting": false,
+                    "showInStandby": false
+                },
+                {
+                    "color": "group",
+                    "name": "G28",
+                    "pos": 12,
                     "showInPause": false,
                     "showInPrinting": false,
                     "showInStandby": false
