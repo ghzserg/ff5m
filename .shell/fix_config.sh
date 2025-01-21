@@ -251,7 +251,7 @@ stepper: stepper_x, stepper_y, stepper_z
                 echo "mmcblk0p7 not mounted and will fsck";
                 fsck -y /dev/mmcblk0p7 && mount /dev/mmcblk0p7 /data;
             fi
-            mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/run.sh
+            mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/start.sh
             /opt/config/mod/.shell/prepare.sh klipper
         fi
         sync
