@@ -20,6 +20,8 @@ class SaveVariables:
         gcode = self.printer.lookup_object('gcode')
         gcode.register_command('SAVE_VARIABLE', self.cmd_SAVE_VARIABLE,
                                desc=self.cmd_SAVE_VARIABLE_help)
+        gcode.register_command('ZLOAD_VARIABLE', self.cmd_ZLOAD_VARIABLE,
+                               desc=self.cmd_ZLOAD_VARIABLE_help)
     def loadVariables(self):
         allvars = {}
         varfile = configparser.ConfigParser()
@@ -33,6 +35,9 @@ class SaveVariables:
             logging.exception(msg)
             raise self.printer.command_error(msg)
         self.allVariables = allvars
+    cmd_ZLOAD_VARIABLE_help = "LOAD arbitrary variables to disk"
+    def cmd_ZLOAD_VARIABLE(self, gcmd):
+        self.loadVariables()
     cmd_SAVE_VARIABLE_help = "Save arbitrary variables to disk"
     def cmd_SAVE_VARIABLE(self, gcmd):
         varname = gcmd.get('VARIABLE')

@@ -256,6 +256,20 @@ class KlippyAPI(APITransport):
         self, web_request: WebRequest
     ):
         result = await self.get_object_list(default=None)
+        if 'output_pin level_h1' in result:
+            result.remove('output_pin level_h1')
+        if 'output_pin level_h2' in result:
+            result.remove('output_pin level_h2')
+        if 'output_pin level_h3' in result:
+            result.remove('output_pin level_h3')
+        if 'output_pin power_off' in result:
+            result.remove('output_pin power_off')
+        if 'output_pin clear_power_off' in result:
+            result.remove('output_pin clear_power_off')
+        if 'output_pin level_clear' in result:
+            result.remove('output_pin level_clear')
+        if 'filament_switch_sensor check_level_pin_alt' in result:
+            result.remove('filament_switch_sensor check_level_pin_alt')
         return {
             "objects": result
         }
