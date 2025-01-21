@@ -16,7 +16,8 @@ klipper12()
     else
         /usr/sbin/chroot $MOD /opt/config/mod/.shell/root/S60klipper start
     fi
-    umount /opt/klipper/start.sh
+    mount
+    ps
 }
 
 mv /opt/config/mod_data/log/klipper12.log.4 /opt/config/mod_data/log/klipper12.log.5

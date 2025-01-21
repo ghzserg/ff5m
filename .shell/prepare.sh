@@ -129,6 +129,8 @@ start_moon()
     mount --bind /data/lost+found /data/.mod
     mount
     ps
+    sleep 60
+    umount /opt/klipper/start.sh
 }
 
 start_prepare()

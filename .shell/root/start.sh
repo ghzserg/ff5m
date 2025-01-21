@@ -10,9 +10,9 @@ prepare_chroot()
 
     [ -L /etc/init.d/S98zssh ] || ln -s /opt/config/mod/.shell/S98zssh /etc/init.d/
     [ -L /etc/init.d/S98camera ] || ln -s /opt/config/mod/.shell/S98camera /etc/init.d/
-    [ -L /etc/init.d/S60klipper ] || ln -s /opt/config/mod/.shell/S60klipper
-    [ -L /etc/init.d/S65moonraker ] || ln -s /opt/config/mod/.shell/S65moonraker
-    [ -L /etc/init.d/S70httpd ] || ln -s /opt/config/mod/.shell/S70httpd
+    [ -L /etc/init.d/S60klipper ] || ln -s /opt/config/mod/.shell/S60klipper /etc/init.d/
+    [ -L /etc/init.d/S65moonraker ] || ln -s /opt/config/mod/.shell/S65moonraker /etc/init.d/
+    [ -L /etc/init.d/S70httpd ] || ln -s /opt/config/mod/.shell/S70httpd /etc/init.d/
 }
 
 SWAP="$1"
