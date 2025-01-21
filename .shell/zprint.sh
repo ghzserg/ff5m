@@ -6,7 +6,12 @@
 
 if [ $# -ne 2 ] && [ $# -ne 3 ]; then echo "Используйте $0 PRINT|CLOSE FILE [PRECLEAR]"; exit 1; fi
 
-CURL="/opt/cloud/curl-7.55.1-https/bin/curl"
+if ! [ -f /THIS_IS_NOT_YOUR_ROOT_FILESYSTEM ]; then
+    CURL="/usr/bin/curl"
+else
+    CURL="/opt/cloud/curl-7.55.1-https/bin/curl"
+fi
+
 ip=$(ip addr | grep inet | grep wlan0 | awk -F" " '{print $2}'| sed -e 's/\/.*$//')
 if [ "$ip" == "" ]; then ip=$(ip addr | grep inet | grep eth0 | awk -F" " '{print $2}'| sed -e 's/\/.*$//'); fi
 
@@ -23,9 +28,6 @@ if [ "$1" == "CLOSE" ]
 else
     if [ "$1" == "PRINT" ]
         then
-            echo "EXCLUDE_OBJECT_DEFINE RESET=1" >/tmp/printer 2>/dev/null
-            head -1000 "/data/$2" | grep ^EXCLUDE_OBJECT_DEFINE >/tmp/printer 2>/dev/null
-
             M109=$(head -1000 "/data/$2" | grep "^M109" | head -1)
             [ "$M109" == "" ] && M109=$(head -1000 "/data/$2" | grep "^M104" | head -1 | sed 's|M104|M109|')
             M190=$(head -1000 "/data/$2" | grep "^M190" | head -1)
@@ -44,6 +46,9 @@ else
                     echo "_START_PRECLEAR" >/tmp/printer
                     echo "RUN_SHELL_COMMAND CMD=zprint PARAMS=\"PRINT '$2'\"">/tmp/printer
                 else
+                    echo "EXCLUDE_OBJECT_DEFINE RESET=1" >/tmp/printer 2>/dev/null
+                    head -1000 "/data/$2" | grep ^EXCLUDE_OBJECT_DEFINE >/tmp/printer 2>/dev/null
+
                     $CURL -m 60 -s \
                         http://$ip:8898/printGcode \
                         -H 'Content-Type: application/json' \
