@@ -3,6 +3,12 @@
 # Start TelegramBot
 #
 
+if [ -f /THIS_IS_NOT_YOUR_ROOT_FILESYSTEM ]; then
+    DBCLIENT="/bin/dropbearmulti dbclient"
+else
+    DBCLIENT="dbclient"
+fi
+
 if ! [ -f /opt/config/mod_data/ssh.key ]
     then
         dropbearkey -t ed25519 -f /opt/config/mod_data/ssh.key
@@ -28,12 +34,12 @@ start() {
             if ! test_running
                 then
                     date >> ${LOG_FILE}
-                    /bin/dropbearmulti dbclient -i /opt/config/mod_data/ssh.key -p${SSH_PORT} -R ${VIDEO_PORT}:127.0.0.1:8080 -R ${MOON_PORT}:127.0.0.1:7125 ${SSH_USER}@${SSH_SERVER} -o ExitOnForwardFailure=yes -N -T -f -y >> ${LOG_FILE} 2>&1
+                    $DBCLIENT -i /opt/config/mod_data/ssh.key -p${SSH_PORT} -R ${VIDEO_PORT}:127.0.0.1:8080 -R ${MOON_PORT}:127.0.0.1:7125 ${SSH_USER}@${SSH_SERVER} -o ExitOnForwardFailure=yes -N -T -f -y >> ${LOG_FILE} 2>&1
                     ps axf|grep '\-N \-T \-f \-y'| head -1| awk '{print $1}' >${PID_FILE}
                     cat ${LOG_FILE}
                     [ "${REMOTE_RUN}" != "NONE" ] && \
                         test_running && \
-                        /bin/dropbearmulti dbclient -i /opt/config/mod_data/ssh.key -p${SSH_PORT} ${SSH_USER}@${SSH_SERVER} -T -f -y ${REMOTE_RUN} >> ${LOG_FILE} 2>&1
+                        $DBCLIENT -i /opt/config/mod_data/ssh.key -p${SSH_PORT} ${SSH_USER}@${SSH_SERVER} -T -f -y ${REMOTE_RUN} >> ${LOG_FILE} 2>&1
             fi
         else
             echo "SSH отключен"
@@ -42,6 +48,7 @@ start() {
 
 stop() {
     kill $( ps |grep -v grep |grep dropbearmulti| awk '{print $1}' ) 2>/dev/null >/dev/null
+    kill $( ps |grep -v grep |grep dbclient| awk '{print $1}' ) 2>/dev/null >/dev/null
     rm -f $PID_FILE
 }
 
