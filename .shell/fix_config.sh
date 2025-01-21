@@ -4,7 +4,7 @@ set -x
 
 ns_off()
 {
-    grep -q "$1" /etc/hosts && sed -i "|$1|d" /etc/hosts
+    grep -q "$1" /etc/hosts && sed -i "/$1/d" /etc/hosts
 }
 
 ns_on()
@@ -30,17 +30,6 @@ fix_config()
 
     # Rem стукач
     if grep -q "china_cloud = 1" /opt/config/mod_data/variables.cfg; then
-        ns_off api.cloud.flashforge.com
-        ns_off api.fdmcloud.flashforge.com
-        ns_off cloud.sz3dp.com
-        ns_off hz.sz3dp.com
-        ns_off printer2.polar3d.com
-        ns_off qvs.qiniuapi.com
-        ns_off update.cn.sz3dp.com
-        ns_off update.sz3dp.com
-        ns_off cloud.sz3dp.com
-        ns_off polar3d.com
-    else
         ns_on api.cloud.flashforge.com
         ns_on api.fdmcloud.flashforge.com
         ns_on cloud.sz3dp.com
@@ -51,13 +40,24 @@ fix_config()
         ns_on update.sz3dp.com
         ns_on cloud.sz3dp.com
         ns_on polar3d.com
+    else
+        ns_off api.cloud.flashforge.com
+        ns_off api.fdmcloud.flashforge.com
+        ns_off cloud.sz3dp.com
+        ns_off hz.sz3dp.com
+        ns_off printer2.polar3d.com
+        ns_off qvs.qiniuapi.com
+        ns_off update.cn.sz3dp.com
+        ns_off update.sz3dp.com
+        ns_off cloud.sz3dp.com
+        ns_off polar3d.com
     fi
 
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py || cp /opt/config/mod/.shell/save_variables.py /opt/klipper/klippy/extras/save_variables.py
 
     grep -q zmod_1.0 /opt/klipper/klippy/extras/gcode_shell_command.py || cp /opt/config/mod/.shell/gcode_shell_command.py /opt/klipper/klippy/extras/gcode_shell_command.py
 
-    grep -q '^\[include check_md5.cfg\]' ${PRINTER_CFG} && sed -i '|^\[include check_md5.cfg\]|d' ${PRINTER_CFG} && NEED_REBOOT=1
+    grep -q '^\[include check_md5.cfg\]' ${PRINTER_CFG} && sed -i '/^\[include check_md5.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
 
     grep -q '^\[include ./mod/mod.cfg\]' ${PRINTER_CFG} && grep -q '^\[include ./mod/display_off.cfg\]' ${PRINTER_CFG} && sed -i '/^\[include .\/mod\/display_off.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
 
@@ -205,9 +205,20 @@ stepper: stepper_x, stepper_y, stepper_z
 ' >>${PRINTER_BASE}
     fi
 
-    wc -l ${PRINTER_BASE}
-    wc -l ${PRINTER_CFG}
-
+    # Klipper12 FIX
+    if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
+        if grep -q '^max_accel_to_decel' ${PRINTER_BASE}
+            then
+                NEED_REBOOT=1
+                sed -i 's|^max_accel_to_decel.*|minimum_cruise_ratio: 0.5|' ${PRINTER_BASE}
+        fi
+    else
+        if grep -q '^minimum_cruise_ratio' ${PRINTER_BASE}
+            then
+                NEED_REBOOT=1
+                sed -i 's|^minimum_cruise_ratio.*|max_accel_to_decel:5000|' ${PRINTER_BASE}
+        fi
+    fi
 
     if [ ${NEED_REBOOT} -eq 1 ]
         then
@@ -221,19 +232,26 @@ stepper: stepper_x, stepper_y, stepper_z
             cat ${PRINTER_BASE} >${PRINTER_BASE_ORIG}
             sync
             cat ${PRINTER_CFG} >${PRINTER_CFG_ORIG}
-            if [ "$1" == "start" ]; then
-                echo "Reboot"
-                sync
-                reboot
-            fi
+#            if [ "$1" == "start" ]; then
+#                echo "Reboot"
+#                sync
+#                reboot
+#            fi
     fi
     diff -u ${PRINTER_BASE} ${PRINTER_BASE_ORIG}
     diff -u ${PRINTER_CFG} ${PRINTER_CFG_ORIG}
     echo "END fix_config"
+
+    if [ "$1" == "start" ] && grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
+        mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/start.sh
+    fi
+
+    sync
 }
 
 mkdir -p /opt/config/mod_data/log/
-ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
+
+[ -L /etc/init.d/S00fix ] || ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
 
 mv /opt/config/mod_data/log/fix_config.log.4 /opt/config/mod_data/log/fix_config.log.5
 mv /opt/config/mod_data/log/fix_config.log.3 /opt/config/mod_data/log/fix_config.log.4
