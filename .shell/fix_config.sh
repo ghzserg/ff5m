@@ -29,7 +29,7 @@ fix_config()
     cat ${PRINTER_CFG}
 
     # Rem стукач
-    if [ grep -q "china_cloud = 1" /opt/config/mod_data/variables.cfg ]; then
+    if grep -q "china_cloud = 1" /opt/config/mod_data/variables.cfg; then
         ns_off api.cloud.flashforge.com
         ns_off api.fdmcloud.flashforge.com
         ns_off cloud.sz3dp.com
