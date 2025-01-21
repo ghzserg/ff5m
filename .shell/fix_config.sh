@@ -253,13 +253,15 @@ stepper: stepper_x, stepper_y, stepper_z
             fi
             mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/start.sh
             /opt/config/mod/.shell/prepare.sh klipper
+            mount
         fi
         sync
     fi
 }
 
 mkdir -p /opt/config/mod_data/log/
-ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
+
+[ -L /etc/init.d/S00fix ] || ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
 
 mv /opt/config/mod_data/log/fix_config.log.4 /opt/config/mod_data/log/fix_config.log.5
 mv /opt/config/mod_data/log/fix_config.log.3 /opt/config/mod_data/log/fix_config.log.4

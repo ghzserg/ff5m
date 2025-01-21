@@ -140,7 +140,7 @@ start_prepare()
     fi
 
     #/opt/config/mod/.shell/fix_config.sh
-    ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
+    [ -L /etc/init.d/S00fix ] || ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
     echo "System start" >/data/logFiles/ssh.log
     mount -t proc /proc $MOD/proc
     mount --rbind /sys $MOD/sys
@@ -206,7 +206,7 @@ start_program()
         echo "Работа в режиме Klipper 12"
         if [ "$1" == "moon" ]; then
             echo "Запуск moonraker"
-            renice -16 $(ps |grep klippy.py| grep -v grep| awk '{print $1}')
+            renice -18 $(ps |grep klippy.py| grep -v grep| awk '{print $1}')
             start_moon
         else
             echo "Подготовка к запуску Klipper 12"
@@ -218,8 +218,6 @@ start_program()
         start_prepare moon
     fi
 }
-
-
 
 if [ -f /opt/config/mod/SKIP_ZMOD ]
  then
