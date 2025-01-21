@@ -2,6 +2,7 @@
 
 send_klipper()
 {
+    echo "send_klipper $1"
     sed -i "s/^check_md5.*/check_md5 = $1/" /opt/config/mod_data/variables.cfg
     sleep 1
 }
