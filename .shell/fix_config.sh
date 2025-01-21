@@ -29,7 +29,7 @@ fix_config()
     cat ${PRINTER_CFG}
 
     # Rem стукач
-    if [ grep -q "china_cloud = 1" /opt/config/mod_data/variables.cfg ]; then
+    if grep -q "china_cloud = 1" /opt/config/mod_data/variables.cfg; then
         ns_off api.cloud.flashforge.com
         ns_off api.fdmcloud.flashforge.com
         ns_off cloud.sz3dp.com
@@ -206,7 +206,7 @@ stepper: stepper_x, stepper_y, stepper_z
     fi
 
     # Klipper12 FIX
-    if [ grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg ]; then
+    if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
         if grep -q '^max_accel_to_decel' ${PRINTER_BASE}
             then
                 NEED_REBOOT=1
@@ -246,7 +246,7 @@ stepper: stepper_x, stepper_y, stepper_z
     echo "END fix_config"
 
     if [ "$1" == "start" ]; then
-        if [ grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg ]; then
+        if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
             if [ ! "`mount | grep "mmcblk0p7"`" ]; then
                 echo "mmcblk0p7 not mounted and will fsck";
                 fsck -y /dev/mmcblk0p7 && mount /dev/mmcblk0p7 /data;

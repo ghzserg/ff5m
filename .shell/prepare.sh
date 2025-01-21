@@ -202,7 +202,7 @@ start_prepare()
 
 start_program()
 {
-    if [ grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg ]; then
+    if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
         echo "Работа в режиме Klipper 12"
         if [ "$1" == "moon" ]; then
             echo "Запуск moonraker"

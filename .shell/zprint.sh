@@ -6,7 +6,7 @@
 
 if [ $# -ne 2 ] && [ $# -ne 3 ]; then echo "Используйте $0 PRINT|CLOSE FILE [PRECLEAR]"; exit 1; fi
 
-if [ grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg ]; then
+if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
     CURL="/usr/bin/curl"
 else
     CURL="/opt/cloud/curl-7.55.1-https/bin/curl"

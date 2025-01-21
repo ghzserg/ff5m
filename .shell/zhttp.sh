@@ -21,7 +21,7 @@ CLIENT=$WEB
 
 sync
 
-if [ grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg ]; then
+if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
     /opt/config/mod/.shell/root/S70httpd restart
 else
     umount /data/.mod/
