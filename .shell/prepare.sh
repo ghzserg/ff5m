@@ -198,28 +198,7 @@ start_prepare()
 
     cat /etc/localtime >/tmp/localtime
 
-    if [ "$1" == "moon" ]; then
-        start_moon
-    fi
-}
-
-start_program()
-{
-    if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
-        echo "Работа в режиме Klipper 12"
-        if [ "$1" == "moon" ]; then
-            echo "Запуск moonraker"
-            renice -18 $(ps |grep klippy.py| grep -v grep| awk '{print $1}')
-            start_moon
-        else
-            echo "Подготовка к запуску Klipper 12"
-            start_prepare klipper
-        fi
-    else
-        echo "Работа в режиме родного Klipper"
-        echo "Запуск moonraker"
-        start_prepare moon
-    fi
+    start_moon
 }
 
 if [ -f /opt/config/mod/SKIP_ZMOD ]
@@ -236,4 +215,4 @@ mv /opt/config/mod_data/log/zmod.log.3 /opt/config/mod_data/log/zmod.log.4
 mv /opt/config/mod_data/log/zmod.log.2 /opt/config/mod_data/log/zmod.log.3
 mv /opt/config/mod_data/log/zmod.log.1 /opt/config/mod_data/log/zmod.log.2
 mv /opt/config/mod_data/log/zmod.log /opt/config/mod_data/log/zmod.log.1
-start_program $1 &>/opt/config/mod_data/log/zmod.log
+start_prepare &>/opt/config/mod_data/log/zmod.log

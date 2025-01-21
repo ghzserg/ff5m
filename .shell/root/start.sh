@@ -37,6 +37,10 @@ mkdir -p /data/tmp
 
 mount --bind /data/lost+found /data/.mod
 
+if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
+    /opt/config/mod/.shell/root/S60klipper start
+fi
+
 date 2024.01.01-00:00:00
 
 # Пробуем синхронизировать время

@@ -1,5 +1,6 @@
 #!/bin/sh
 
+exit 0
 unset LD_LIBRARY_PATH
 unset LD_PRELOAD
 
