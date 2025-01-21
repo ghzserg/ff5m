@@ -30,10 +30,10 @@ fi
 LOCAL_MD5="$(/bin/cat "${FILE_NAME}"|/bin/grep -v '^; MD5:'|/usr/bin/md5sum|/usr/bin/tr -d ' -')"
 
 if [ "_${LOCAL_MD5}" = "_${ORIG_MD5}" ]; then
-    if grep -q 'G2 ' "${FILE_NAME}" || grep -q 'G3 ' "${FILE_NAME}"; then
+    if grep -q -e 'G2 ' -e 'G3 ' "${FILE_NAME}"; then
         send_klipper 4
     else
-        if grep -q 'G17 ' "${FILE_NAME}" || grep -q 'G18 ' "${FILE_NAME}" || grep -q 'G19 ' "${FILE_NAME}"; then
+        if grep -q -e 'G17 ' -e 'G18 ' -e 'G19 ' "${FILE_NAME}"; then
             send_klipper 8
         else
             send_klipper 5
