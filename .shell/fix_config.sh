@@ -220,9 +220,6 @@ stepper: stepper_x, stepper_y, stepper_z
         fi
     fi
 
-    wc -l ${PRINTER_BASE}
-    wc -l ${PRINTER_CFG}
-
     if [ ${NEED_REBOOT} -eq 1 ]
         then
             echo "Kill firmwareExe"
