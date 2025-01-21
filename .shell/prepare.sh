@@ -163,7 +163,7 @@ start_prepare()
 
     #/opt/config/mod/.shell/fix_config.sh
     [ -L /etc/init.d/S00fix ] || ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
-    echo "System start" >/data/logFiles/ssh.log
+    echo "System start" >/opt/config/mod_data/log/ssh.log
     mount -t proc /proc $MOD/proc
     mount --rbind /sys $MOD/sys
     mount --rbind /dev $MOD/dev
@@ -229,9 +229,9 @@ fi
 
 while ! mount |grep /dev/mmcblk0p7; do sleep 10; done
 
-mv /data/logFiles/zmod.log.4 /data/logFiles/zmod.log.5
-mv /data/logFiles/zmod.log.3 /data/logFiles/zmod.log.4
-mv /data/logFiles/zmod.log.2 /data/logFiles/zmod.log.3
-mv /data/logFiles/zmod.log.1 /data/logFiles/zmod.log.2
-mv /data/logFiles/zmod.log /data/logFiles/zmod.log.1
-start_program $1 &>/data/logFiles/zmod.log
+mv /opt/config/mod_data/log/zmod.log.4 /opt/config/mod_data/log/zmod.log.5
+mv /opt/config/mod_data/log/zmod.log.3 /opt/config/mod_data/log/zmod.log.4
+mv /opt/config/mod_data/log/zmod.log.2 /opt/config/mod_data/log/zmod.log.3
+mv /opt/config/mod_data/log/zmod.log.1 /opt/config/mod_data/log/zmod.log.2
+mv /opt/config/mod_data/log/zmod.log /opt/config/mod_data/log/zmod.log.1
+start_program $1 &>/opt/config/mod_data/log/zmod.log

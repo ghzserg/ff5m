@@ -5,8 +5,17 @@ unset LD_PRELOAD
 
 klipper12()
 {
+    mount
+    ps
     MOD=/data/.mod/.zmod
-    /usr/sbin/chroot $MOD /opt/config/mod/.shell/root/S60klipper start
+    if mount|grep " /data/.mod "; then
+        umount /data/.mod
+        /usr/sbin/chroot $MOD /opt/config/mod/.shell/root/S60klipper start
+        sleep 10
+        mount --bind /data/lost+found /data/.mod
+    else
+        /usr/sbin/chroot $MOD /opt/config/mod/.shell/root/S60klipper start
+    fi
 }
 
 mv /opt/config/mod_data/log/klipper12.log.4 /opt/config/mod_data/log/klipper12.log.5

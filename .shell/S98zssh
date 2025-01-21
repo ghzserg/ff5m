@@ -20,7 +20,7 @@ REMOTE_RUN="NONE"
 source /opt/config/mod_data/ssh.conf
 
 PID_FILE=/run/zssh.pid
-LOG_FILE=/data/logFiles/ssh.log
+LOG_FILE=/opt/config/mod_data/log/ssh.log
 
 start() {
     if [ $START = "on" ]
