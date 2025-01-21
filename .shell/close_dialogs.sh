@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg ]; then
+    echo "Закрытие диалогов не поддерживается. Используйте быстрое закрытие диалогов"
+    exit
+fi
+
 unset LD_LIBRARY_PATH
 unset LD_PRELOAD
 export PATH="$PATH:/opt/bin:/opt/sbin"

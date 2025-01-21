@@ -6,7 +6,12 @@
 
 if [ $# -ne 2 ] && [ $# -ne 3 ]; then echo "Используйте $0 PRINT|CLOSE FILE [PRECLEAR]"; exit 1; fi
 
-CURL="/opt/cloud/curl-7.55.1-https/bin/curl"
+if [ grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg ]; then
+    CURL="/usr/bin/curl"
+else
+    CURL="/opt/cloud/curl-7.55.1-https/bin/curl"
+fi
+
 ip=$(ip addr | grep inet | grep wlan0 | awk -F" " '{print $2}'| sed -e 's/\/.*$//')
 if [ "$ip" == "" ]; then ip=$(ip addr | grep inet | grep eth0 | awk -F" " '{print $2}'| sed -e 's/\/.*$//'); fi
 

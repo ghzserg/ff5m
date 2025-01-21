@@ -1,5 +1,14 @@
 #!/bin/sh
 
+prepare_chroot()
+{
+    mkdir -p /etc/init.d/
+    ln -s /opt/config/mod/.shell /root/printer_data/scripts
+    ln -s /opt/config/mod/.shell/S98zssh /etc/init.d/
+    ln -s /opt/config/mod/.shell/S98camera /etc/init.d/
+    ln -s /usr/lib/python3.11/site-packages/numpy /root/klipper-env/lib/python3.11/site-packages/
+}
+
 SWAP="$1"
 echo "SWAP=$SWAP"
 
@@ -11,6 +20,8 @@ if [ "$SWAP" == "/root/swap" ]
     then
         grep -q "use_swap = 0" /opt/config/mod_data/variables.cfg || swapon $SWAP
 fi
+
+prepare_chroot
 
 VER="FF5M $2"
 grep -q VERSION_CODENAME /etc/os-release || echo "VERSION_CODENAME=\"${VER}\"" >>/etc/os-release

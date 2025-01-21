@@ -3,7 +3,7 @@
 send_klipper()
 {
     sed -i "s/^check_md5.*/check_md5 = $1/" /opt/config/mod_data/variables.cfg
-    sleep
+    sleep 1
 }
 
 FILE_NAME=${1}

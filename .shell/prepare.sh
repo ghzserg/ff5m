@@ -2,6 +2,8 @@
 
 set -x
 
+MOD=/data/.mod/.zmod
+
 ns_off()
 {
     grep -q "$1" /etc/hosts && sed -i "|$1|d" /etc/hosts
@@ -71,6 +73,8 @@ pin:PB7
 ' >>/opt/config/printer.base.cfg
     fi
 
+    grep -q '^minimum_cruise_ratio' /opt/config/printer.base.cfg && sed -i 's|^minimum_cruise_ratio.*|max_accel_to_decel:5000|' /opt/config/printer.base.cfg
+
     rm -rf /data/.mod
     rm /etc/init.d/S00fix
     rm /etc/init.d/S99moon
@@ -94,12 +98,19 @@ pin:PB7
     rm -rf /opt/var
 }
 
+start_moon()
+{
+    VER=$(cat /root/version)
+    chroot $MOD /opt/config/mod/.shell/root/start.sh "$SWAP" "$VER" &
+
+    mkdir -p /data/lost+found
+    sleep 10
+    mount --bind /data/lost+found /data/.mod
+}
+
+
 start_prepare()
 {
-    renice -16 $(ps |grep klippy.py| grep -v grep| awk '{print $1}')
-
-    MOD=/data/.mod/.zmod
-
     if [ -f /opt/config/mod/REMOVE ]
      then
       restore_base
@@ -136,6 +147,7 @@ start_prepare()
     mount --rbind /dev $MOD/dev
 
     mount --bind /tmp $MOD/tmp
+    mount --bind /run $MOD/run
 
     mkdir -p $MOD/opt/config
     mount --bind /opt/config $MOD/opt/config
@@ -183,13 +195,31 @@ start_prepare()
 
     cat /etc/localtime >/tmp/localtime
 
-    VER=$(cat /root/version)
-    chroot $MOD /opt/config/mod/.shell/root/start.sh "$SWAP" "$VER" &
-
-    mkdir -p /data/lost+found
-    sleep 10
-    mount --bind /data/lost+found /data/.mod
+    if [ "$1" == "moon" ]; then
+        start_moon
+    fi
 }
+
+start_program()
+{
+    if [ grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg ]; then
+        echo "Работа в режиме Klipper 12"
+        if [ "$1" == "moon" ]; then
+            echo "Запуск moonraker"
+            renice -16 $(ps |grep klippy.py| grep -v grep| awk '{print $1}')
+            start_moon
+        else
+            echo "Подготовка к запуску Klipper 12"
+            start_prepare klipper
+        fi
+    else
+        echo "Работа в режиме родного Klipper"
+        echo "Запуск moonraker"
+        start_prepare moon
+    fi
+}
+
+
 
 if [ -f /opt/config/mod/SKIP_ZMOD ]
  then
@@ -205,4 +235,4 @@ mv /data/logFiles/zmod.log.3 /data/logFiles/zmod.log.4
 mv /data/logFiles/zmod.log.2 /data/logFiles/zmod.log.3
 mv /data/logFiles/zmod.log.1 /data/logFiles/zmod.log.2
 mv /data/logFiles/zmod.log /data/logFiles/zmod.log.1
-start_prepare &>/data/logFiles/zmod.log
+start_program $1 &>/data/logFiles/zmod.log

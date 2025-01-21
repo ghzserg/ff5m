@@ -205,9 +205,23 @@ stepper: stepper_x, stepper_y, stepper_z
 ' >>${PRINTER_BASE}
     fi
 
+    # Klipper12 FIX
+    if [ grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg ]; then
+        if grep -q '^max_accel_to_decel' ${PRINTER_BASE}
+            then
+                NEED_REBOOT=1
+                sed -i 's|^max_accel_to_decel.*|minimum_cruise_ratio: 0.5|' ${PRINTER_BASE}
+        fi
+    else
+        if grep -q '^minimum_cruise_ratio' ${PRINTER_BASE}
+            then
+                NEED_REBOOT=1
+                sed -i 's|^minimum_cruise_ratio.*|max_accel_to_decel:5000|' ${PRINTER_BASE}
+        fi
+    fi
+
     wc -l ${PRINTER_BASE}
     wc -l ${PRINTER_CFG}
-
 
     if [ ${NEED_REBOOT} -eq 1 ]
         then
@@ -230,6 +244,18 @@ stepper: stepper_x, stepper_y, stepper_z
     diff -u ${PRINTER_BASE} ${PRINTER_BASE_ORIG}
     diff -u ${PRINTER_CFG} ${PRINTER_CFG_ORIG}
     echo "END fix_config"
+
+    if [ "$1" == "start" ]; then
+        if [ grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg ]; then
+            if [ ! "`mount | grep "mmcblk0p7"`" ]; then
+                echo "mmcblk0p7 not mounted and will fsck";
+                fsck -y /dev/mmcblk0p7 && mount /dev/mmcblk0p7 /data;
+            fi
+            mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/run.sh
+            /opt/config/mod/.shell/prepare.sh klipper
+        fi
+        sync
+    fi
 }
 
 mkdir -p /opt/config/mod_data/log/
