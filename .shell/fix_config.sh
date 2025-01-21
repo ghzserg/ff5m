@@ -30,17 +30,6 @@ fix_config()
 
     # Rem стукач
     if grep -q "china_cloud = 1" /opt/config/mod_data/variables.cfg; then
-        ns_off api.cloud.flashforge.com
-        ns_off api.fdmcloud.flashforge.com
-        ns_off cloud.sz3dp.com
-        ns_off hz.sz3dp.com
-        ns_off printer2.polar3d.com
-        ns_off qvs.qiniuapi.com
-        ns_off update.cn.sz3dp.com
-        ns_off update.sz3dp.com
-        ns_off cloud.sz3dp.com
-        ns_off polar3d.com
-    else
         ns_on api.cloud.flashforge.com
         ns_on api.fdmcloud.flashforge.com
         ns_on cloud.sz3dp.com
@@ -51,6 +40,17 @@ fix_config()
         ns_on update.sz3dp.com
         ns_on cloud.sz3dp.com
         ns_on polar3d.com
+    else
+        ns_off api.cloud.flashforge.com
+        ns_off api.fdmcloud.flashforge.com
+        ns_off cloud.sz3dp.com
+        ns_off hz.sz3dp.com
+        ns_off printer2.polar3d.com
+        ns_off qvs.qiniuapi.com
+        ns_off update.cn.sz3dp.com
+        ns_off update.sz3dp.com
+        ns_off cloud.sz3dp.com
+        ns_off polar3d.com
     fi
 
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py || cp /opt/config/mod/.shell/save_variables.py /opt/klipper/klippy/extras/save_variables.py
@@ -242,16 +242,11 @@ stepper: stepper_x, stepper_y, stepper_z
     diff -u ${PRINTER_CFG} ${PRINTER_CFG_ORIG}
     echo "END fix_config"
 
-    if [ "$1" == "start" ]; then
-        if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
-            if [ ! "`mount | grep "mmcblk0p7"`" ]; then
-                echo "mmcblk0p7 not mounted and will fsck";
-                fsck -y /dev/mmcblk0p7 && mount /dev/mmcblk0p7 /data;
-            fi
-            mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/start.sh
-        fi
-        sync
+    if [ "$1" == "start" ] && grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
+        mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/start.sh
     fi
+
+    sync
 }
 
 mkdir -p /opt/config/mod_data/log/
