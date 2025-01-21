@@ -15,7 +15,7 @@ checkCode=$(cat /opt/config/Adventurer5M.json | grep "lanCode"| cut  -d ":" -f2|
 
 if [ "$1" == "CLOSE" ]
     then
-        $CURL -s \
+        $CURL -m 60 -s \
         http://$ip:8898/control \
         -H 'Content-Type: application/json' \
         -d "{\"serialNumber\":\"$serialNumber\",\"checkCode\":\"$checkCode\",\"payload\":{\"cmd\":\"stateCtrl_cmd\",\"args\":{\"action\":\"setClearPlatform\"}}}" || \
@@ -44,7 +44,7 @@ else
                     echo "_START_PRECLEAR" >/tmp/printer
                     echo "RUN_SHELL_COMMAND CMD=zprint PARAMS=\"PRINT '$2'\"">/tmp/printer
                 else
-                    $CURL -s \
+                    $CURL -m 60 -s \
                         http://$ip:8898/printGcode \
                         -H 'Content-Type: application/json' \
                         -d "{\"serialNumber\":\"$serialNumber\",\"checkCode\":\"$checkCode\",\"fileName\":\"$2\",\"levelingBeforePrint\":true}'" || \
