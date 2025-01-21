@@ -2,12 +2,14 @@
 
 set -x
 
-ns_off()
+# Разблокировка
+china_razbl()
 {
     grep -q "$1" /etc/hosts && sed -i "/$1/d" /etc/hosts
 }
 
-ns_on()
+# Блокировка
+china_block()
 {
     grep -q "$1" /etc/hosts || sed -i "2 i\127.0.0.1 $1" /etc/hosts
 }
@@ -30,27 +32,27 @@ fix_config()
 
     # Rem стукач
     if grep -q "china_cloud = 1" /opt/config/mod_data/variables.cfg; then
-        ns_on api.cloud.flashforge.com
-        ns_on api.fdmcloud.flashforge.com
-        ns_on cloud.sz3dp.com
-        ns_on hz.sz3dp.com
-        ns_on printer2.polar3d.com
-        ns_on qvs.qiniuapi.com
-        ns_on update.cn.sz3dp.com
-        ns_on update.sz3dp.com
-        ns_on cloud.sz3dp.com
-        ns_on polar3d.com
+        china_razbl api.cloud.flashforge.com
+        china_razbl api.fdmcloud.flashforge.com
+        china_razbl cloud.sz3dp.com
+        china_razbl hz.sz3dp.com
+        china_razbl printer2.polar3d.com
+        china_razbl qvs.qiniuapi.com
+        china_razbl update.cn.sz3dp.com
+        china_razbl update.sz3dp.com
+        china_razbl cloud.sz3dp.com
+        china_razbl polar3d.com
     else
-        ns_off api.cloud.flashforge.com
-        ns_off api.fdmcloud.flashforge.com
-        ns_off cloud.sz3dp.com
-        ns_off hz.sz3dp.com
-        ns_off printer2.polar3d.com
-        ns_off qvs.qiniuapi.com
-        ns_off update.cn.sz3dp.com
-        ns_off update.sz3dp.com
-        ns_off cloud.sz3dp.com
-        ns_off polar3d.com
+        china_block api.cloud.flashforge.com
+        china_block api.fdmcloud.flashforge.com
+        china_block cloud.sz3dp.com
+        china_block hz.sz3dp.com
+        china_block printer2.polar3d.com
+        china_block qvs.qiniuapi.com
+        china_block update.cn.sz3dp.com
+        china_block update.sz3dp.com
+        china_block cloud.sz3dp.com
+        china_block polar3d.com
     fi
 
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py || cp /opt/config/mod/.shell/save_variables.py /opt/klipper/klippy/extras/save_variables.py
