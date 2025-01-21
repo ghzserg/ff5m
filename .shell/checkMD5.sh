@@ -29,14 +29,19 @@ fi
 LOCAL_MD5="$(/bin/cat "${FILE_NAME}"|/bin/grep -v '^; MD5:'|/usr/bin/md5sum|/usr/bin/tr -d ' -')"
 
 if [ "_${LOCAL_MD5}" = "_${ORIG_MD5}" ]; then
-    if grep -q -e 'G2 ' -e 'G3 ' "${FILE_NAME}"; then
-        send_klipper 4
+    if grep -q "swap = 0" /opt/config/mod_data/variables.cfg; then
+        send_klipper 5
     else
-        if grep -q -e 'G17 ' -e 'G18 ' -e 'G19 ' "${FILE_NAME}"; then
-            send_klipper 8
+        if grep -q -e 'G2 ' -e 'G3 ' "${FILE_NAME}"; then
+            send_klipper 4
         else
-            send_klipper 5
+            if grep -q -e 'G17 ' -e 'G18 ' -e 'G19 ' "${FILE_NAME}"; then
+                send_klipper 8
+            else
+                send_klipper 5
+            fi
         fi
+    fi
 else
     if [ "true" = "${DELETE_FILE}" ] || [ "True" = "${DELETE_FILE}" ]; then
         /bin/rm -f "${FILE_NAME}"
