@@ -1,6 +1,6 @@
 #!/bin/sh
 
-grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg && exit 0
+[ -f /THIS_IS_NOT_YOUR_ROOT_FILESYSTEM ] || exit 0
 
 F="/opt/klipper/klippy/toolhead.py"
 

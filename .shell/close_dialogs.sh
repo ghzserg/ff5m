@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
+if ! [ -f /THIS_IS_NOT_YOUR_ROOT_FILESYSTEM ]; then
     echo "Закрытие диалогов не поддерживается. Используйте быстрое закрытие диалогов"
     exit
 fi
