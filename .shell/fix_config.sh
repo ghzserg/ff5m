@@ -4,7 +4,7 @@ set -x
 
 ns_off()
 {
-    grep -q "$1" /etc/hosts && sed -i "|$1|d" /etc/hosts
+    grep -q "$1" /etc/hosts && sed -i "/$1/d" /etc/hosts
 }
 
 ns_on()
@@ -57,7 +57,7 @@ fix_config()
 
     grep -q zmod_1.0 /opt/klipper/klippy/extras/gcode_shell_command.py || cp /opt/config/mod/.shell/gcode_shell_command.py /opt/klipper/klippy/extras/gcode_shell_command.py
 
-    grep -q '^\[include check_md5.cfg\]' ${PRINTER_CFG} && sed -i '|^\[include check_md5.cfg\]|d' ${PRINTER_CFG} && NEED_REBOOT=1
+    grep -q '^\[include check_md5.cfg\]' ${PRINTER_CFG} && sed -i '/^\[include check_md5.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
 
     grep -q '^\[include ./mod/mod.cfg\]' ${PRINTER_CFG} && grep -q '^\[include ./mod/display_off.cfg\]' ${PRINTER_CFG} && sed -i '/^\[include .\/mod\/display_off.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
 

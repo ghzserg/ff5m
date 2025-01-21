@@ -6,14 +6,14 @@ MOD=/data/.mod/.zmod
 
 ns_off()
 {
-    grep -q "$1" /etc/hosts && sed -i "|$1|d" /etc/hosts
+    grep -q "$1" /etc/hosts && sed -i "/$1/d" /etc/hosts
 }
 
 restore_base()
 {
-    grep -q '^\[include mod.user.cfg' /opt/config/printer.cfg && sed -i '|include mod.user.cfg|d' /opt/config/printer.cfg
-    grep -q '^\[include ./mod/mod.cfg' /opt/config/printer.cfg && sed -i '|include mod.cfg|d' /opt/config/printer.cfg
-    grep -q '^\[include ./mod/display_off.cfg' /opt/config/printer.cfg && sed -i '|display_off.cfg|d' /opt/config/printer.cfg
+    grep -q '^\[include mod.user.cfg' /opt/config/printer.cfg && sed -i '/include mod.user.cfg/d' /opt/config/printer.cfg
+    grep -q '^\[include ./mod/mod.cfg' /opt/config/printer.cfg && sed -i '/mod.cfg/d' /opt/config/printer.cfg
+    grep -q '^\[include ./mod/display_off.cfg' /opt/config/printer.cfg && sed -i '/display_off.cfg/d' /opt/config/printer.cfg
 
     ns_off api.cloud.flashforge.com
     ns_off api.fdmcloud.flashforge.com
