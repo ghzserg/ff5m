@@ -232,11 +232,11 @@ stepper: stepper_x, stepper_y, stepper_z
             cat ${PRINTER_BASE} >${PRINTER_BASE_ORIG}
             sync
             cat ${PRINTER_CFG} >${PRINTER_CFG_ORIG}
-            if [ "$1" == "start" ]; then
-                echo "Reboot"
-                sync
-                reboot
-            fi
+#            if [ "$1" == "start" ]; then
+#                echo "Reboot"
+#                sync
+#                reboot
+#            fi
     fi
     diff -u ${PRINTER_BASE} ${PRINTER_BASE_ORIG}
     diff -u ${PRINTER_CFG} ${PRINTER_CFG_ORIG}
