@@ -2,11 +2,17 @@
 
 prepare_chroot()
 {
-    [ -d /etc/init.d/ ] || mkdir -p /etc/init.d/
     [ -L /root/printer_data/scripts ] || ln -s /opt/config/mod/.shell /root/printer_data/scripts
+
+    [ -L /root/klipper-env/lib/python3.11/site-packages/numpy ] || ln -s /usr/lib/python3.11/site-packages/numpy /root/klipper-env/lib/python3.11/site-packages/
+
+    [ -d /etc/init.d/ ] || mkdir -p /etc/init.d/
+
     [ -L /etc/init.d/S98zssh ] || ln -s /opt/config/mod/.shell/S98zssh /etc/init.d/
     [ -L /etc/init.d/S98camera ] || ln -s /opt/config/mod/.shell/S98camera /etc/init.d/
-    [ -L /root/klipper-env/lib/python3.11/site-packages/numpy ] || ln -s /usr/lib/python3.11/site-packages/numpy /root/klipper-env/lib/python3.11/site-packages/
+    [ -L /etc/init.d/S60klipper ] || ln -s /opt/config/mod/.shell/S60klipper
+    [ -L /etc/init.d/S65moonraker ] || ln -s /opt/config/mod/.shell/S65moonraker
+    [ -L /etc/init.d/S70httpd ] || ln -s /opt/config/mod/.shell/S70httpd
 }
 
 SWAP="$1"
