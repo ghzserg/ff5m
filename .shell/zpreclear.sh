@@ -16,7 +16,8 @@ M190=$(head -1000 "/data/$1" | grep "^M190" | head -1)
 if [ "$M190" == "" ] || [ "$M109" == "" ]; then
     echo "RESPOND TYPE=error MSG=\"В файле $1 не найдены команды нагрева стола(M140/M190) или сопла(M104/M109).\"" >/tmp/printer
     echo "CANCEL_PRINT" >/tmp/printer
-exit 1
+    exit 1
+fi
 
 if [ "$2" == "TEST" ]; then
     echo "$M190" >/tmp/printer
