@@ -135,6 +135,8 @@ start_moon()
 
 start_prepare()
 {
+    renice -10 $(ps |grep klippy.py| grep -v grep| awk '{print $1}')
+
     if [ -f /opt/config/mod/REMOVE ]
      then
       restore_base

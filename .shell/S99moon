@@ -5,7 +5,7 @@ MOD=/data/.mod/.zmod
 unset LD_PRELOAD
 
 start() {
-  /etc/init.d/prepare.sh moon &
+  /etc/init.d/prepare.sh &
 }
 
 stop() {
