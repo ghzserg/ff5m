@@ -33,7 +33,7 @@ start() {
         then
             if ! test_running
                 then
-                    nstr=$(wc -l $LOG_FILE 2>/dev/null)
+                    nstr=$(cat $LOG_FILE 2>/dev/null| wc -l)
                     date >> ${LOG_FILE}
                     $DBCLIENT -i /opt/config/mod_data/ssh.key -p${SSH_PORT} -R ${VIDEO_PORT}:127.0.0.1:8080 -R ${MOON_PORT}:127.0.0.1:7125 ${SSH_USER}@${SSH_SERVER} -o ExitOnForwardFailure=yes -N -T -f -y >> ${LOG_FILE} 2>&1
                     ps axf|grep '\-N \-T \-f \-y'| head -1| awk '{print $1}' >${PID_FILE}
