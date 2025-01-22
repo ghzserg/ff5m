@@ -19,7 +19,7 @@ prepare_chroot()
     [ -L /usr/lib/python3.11/site-packages/mido-1.3.3.dist-info ] || ln -s /opt/config/mod/.shell/root/mido-1.3.3.dist-info/ /usr/lib/python3.11/site-packages/
 
     [ -L /usr/bin/audio ] || ln -s /opt/config/mod/.shell/root/audio/audio /usr/bin/audio
-    [ -L /usr/bin/audio_midi.sh ] || /opt/config/mod/.shell/root/audio/audio_midi.sh /usr/bin/audio_midi.sh
+    [ -L /usr/bin/audio_midi.sh ] || ln -s /opt/config/mod/.shell/root/audio/audio_midi.sh /usr/bin/audio_midi.sh
     [ -L /usr/bin/audio.py ] || ln -s /opt/config/mod/.shell/root/audio/audio.py /usr/bin/audio.py
 }
 
