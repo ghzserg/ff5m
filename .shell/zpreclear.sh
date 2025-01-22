@@ -20,8 +20,8 @@ if [ "$M190" == "" ] || [ "$M109" == "" ]; then
 fi
 
 if [ "$2" == "TEST" ]; then
-    echo "$M190" >>/tmp/printer
-    echo "$M109" >>/tmp/printer
-    echo "_START_PRECLEAR" >>/tmp/printer
+    echo "$M190" >/tmp/printer
+    echo "$M109" >/tmp/printer
+    echo "_START_PRECLEAR" >/tmp/printer
 fi
 exit 0
