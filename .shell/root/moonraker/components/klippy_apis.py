@@ -270,6 +270,8 @@ class KlippyAPI(APITransport):
             result.remove('output_pin level_clear')
         if 'filament_switch_sensor check_level_pin_alt' in result:
             result.remove('filament_switch_sensor check_level_pin_alt')
+        if 'filament_switch_sensor e1_sensor' in result:
+            result.remove('filament_switch_sensor e1_sensor')
         return {
             "objects": result
         }
