@@ -8,5 +8,5 @@ if ! [ -f "/data/$1" ]; then
     exit 1
 fi
 
-head -1000 "/data/$1" | grep ^EXCLUDE_OBJECT_DEFINE >/tmp/printer 2>/dev/null
+head -1000 "/data/$1" | grep ^EXCLUDE_OBJECT_DEFINE >/tmp/printer
 exit 0
