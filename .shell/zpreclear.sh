@@ -2,6 +2,9 @@
 
 if [ $# -ne 2 ]; then echo "Используйте $0 FILE NONE|TEST"; exit 1; fi
 
+mkdir -p /data/tmp/
+> /data/tmp/exlude.gcode
+
 if ! [ -f "/data/$1" ]; then
     echo "RESPOND TYPE=error MSG=\"Файл $1 не найден.\"" >/tmp/printer
     echo "CANCEL_PRINT" >/tmp/printer
@@ -20,8 +23,8 @@ if [ "$M190" == "" ] || [ "$M109" == "" ]; then
 fi
 
 if [ "$2" == "TEST" ]; then
-    echo "$M190" >/tmp/printer
-    echo "$M109" >/tmp/printer
-    echo "_START_PRECLEAR" >/tmp/printer
+    echo "$M190" >/data/tmp/exlude.gcode
+    echo "$M109" >/data/tmp/exlude.gcode
+    echo "_START_PRECLEAR" >/data/tmp/exlude.gcode
 fi
 exit 0
