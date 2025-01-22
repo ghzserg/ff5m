@@ -254,6 +254,7 @@ stepper: stepper_x, stepper_y, stepper_z
 mkdir -p /opt/config/mod_data/log/
 
 [ -L /etc/init.d/S00fix ] || ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
+[ -L /usr/bin/audio.py ]  || ln -s /opt/config/mod/.shell/root/audio/audio.py /usr/bin/audio.py
 
 mv /opt/config/mod_data/log/fix_config.log.4 /opt/config/mod_data/log/fix_config.log.5
 mv /opt/config/mod_data/log/fix_config.log.3 /opt/config/mod_data/log/fix_config.log.4

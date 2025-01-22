@@ -14,6 +14,13 @@ prepare_chroot()
     [ -L /etc/init.d/S60klipper ] || ln -s /opt/config/mod/.shell/root/S60klipper /etc/init.d/
     [ -L /etc/init.d/S65moonraker ] || ln -s /opt/config/mod/.shell/root/S65moonraker /etc/init.d/
     [ -L /etc/init.d/S70httpd ] || ln -s /opt/config/mod/.shell/root/S70httpd /etc/init.d/
+
+    [ -L /usr/lib/python3.11/site-packages/mido ] || ln -s /opt/config/mod/.shell/root/mido/ /usr/lib/python3.11/site-packages/
+    [ -L /usr/lib/python3.11/site-packages/mido-1.3.3.dist-info ] || ln -s /opt/config/mod/.shell/root/mido-1.3.3.dist-info/ /usr/lib/python3.11/site-packages/
+
+    [ -L /usr/bin/audio ] || ln -s /opt/config/mod/.shell/root/audio/audio /usr/bin/audio
+    [ -L /usr/bin/audio_midi.sh ] || /opt/config/mod/.shell/root/audio/audio_midi.sh /usr/bin/audio_midi.sh
+    [ -L /usr/bin/audio.py ] || ln -s /opt/config/mod/.shell/root/audio/audio.py /usr/bin/audio.py
 }
 
 SWAP="$1"
