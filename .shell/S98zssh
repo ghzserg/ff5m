@@ -59,7 +59,8 @@ restart() {
 }
 
 test_running() {
-    if [ -f $PID_FILE ] && kill -0 $(cat $PID_FILE) 2>/dev/null
+    cnt=$(ps |grep -v grep |grep dbclient| wc -l)
+    if [ -f $PID_FILE ] && kill -0 $(cat $PID_FILE) 2>/dev/null && [ "$cnt" -ne 0 ]
         then
             return 0
         else
