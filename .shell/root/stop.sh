@@ -2,4 +2,6 @@
 
 /opt/config/mod/.shell/root/S70httpd stop
 /opt/config/mod/.shell/root/S65moonraker stop
-/opt/config/mod/.shell/root/S60klipper stop
+if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
+    /opt/config/mod/.shell/root/S60klipper stop
+fi
