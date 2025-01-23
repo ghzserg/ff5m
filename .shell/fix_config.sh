@@ -212,7 +212,9 @@ press_gcode:
             NEED_REBOOT=1
             echo '
 [filament_switch_sensor e0_sensor]
-pin:PB7
+pause_on_runout: False
+switch_pin: !PB14
+event_delay: 1.0
 ' >>${PRINTER_BASE}
     fi
 
