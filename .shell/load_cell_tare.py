@@ -58,9 +58,6 @@ class LoadCellTareGcode:
         macro_obj = self.printer.lookup_object('gcode_macro START_PRINT')
         screen = macro_obj.variables.get('screen', True)
 
-#        if screen == True:
-#            gcmd.respond_info(f"Используйте режим снятия карты стола с родного экрана. // SAVE_ZMOD_DATA PRINT_LEVELING=1")
-
         if not ok:
             if self.weight.last_temp == 0 and alter_cell_tare == 1:
                 gcmd.respond_info(f"Установлен режим игнорирования ошибок сброса тензодатчиков. // SAVE_ZMOD_DATA ALTER_CELL_TARE={alter_cell_tare}")
