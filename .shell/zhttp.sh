@@ -20,6 +20,11 @@ CLIENT=$WEB
 " >/opt/config/mod_data/web.conf
 
 sync
-umount /data/.mod/
-chroot $MOD /opt/config/mod/.shell/root/S70httpd restart
-mount --bind /data/lost+found /data/.mod
+
+if ! [ -f /THIS_IS_NOT_YOUR_ROOT_FILESYSTEM ]; then
+    /opt/config/mod/.shell/root/S70httpd restart
+else
+    umount /data/.mod/
+    chroot $MOD /opt/config/mod/.shell/root/S70httpd restart
+    mount --bind /data/lost+found /data/.mod
+fi

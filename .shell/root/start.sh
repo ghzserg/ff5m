@@ -1,5 +1,28 @@
 #!/bin/sh
 
+prepare_chroot()
+{
+    [ -L /root/printer_data/scripts ] || ln -s /opt/config/mod/.shell /root/printer_data/scripts
+
+    [ -L /root/klipper-env/lib/python3.11/site-packages/numpy ] || ln -s /usr/lib/python3.11/site-packages/numpy /root/klipper-env/lib/python3.11/site-packages/
+
+    [ -d /etc/init.d/ ] || mkdir -p /etc/init.d/
+
+    [ -L /etc/init.d/S98zssh ] || ln -s /opt/config/mod/.shell/S98zssh /etc/init.d/
+    [ -L /etc/init.d/S98camera ] || ln -s /opt/config/mod/.shell/S98camera /etc/init.d/
+
+    [ -L /etc/init.d/S60klipper ] || ln -s /opt/config/mod/.shell/root/S60klipper /etc/init.d/
+    [ -L /etc/init.d/S65moonraker ] || ln -s /opt/config/mod/.shell/root/S65moonraker /etc/init.d/
+    [ -L /etc/init.d/S70httpd ] || ln -s /opt/config/mod/.shell/root/S70httpd /etc/init.d/
+
+    [ -L /usr/lib/python3.11/site-packages/mido ] || ln -s /opt/config/mod/.shell/root/mido/ /usr/lib/python3.11/site-packages/
+    [ -L /usr/lib/python3.11/site-packages/mido-1.3.3.dist-info ] || ln -s /opt/config/mod/.shell/root/mido-1.3.3.dist-info/ /usr/lib/python3.11/site-packages/
+
+    [ -L /usr/bin/audio ] || ln -s /opt/config/mod/.shell/root/audio/audio /usr/bin/audio
+    [ -L /usr/bin/audio_midi.sh ] || ln -s /opt/config/mod/.shell/root/audio/audio_midi.sh /usr/bin/audio_midi.sh
+    [ -L /usr/bin/audio.py ] || ln -s /opt/config/mod/.shell/root/audio/audio.py /usr/bin/audio.py
+}
+
 SWAP="$1"
 echo "SWAP=$SWAP"
 
@@ -12,6 +35,8 @@ if [ "$SWAP" == "/root/swap" ]
         grep -q "use_swap = 0" /opt/config/mod_data/variables.cfg || swapon $SWAP
 fi
 
+prepare_chroot
+
 VER="FF5M $2"
 grep -q VERSION_CODENAME /etc/os-release || echo "VERSION_CODENAME=\"${VER}\"" >>/etc/os-release
 grep -q "VERSION_CODENAME=\"${VER}\"" /etc/os-release || sed -i "s|VERSION_CODENAME=.*|VERSION_CODENAME=\"${VER}\"|" /etc/os-release
@@ -19,6 +44,10 @@ grep -q "VERSION_CODENAME=\"${VER}\"" /etc/os-release || sed -i "s|VERSION_CODEN
 mkdir -p /data/tmp
 
 mount --bind /data/lost+found /data/.mod
+
+if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
+    /opt/config/mod/.shell/root/S60klipper start
+fi
 
 date 2024.01.01-00:00:00
 

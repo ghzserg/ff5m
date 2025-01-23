@@ -1,5 +1,7 @@
 #!/bin/sh
 
+[ -f /THIS_IS_NOT_YOUR_ROOT_FILESYSTEM ] || exit 0
+
 F="/opt/klipper/klippy/toolhead.py"
 
 clear_klipper()

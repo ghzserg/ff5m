@@ -9,10 +9,11 @@ KLIPPER_CONF=/opt/config/printer.cfg
 KLIPPER_LOG=/data/logFiles/printer.log
 KLIPPER_UDS=/tmp/uds
 PID_FILE=/run/klipper.pid
-KLIPPER_NICENESS=-5
+KLIPPER_NICENESS=-10
 
 start() {
     mkdir -p $(dirname $KLIPPER_LOG) # make sure the log directory exists
+#    /opt/config/mod/.shell/root/mcu/boot_eboard_mcu
     start-stop-daemon -S -b -m -p $PID_FILE -N $KLIPPER_NICENESS --exec $PYTHON -- $KLIPPER $KLIPPER_CONF -l $KLIPPER_LOG -a $KLIPPER_UDS
 }
 
