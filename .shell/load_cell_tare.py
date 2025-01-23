@@ -61,7 +61,7 @@ class LoadCellTareGcode:
         threshold_weight = self.variables.allVariables.get("cell_weight", 0)
         ignore_cell_tare = self.variables.allVariables.get("ignore_cell_tare", 0)
 
-        gcmd.respond_info(f"Сброс веса тензодатчиков")
+        gcmd.respond_info(f"Сброс веса тензодатчиков. Альтернативная реализация.")
 
         # TODO: Is it okay ???
         if weight < threshold_weight:
@@ -97,11 +97,13 @@ class LoadCellTareGcode:
                     f"Установлен режим игнорирования ошибок сброса тензодатчиков. // SAVE_ZMOD_DATA IGNORE_CELL_TARE={ignore_cell_tare}")
                 if screen:
                     gcmd.respond_info(f"Используйте режим снятия карты стола с родного экрана. // SAVE_ZMOD_DATA PRINT_LEVELING=1")
+                gcmd.respond_info(f"Попробуйте основной алгоритм сброса тензодатчиков. // SAVE_ZMOD_DATA ALTER_CELL_TARE=0")
                 gcmd.respond_info(f"Сброс веса тензодатчиков завершен. Вес: {self.weight.last_temp}")
             else:
                 gcmd.respond_info(f"Вес при ошибке: {self.weight.last_temp}")
                 if screen:
                     gcmd.respond_info(f"Используйте режим снятия карты стола с родного экрана. // SAVE_ZMOD_DATA PRINT_LEVELING=1")
+                gcmd.respond_info(f"Попробуйте основной алгоритм сброса тензодатчиков. // SAVE_ZMOD_DATA ALTER_CELL_TARE=0")
                 gcmd.respond_info(f"Попробуйте игнорирование ошибок сброса тензодатчиков. // SAVE_ZMOD_DATA IGNORE_CELL_TARE=1")
                 raise gcmd.error("Ошибка сброса веса тензодатчиков. Читайте FAQ: https://github.com/ghzserg/zmod/wiki/FAQ")
 
