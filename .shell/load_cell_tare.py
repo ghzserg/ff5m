@@ -99,12 +99,16 @@ class LoadCellTareGcode:
         self._run_gcode(
             "SET_PIN PIN=level_h1 VALUE=0",
             f"G4 P{timeout}",
+            f"M400",
             "SET_PIN PIN=level_h1 VALUE=1",
             f"G4 P{timeout}",
+            f"M400",
             "SET_PIN PIN=level_h1 VALUE=0",
             f"G4 P{timeout}",
+            f"M400",
             "SET_PIN PIN=level_h1 VALUE=1",
             f"G4 P{timeout}",
+            f"M400"
         )
 
     def _confirm_tare(self):
@@ -114,8 +118,10 @@ class LoadCellTareGcode:
         self._run_gcode(
             "SET_PIN PIN=level_clear VALUE=0",
             f"G4 P{timeout}",
+            f"M400",
             "SET_PIN PIN=level_clear VALUE=1",
             f"G4 P{timeout}",
+            f"M400"
         )
 
 
