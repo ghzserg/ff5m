@@ -58,6 +58,7 @@ fix_config()
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py || cp /opt/config/mod/.shell/save_variables.py /opt/klipper/klippy/extras/save_variables.py
 
     grep -q zmod_1.0 /opt/klipper/klippy/extras/gcode_shell_command.py || cp /opt/config/mod/.shell/gcode_shell_command.py /opt/klipper/klippy/extras/gcode_shell_command.py
+    [ -L /opt/klipper/klippy/extras/load_cell_tare.py ] || ln -s /opt/config/mod/.shell/load_cell_tare.py /opt/klipper/klippy/extras/load_cell_tare.py
 
     grep -q '^\[include check_md5.cfg\]' ${PRINTER_CFG} && sed -i '/^\[include check_md5.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
 
@@ -164,34 +165,55 @@ max_temp: 130
             rm -f heater_bed.txt printer.base.tmp
     fi
 
-    # Удаляем filament_switch_sensor e0_sensor
-    if grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
+#    # Удаляем filament_switch_sensor e0_sensor
+#    if grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
+#        then
+#            NEED_REBOOT=1
+#
+#            sed -e '/^\[filament_switch_sensor e0_sensor/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
+#            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
+#            sed -i '$d' heater_bed.txt
+#            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
+#            num=$(($num-1))
+#            sed -e "/^\[filament_switch_sensor e0_sensor/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
+#            cat printer.base.tmp >${PRINTER_BASE}
+#            rm -f heater_bed.txt printer.base.tmp
+#    fi
+#
+#    # Удаляем gcode_button check_level_pin
+#    if grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
+#        then
+#            NEED_REBOOT=1
+#
+#            sed -e '/^\[gcode_button check_level_pin/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
+#            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
+#            sed -i '$d' heater_bed.txt
+#            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
+#            num=$(($num-1))
+#            sed -e "/^\[gcode_button check_level_pin/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
+#            cat printer.base.tmp >${PRINTER_BASE}
+#            rm -f heater_bed.txt printer.base.tmp
+#    fi
+    # Возвращаем gcode_button check_level_pin
+    if ! grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
         then
             NEED_REBOOT=1
-
-            sed -e '/^\[filament_switch_sensor e0_sensor/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
-            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
-            sed -i '$d' heater_bed.txt
-            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
-            num=$(($num-1))
-            sed -e "/^\[filament_switch_sensor e0_sensor/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
-            cat printer.base.tmp >${PRINTER_BASE}
-            rm -f heater_bed.txt printer.base.tmp
+            echo '
+[gcode_button check_level_pin]
+pin: !PE0
+press_gcode:
+    M105
+' >>${PRINTER_BASE}
     fi
 
-    # Удаляем gcode_button check_level_pin
-    if grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
+    # Возвращаем filament_switch_sensor e0_sensor
+    if ! grep -q '\[filament_switch_sensor e0_sensor' ${PRINTER_BASE}
         then
             NEED_REBOOT=1
-
-            sed -e '/^\[gcode_button check_level_pin/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
-            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
-            sed -i '$d' heater_bed.txt
-            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
-            num=$(($num-1))
-            sed -e "/^\[gcode_button check_level_pin/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
-            cat printer.base.tmp >${PRINTER_BASE}
-            rm -f heater_bed.txt printer.base.tmp
+            echo '
+[filament_switch_sensor e0_sensor]
+pin:PB7
+' >>${PRINTER_BASE}
     fi
 
     # Добавляем controller_fan driver_fan
@@ -254,6 +276,7 @@ stepper: stepper_x, stepper_y, stepper_z
 mkdir -p /opt/config/mod_data/log/
 
 [ -L /etc/init.d/S00fix ] || ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
+[ -L /usr/bin/audio.py ]  || ln -s /opt/config/mod/.shell/root/audio/audio.py /usr/bin/audio.py
 
 mv /opt/config/mod_data/log/fix_config.log.4 /opt/config/mod_data/log/fix_config.log.5
 mv /opt/config/mod_data/log/fix_config.log.3 /opt/config/mod_data/log/fix_config.log.4
