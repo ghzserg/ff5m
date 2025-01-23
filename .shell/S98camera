@@ -17,11 +17,7 @@ start() {
     if [ $START = "on" ]
         then
             /usr/bin/v4l2-ctl --set-fmt-video=width=${WIDTH},height=${HEIGHT},pixelformat=1
-            if ! [ -f /THIS_IS_NOT_YOUR_ROOT_FILESYSTEM ]; then
-                start-stop-daemon -S -b -m -p $PID_FILE --exec /usr/bin/mjpg_streamer               -- -o "/usr/lib/mjpg-streamer/output_http.so -w /usr/share/mjpg-streamer/www -p 8080" -i  "/usr/lib/mjpg-streamer/input_uvc.so -d /dev/${VIDEO} -r ${WIDTH}x${HEIGHT} -f $FPS"
-            else
-                start-stop-daemon -S -b -m -p $PID_FILE --exec /opt/mjpg-streamer/bin/mjpg_streamer -- -o "/opt/mjpg-streamer/lib/output_http.so -w /opt/mjpg-streamer/www       -p 8080" -i  "/opt/mjpg-streamer/lib/input_uvc.so -d /dev/${VIDEO} -r ${WIDTH}x${HEIGHT} -f $FPS"
-            fi
+            start-stop-daemon -S -b -m -p $PID_FILE --exec /opt/mjpg-streamer/bin/mjpg_streamer -- -o "/opt/mjpg-streamer/lib/output_http.so -w /opt/mjpg-streamer/www -p 8080" -i  "/opt/mjpg-streamer/lib/input_uvc.so -d /dev/${VIDEO} -r ${WIDTH}x${HEIGHT} -f $FPS"
         else
             echo "Камера отключена"
     fi
