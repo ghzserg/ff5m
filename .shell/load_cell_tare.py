@@ -49,19 +49,28 @@ class LoadCellTareGcode:
             self._cell_tare()
 
             if self.level_pin.last_state:
-                
                 gcmd.respond_info(f"Сброс веса тензодатчиков прошел успешно. Вес: {self.weight.last_temp}")
                 ok = True
                 break
 
             gcmd.respond_info(f"Проверка {i + 1}. Подтверждения обнуления нет. Вес: {self.weight.last_temp}")
 
+        macro_obj = self.printer.lookup_object('gcode_macro START_PRINT')
+        screen = macro_obj.variables.get('screen', True)
+
+#        if screen == True:
+#            gcmd.respond_info(f"Используйте режим снятия карты стола с родного экрана. // SAVE_ZMOD_DATA PRINT_LEVELING=1")
+
         if not ok:
             if self.weight.last_temp == 0 and alter_cell_tare == 1:
                 gcmd.respond_info(f"Установлен режим игнорирования ошибок сброса тензодатчиков. // SAVE_ZMOD_DATA ALTER_CELL_TARE={alter_cell_tare}")
+                if screen == True:
+                    gcmd.respond_info(f"Используйте режим снятия карты стола с родного экрана. // SAVE_ZMOD_DATA PRINT_LEVELING=1")
                 gcmd.respond_info(f"Сброс веса тензодатчиков завершен. Вес: {self.weight.last_temp}")
             else:
                 gcmd.respond_info(f"Вес при ошибке: {self.weight.last_temp}")
+                if screen == True:
+                    gcmd.respond_info(f"Используйте режим снятия карты стола с родного экрана. // SAVE_ZMOD_DATA PRINT_LEVELING=1")
                 gcmd.respond_info(f"Попробуйте игнорирование ошибок сброса тензодатчиков. // SAVE_ZMOD_DATA ALTER_CELL_TARE=1")
                 raise gcmd.error("Ошибка сброса веса тензодатчиков. Читайте FAQ: https://github.com/ghzserg/zmod/wiki/FAQ")
 
