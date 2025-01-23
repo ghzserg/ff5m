@@ -2,16 +2,18 @@
 
 set -x
 
+MOD=/data/.mod/.zmod
+
 ns_off()
 {
-    grep -q "$1" /etc/hosts && sed -i "|$1|d" /etc/hosts
+    grep -q "$1" /etc/hosts && sed -i "/$1/d" /etc/hosts
 }
 
 restore_base()
 {
-    grep -q '^\[include mod.user.cfg' /opt/config/printer.cfg && sed -i '|include mod.user.cfg|d' /opt/config/printer.cfg
-    grep -q '^\[include ./mod/mod.cfg' /opt/config/printer.cfg && sed -i '|include mod.cfg|d' /opt/config/printer.cfg
-    grep -q '^\[include ./mod/display_off.cfg' /opt/config/printer.cfg && sed -i '|display_off.cfg|d' /opt/config/printer.cfg
+    grep -q '^\[include mod.user.cfg' /opt/config/printer.cfg && sed -i '/include mod.user.cfg/d' /opt/config/printer.cfg
+    grep -q '^\[include ./mod/mod.cfg' /opt/config/printer.cfg && sed -i '/mod.cfg/d' /opt/config/printer.cfg
+    grep -q '^\[include ./mod/display_off.cfg' /opt/config/printer.cfg && sed -i '/display_off.cfg/d' /opt/config/printer.cfg
 
     ns_off api.cloud.flashforge.com
     ns_off api.fdmcloud.flashforge.com
@@ -71,6 +73,8 @@ pin:PB7
 ' >>/opt/config/printer.base.cfg
     fi
 
+    grep -q '^minimum_cruise_ratio' /opt/config/printer.base.cfg && sed -i 's|^minimum_cruise_ratio.*|max_accel_to_decel:5000|' /opt/config/printer.base.cfg
+
     rm -rf /data/.mod
     rm /etc/init.d/S00fix
     rm /etc/init.d/S99moon
@@ -94,11 +98,44 @@ pin:PB7
     rm -rf /opt/var
 }
 
+start_moon()
+{
+    SWAP="/root/swap"
+    if grep -q "use_swap = 2" /opt/config/mod_data/variables.cfg
+        then
+            for i in `seq 1 6`; do mount |grep /media && break; echo $i; sleep 10; done;
+
+            if mount |grep /media
+                then
+                    FREE_SPACE=$(df /media 2>/dev/null|grep -v /dev/root|grep -v Filesystem| tail -1 | tr -s ' ' | cut -d' ' -f4)
+                    MIN_SPACE=$((128*1024))
+                    mount
+                    df /media
+
+                    if [ "$FREE_SPACE" != "" ] && [ "$FREE_SPACE" -ge "$MIN_SPACE" ]
+                        then
+                            SWAP="/media/swap"
+                            if ! [ -f $SWAP ]; then dd if=/dev/zero of=$SWAP bs=1024 count=131072; mkswap $SWAP; fi;
+                            swapon $SWAP
+                    fi
+            fi
+    fi
+
+    VER=$(cat /root/version)
+    chroot $MOD /opt/config/mod/.shell/root/start.sh "$SWAP" "$VER" &
+
+    mkdir -p /data/lost+found
+    sleep 10
+    mount --bind /data/lost+found /data/.mod
+    mount
+    ps
+    sleep 60
+    umount /opt/klipper/start.sh
+}
+
 start_prepare()
 {
-    renice -16 $(ps |grep klippy.py| grep -v grep| awk '{print $1}')
-
-    MOD=/data/.mod/.zmod
+    renice -10 $(ps |grep klippy.py| grep -v grep| awk '{print $1}')
 
     if [ -f /opt/config/mod/REMOVE ]
      then
@@ -107,7 +144,7 @@ start_prepare()
       # Remove ROOT
       rm -rf /etc/init.d/S50sshd /etc/init.d/S55date /bin/dropbearmulti /bin/dropbear /bin/dropbearkey /bin/scp /etc/dropbear /etc/init.d/S60dropbear
       # Remove BEEP
-      rm -f /usr/bin/audio /usr/lib/python3.7/site-packages/audio.py /usr/bin/audio_midi.sh /opt/klipper/klippy/extras/gcode_shell_command.py
+      rm -f /usr/bin/audio.py /usr/bin/audio /usr/lib/python3.7/site-packages/audio.py /usr/bin/audio_midi.sh /opt/klipper/klippy/extras/gcode_shell_command.py
       rm -rf /usr/lib/python3.7/site-packages/mido/
 
       sync
@@ -129,13 +166,14 @@ start_prepare()
     fi
 
     #/opt/config/mod/.shell/fix_config.sh
-    ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
-    echo "System start" >/data/logFiles/ssh.log
+    [ -L /etc/init.d/S00fix ] || ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
+    echo "System start" >/opt/config/mod_data/log/ssh.log
     mount -t proc /proc $MOD/proc
     mount --rbind /sys $MOD/sys
     mount --rbind /dev $MOD/dev
 
     mount --bind /tmp $MOD/tmp
+    mount --bind /run $MOD/run
 
     mkdir -p $MOD/opt/config
     mount --bind /opt/config $MOD/opt/config
@@ -160,35 +198,9 @@ start_prepare()
         cp /opt/klipper/config/* $MOD/opt/klipper/config
     fi
 
-    SWAP="/root/swap"
-    if grep -q "use_swap = 2" /opt/config/mod_data/variables.cfg
-        then
-            for i in `seq 1 6`; do mount |grep /media && break; echo $i; sleep 10; done;
-
-            if mount |grep /media
-                then
-                    FREE_SPACE=$(df /media 2>/dev/null|grep -v /dev/root|grep -v Filesystem| tail -1 | tr -s ' ' | cut -d' ' -f4)
-                    MIN_SPACE=$((128*1024))
-                    mount
-                    df /media
-
-                    if [ "$FREE_SPACE" != "" ] && [ "$FREE_SPACE" -ge "$MIN_SPACE" ]
-                        then
-                            SWAP="/media/swap"
-                            if ! [ -f $SWAP ]; then dd if=/dev/zero of=$SWAP bs=1024 count=131072; mkswap $SWAP; fi;
-                            swapon $SWAP
-                    fi
-            fi
-    fi
-
     cat /etc/localtime >/tmp/localtime
 
-    VER=$(cat /root/version)
-    chroot $MOD /opt/config/mod/.shell/root/start.sh "$SWAP" "$VER" &
-
-    mkdir -p /data/lost+found
-    sleep 10
-    mount --bind /data/lost+found /data/.mod
+    start_moon
 }
 
 if [ -f /opt/config/mod/SKIP_ZMOD ]
@@ -200,9 +212,9 @@ fi
 
 while ! mount |grep /dev/mmcblk0p7; do sleep 10; done
 
-mv /data/logFiles/zmod.log.4 /data/logFiles/zmod.log.5
-mv /data/logFiles/zmod.log.3 /data/logFiles/zmod.log.4
-mv /data/logFiles/zmod.log.2 /data/logFiles/zmod.log.3
-mv /data/logFiles/zmod.log.1 /data/logFiles/zmod.log.2
-mv /data/logFiles/zmod.log /data/logFiles/zmod.log.1
-start_prepare &>/data/logFiles/zmod.log
+mv /opt/config/mod_data/log/zmod.log.4 /opt/config/mod_data/log/zmod.log.5
+mv /opt/config/mod_data/log/zmod.log.3 /opt/config/mod_data/log/zmod.log.4
+mv /opt/config/mod_data/log/zmod.log.2 /opt/config/mod_data/log/zmod.log.3
+mv /opt/config/mod_data/log/zmod.log.1 /opt/config/mod_data/log/zmod.log.2
+mv /opt/config/mod_data/log/zmod.log /opt/config/mod_data/log/zmod.log.1
+start_prepare &>/opt/config/mod_data/log/zmod.log
