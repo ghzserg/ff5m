@@ -19,7 +19,7 @@ class LoadCellTareGcode:
         self.config = config
         self.printer = config.get_printer()
         self.gcode = self.printer.lookup_object("gcode")
-        self.gcode.register_command("LOAD_CELL_TARE_ALTER", self.cmd_LOAD_CELL_TARE)
+        self.gcode.register_command("_LOAD_CELL_TARE_ALT", self.cmd_LOAD_CELL_TARE)
 
     def _lazy_load_printers_objects(self):
         if self.loaded: return
