@@ -32,7 +32,7 @@ class LoadCellTareGcode:
 
         weight = self.weight.last_temp
         threshold_weight = self.variables.allVariables.get("cell_weight", 0)
-        alter_cell_tare = self.config.getint("alter_cell_tare", 0)
+        alter_cell_tare = self.variables.allVariables.get("alter_cell_tare", 0)
 
         gcmd.respond_info(f"Сброс веса тензодатчиков");
 
