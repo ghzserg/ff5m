@@ -165,71 +165,71 @@ max_temp: 130
             rm -f heater_bed.txt printer.base.tmp
     fi
 
-#    # Удаляем filament_switch_sensor e0_sensor
-#    if grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
-#        then
-#            NEED_REBOOT=1
-#
-#            sed -e '/^\[filament_switch_sensor e0_sensor/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
-#            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
-#            sed -i '$d' heater_bed.txt
-#            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
-#            num=$(($num-1))
-#            sed -e "/^\[filament_switch_sensor e0_sensor/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
-#            cat printer.base.tmp >${PRINTER_BASE}
-#            rm -f heater_bed.txt printer.base.tmp
-#    fi
-#
-#    # Удаляем gcode_button check_level_pin
-#    if grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
-#        then
-#            NEED_REBOOT=1
-#
-#            sed -e '/^\[gcode_button check_level_pin/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
-#            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
-#            sed -i '$d' heater_bed.txt
-#            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
-#            num=$(($num-1))
-#            sed -e "/^\[gcode_button check_level_pin/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
-#            cat printer.base.tmp >${PRINTER_BASE}
-#            rm -f heater_bed.txt printer.base.tmp
-#    fi
-    # Возвращаем gcode_button check_level_pin
-    if ! grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
+    # Удаляем filament_switch_sensor e0_sensor
+    if grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
         then
             NEED_REBOOT=1
-            echo '
-[gcode_button check_level_pin]
-pin: !PE0
-press_gcode:
-    M105
-' >>${PRINTER_BASE}
+
+            sed -e '/^\[filament_switch_sensor e0_sensor/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
+            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
+            sed -i '$d' heater_bed.txt
+            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
+            num=$(($num-1))
+            sed -e "/^\[filament_switch_sensor e0_sensor/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
+            cat printer.base.tmp >${PRINTER_BASE}
+            rm -f heater_bed.txt printer.base.tmp
     fi
 
-    # Возвращаем filament_switch_sensor e0_sensor
-    if ! grep -q '\[filament_switch_sensor e0_sensor' ${PRINTER_BASE}
+    # Удаляем gcode_button check_level_pin
+    if grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
         then
             NEED_REBOOT=1
-            echo '
-[filament_switch_sensor e0_sensor]
-pause_on_runout: False
-switch_pin: !PB14
-event_delay: 1.0
-' >>${PRINTER_BASE}
-    fi
 
-    # Добавляем controller_fan driver_fan
-    if ! grep -q '^\[controller_fan driver_fan' ${PRINTER_BASE}
-        then
-            NEED_REBOOT=1
-            echo '
-[controller_fan driver_fan]
-pin:PB7
-fan_speed: 1.0
-idle_timeout: 30
-stepper: stepper_x, stepper_y, stepper_z
-' >>${PRINTER_BASE}
+            sed -e '/^\[gcode_button check_level_pin/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
+            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
+            sed -i '$d' heater_bed.txt
+            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
+            num=$(($num-1))
+            sed -e "/^\[gcode_button check_level_pin/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
+            cat printer.base.tmp >${PRINTER_BASE}
+            rm -f heater_bed.txt printer.base.tmp
     fi
+#    # Возвращаем gcode_button check_level_pin
+#    if ! grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
+#        then
+#            NEED_REBOOT=1
+#            echo '
+#[gcode_button check_level_pin]
+#pin: !PE0
+#press_gcode:
+#    M105
+#' >>${PRINTER_BASE}
+#    fi
+#
+#    # Возвращаем filament_switch_sensor e0_sensor
+#    if ! grep -q '\[filament_switch_sensor e0_sensor' ${PRINTER_BASE}
+#        then
+#            NEED_REBOOT=1
+#            echo '
+#[filament_switch_sensor e0_sensor]
+#pause_on_runout: False
+#switch_pin: !PB14
+#event_delay: 1.0
+#' >>${PRINTER_BASE}
+#    fi
+#
+#    # Добавляем controller_fan driver_fan
+#    if ! grep -q '^\[controller_fan driver_fan' ${PRINTER_BASE}
+#        then
+#            NEED_REBOOT=1
+#            echo '
+#[controller_fan driver_fan]
+#pin:PB7
+#fan_speed: 1.0
+#idle_timeout: 30
+#stepper: stepper_x, stepper_y, stepper_z
+#' >>${PRINTER_BASE}
+#    fi
 
     # Klipper12 FIX
     if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
