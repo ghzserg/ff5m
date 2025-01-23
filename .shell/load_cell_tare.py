@@ -58,6 +58,8 @@ class LoadCellTareGcode:
         macro_obj = self.printer.lookup_object('gcode_macro START_PRINT')
         screen = macro_obj.variables.get('screen', True)
 
+        self._run_gcode("G4 P100")
+        self._run_gcode("M400")
         if not ok:
             if self.weight.last_temp == 0 and alter_cell_tare == 1:
                 gcmd.respond_info(f"Установлен режим игнорирования ошибок сброса тензодатчиков. // SAVE_ZMOD_DATA ALTER_CELL_TARE={alter_cell_tare}")
