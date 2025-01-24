@@ -221,18 +221,18 @@ max_temp: 130
 #' >>${PRINTER_BASE}
 #    fi
 #
-#    # Добавляем controller_fan driver_fan
-#    if ! grep -q '^\[controller_fan driver_fan' ${PRINTER_BASE}
-#        then
-#            NEED_REBOOT=1
-#            echo '
-#[controller_fan driver_fan]
-#pin:PB7
-#fan_speed: 1.0
-#idle_timeout: 30
-#stepper: stepper_x, stepper_y, stepper_z
-#' >>${PRINTER_BASE}
-#    fi
+    # Добавляем controller_fan driver_fan
+    if ! grep -q '^\[controller_fan driver_fan' ${PRINTER_BASE}
+        then
+            NEED_REBOOT=1
+            echo '
+[controller_fan driver_fan]
+pin:PB7
+fan_speed: 1.0
+idle_timeout: 30
+stepper: stepper_x, stepper_y, stepper_z
+' >>${PRINTER_BASE}
+    fi
 
     # Klipper12 FIX
     if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
