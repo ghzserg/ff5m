@@ -232,6 +232,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "visible": true
         },
         {
+            "alias": "Обновить MCU",
+            "categoryId": "0077449b-cd10-4059-aebd-bf17be6cb270",
+            "color": "",
+            "disabledWhilePrinting": false,
+            "name": "update_mcu",
+            "visible": true
+        },
+        {
             "alias": "",
             "categoryId": "944c031b-feef-4b75-badf-21c30508fb24",
             "color": "",
@@ -1048,6 +1056,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                     "color": "group",
                     "name": "ZSSH_RELOAD",
                     "pos": 26,
+                    "showInPause": true,
+                    "showInPrinting": true,
+                    "showInStandby": true
+                },
+                {
+                    "color": "group",
+                    "name": "UPDATE_MCU",
+                    "pos": 27,
                     "showInPause": true,
                     "showInPrinting": true,
                     "showInStandby": true
