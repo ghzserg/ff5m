@@ -57,6 +57,9 @@ fix_config()
 
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py || cp /opt/config/mod/.shell/save_variables.py /opt/klipper/klippy/extras/save_variables.py
 
+    # Fix possible ordering issue if a callback blocks in button handler#6440
+    grep -q receive_time /opt/klipper/klippy/extras/buttons.py || cp /opt/config/mod/.shell/buttons.py /opt/klipper/klippy/extras/buttons.py
+
     grep -q zmod_1.0 /opt/klipper/klippy/extras/gcode_shell_command.py || cp /opt/config/mod/.shell/gcode_shell_command.py /opt/klipper/klippy/extras/gcode_shell_command.py
     [ -L /opt/klipper/klippy/extras/load_cell_tare.py ] || ln -s /opt/config/mod/.shell/load_cell_tare.py /opt/klipper/klippy/extras/load_cell_tare.py
 

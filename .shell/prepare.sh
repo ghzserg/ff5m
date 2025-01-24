@@ -27,6 +27,7 @@ restore_base()
     ns_off polar3d.com
 
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py && cp /opt/config/mod/.shell/save_variables.py.orig /opt/klipper/klippy/extras/save_variables.py
+    grep -q receive_time /opt/klipper/klippy/extras/buttons.py && cp /opt/config/mod/.shell/buttons.py.orig /opt/klipper/klippy/extras/buttons.py
 
     # Удаляем controller_fan driver_fan
     if grep -q '^\[controller_fan driver_fan' /opt/config/printer.base.cfg
