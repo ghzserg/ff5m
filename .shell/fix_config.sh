@@ -57,8 +57,13 @@ fix_config()
 
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py || cp /opt/config/mod/.shell/save_variables.py /opt/klipper/klippy/extras/save_variables.py
 
+    # Fix possible ordering issue if a callback blocks in button handler#6440
+    grep -q receive_time /opt/klipper/klippy/extras/buttons.py || cp /opt/config/mod/.shell/buttons.py /opt/klipper/klippy/extras/buttons.py
+
     grep -q zmod_1.0 /opt/klipper/klippy/extras/gcode_shell_command.py || cp /opt/config/mod/.shell/gcode_shell_command.py /opt/klipper/klippy/extras/gcode_shell_command.py
-    [ -L /opt/klipper/klippy/extras/load_cell_tare.py ] || ln -s /opt/config/mod/.shell/load_cell_tare.py /opt/klipper/klippy/extras/load_cell_tare.py
+    if [ -L /opt/klipper/klippy/extras/load_cell_tare.py ] || [ -f /opt/klipper/klippy/extras/load_cell_tare.py ]; then
+        rm -f /opt/klipper/klippy/extras/load_cell_tare.py
+    fi
 
     grep -q '^\[include check_md5.cfg\]' ${PRINTER_CFG} && sed -i '/^\[include check_md5.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
 
@@ -165,35 +170,6 @@ max_temp: 130
             rm -f heater_bed.txt printer.base.tmp
     fi
 
-#    # Удаляем filament_switch_sensor e0_sensor
-#    if grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
-#        then
-#            NEED_REBOOT=1
-#
-#            sed -e '/^\[filament_switch_sensor e0_sensor/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
-#            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
-#            sed -i '$d' heater_bed.txt
-#            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
-#            num=$(($num-1))
-#            sed -e "/^\[filament_switch_sensor e0_sensor/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
-#            cat printer.base.tmp >${PRINTER_BASE}
-#            rm -f heater_bed.txt printer.base.tmp
-#    fi
-#
-#    # Удаляем gcode_button check_level_pin
-#    if grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
-#        then
-#            NEED_REBOOT=1
-#
-#            sed -e '/^\[gcode_button check_level_pin/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
-#            diff -u ${PRINTER_BASE} printer.base.tmp | grep -v "printer.base.cfg" |grep "^-" | cut -b 2- >heater_bed.txt
-#            sed -i '$d' heater_bed.txt
-#            num=$(wc -l heater_bed.txt|cut  -d " " -f1)
-#            num=$(($num-1))
-#            sed -e "/^\[gcode_button check_level_pin/,+${num}d;" ${PRINTER_BASE} >printer.base.tmp
-#            cat printer.base.tmp >${PRINTER_BASE}
-#            rm -f heater_bed.txt printer.base.tmp
-#    fi
     # Возвращаем gcode_button check_level_pin
     if ! grep -q '^\[gcode_button check_level_pin' ${PRINTER_BASE}
         then

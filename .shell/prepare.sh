@@ -27,6 +27,7 @@ restore_base()
     ns_off polar3d.com
 
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py && cp /opt/config/mod/.shell/save_variables.py.orig /opt/klipper/klippy/extras/save_variables.py
+    grep -q receive_time /opt/klipper/klippy/extras/buttons.py && cp /opt/config/mod/.shell/buttons.py.orig /opt/klipper/klippy/extras/buttons.py
 
     # Удаляем controller_fan driver_fan
     if grep -q '^\[controller_fan driver_fan' /opt/config/printer.base.cfg
@@ -76,6 +77,9 @@ event_delay: 1.0
 ' >>/opt/config/printer.base.cfg
     fi
 
+    if [ -L /opt/klipper/klippy/extras/load_cell_tare.py ] || [ -f /opt/klipper/klippy/extras/load_cell_tare.py ]; then
+        rm -f /opt/klipper/klippy/extras/load_cell_tare.py
+    fi
     grep -q '^minimum_cruise_ratio' /opt/config/printer.base.cfg && sed -i 's|^minimum_cruise_ratio.*|max_accel_to_decel:5000|' /opt/config/printer.base.cfg
 
     rm -rf /data/.mod
