@@ -77,6 +77,9 @@ event_delay: 1.0
 ' >>/opt/config/printer.base.cfg
     fi
 
+    if [ -L /opt/klipper/klippy/extras/load_cell_tare.py ] || [ -f /opt/klipper/klippy/extras/load_cell_tare.py ]; then
+        rm -f /opt/klipper/klippy/extras/load_cell_tare.py
+    fi
     grep -q '^minimum_cruise_ratio' /opt/config/printer.base.cfg && sed -i 's|^minimum_cruise_ratio.*|max_accel_to_decel:5000|' /opt/config/printer.base.cfg
 
     rm -rf /data/.mod
