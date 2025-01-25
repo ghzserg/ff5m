@@ -22,17 +22,17 @@ for i in /opt/PROGRAM/control/*/; do
         sed -i 's/^FIRMWARE_Head_M3=.*/FIRMWARE_Head_M3=Eboard.hex/' run.sh.12
         sync
 
-        if [ "$1" -eq 1 ] && [ -f /THIS_IS_NOT_YOUR_ROOT_FILESYSTEM ]; then
-            killall python3.7 firmwareExe
-
-            ./run.sh.12
-            sync
-
-            sed -i 's/^FIRMWARE_Board_M3=.*/FIRMWARE_Board_M3=Mainboard.bin.none/' run.sh.12
-            sync
-            sed -i 's/^FIRMWARE_Head_M3=.*/FIRMWARE_Head_M3=Eboard.hex/' run.sh.12
-            sync
-        fi
+#        if [ "$1" -eq 1 ] && [ -f /THIS_IS_NOT_YOUR_ROOT_FILESYSTEM ]; then
+#            killall python3.7 firmwareExe
+#
+#            ./run.sh.12
+#            sync
+#
+#            sed -i 's/^FIRMWARE_Board_M3=.*/FIRMWARE_Board_M3=Mainboard.bin.none/' run.sh.12
+#            sync
+#            sed -i 's/^FIRMWARE_Head_M3=.*/FIRMWARE_Head_M3=Eboard.hex/' run.sh.12
+#            sync
+#        fi
 
         sleep 5
         audio_midi.sh For_Elise.mid
