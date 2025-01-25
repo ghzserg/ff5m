@@ -245,12 +245,14 @@ stepper: stepper_x, stepper_y, stepper_z
     echo "END fix_config"
 
     if [ "$1" == "start" ] && grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
-        mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/start.sh
+
         cnt=$(find /opt/PROGRAM/control/ -name Update|wc -l)
         if [ "$cnt" -ne 0 ]; then
             find /opt/PROGRAM/control/ -name run.sh| while read a; do
-            mount -o bind /opt/config/mod/.shell/update_mcu.sh $a
+                mount -o bind /opt/config/mod/.shell/update_mcu.sh $a
             done
+        else
+            mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/start.sh
         fi
     fi
 
