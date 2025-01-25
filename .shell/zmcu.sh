@@ -19,7 +19,7 @@ for i in /opt/PROGRAM/control/*/; do
         if [ "$1" -eq 1 ] && [ -f /THIS_IS_NOT_YOUR_ROOT_FILESYSTEM ]; then
             killall python3.7 firmwareExe
 
-            cp run.sh run.sh.12 &&   sync
+            cp run.sh run.sh.12 && sync
 
             sed -i 's/^FIRMWARE_Board_M3=.*/FIRMWARE_Board_M3=Mainboard.bin/' run.sh.12
             sync

@@ -269,10 +269,11 @@ stepper: stepper_x, stepper_y, stepper_z
         if [ "$cnt" -ne 0 ]; then
             # Если обновляем MCU
             find /opt/PROGRAM/control/ -name Update| sed 's/Update//'| while read a; do
-                pushd $a
+                cur_dir=$(pwd)
+                cd "$a"
                     grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg && fix_run 1
                     grep -q "klipper12 = 0" /opt/config/mod_data/variables.cfg && fix_run 0
-                popd
+                cd $cur_dir
             done
         else
             # Если обновлений нет
