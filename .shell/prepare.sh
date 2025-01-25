@@ -222,9 +222,9 @@ fi
 
 while ! mount |grep /dev/mmcblk0p7; do sleep 10; done
 
-mv /opt/config/mod_data/log/zmod.log.4 /opt/config/mod_data/log/zmod.log.5
-mv /opt/config/mod_data/log/zmod.log.3 /opt/config/mod_data/log/zmod.log.4
-mv /opt/config/mod_data/log/zmod.log.2 /opt/config/mod_data/log/zmod.log.3
-mv /opt/config/mod_data/log/zmod.log.1 /opt/config/mod_data/log/zmod.log.2
-mv /opt/config/mod_data/log/zmod.log /opt/config/mod_data/log/zmod.log.1
+mv /opt/config/mod_data/log/zmod.4.log /opt/config/mod_data/log/zmod.5.log
+mv /opt/config/mod_data/log/zmod.3.log /opt/config/mod_data/log/zmod.4.log
+mv /opt/config/mod_data/log/zmod.2.log /opt/config/mod_data/log/zmod.3.log
+mv /opt/config/mod_data/log/zmod.1.log /opt/config/mod_data/log/zmod.2.log
+mv /opt/config/mod_data/log/zmod.log /opt/config/mod_data/log/zmod.1.log
 start_prepare &>/opt/config/mod_data/log/zmod.log

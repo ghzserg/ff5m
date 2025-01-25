@@ -289,10 +289,10 @@ mkdir -p /opt/config/mod_data/log/
 [ -L /etc/init.d/S00fix ] || ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
 [ -L /usr/bin/audio.py ]  || ln -s /opt/config/mod/.shell/root/audio/audio.py /usr/bin/audio.py
 
-mv /opt/config/mod_data/log/fix_config.log.4 /opt/config/mod_data/log/fix_config.log.5
-mv /opt/config/mod_data/log/fix_config.log.3 /opt/config/mod_data/log/fix_config.log.4
-mv /opt/config/mod_data/log/fix_config.log.2 /opt/config/mod_data/log/fix_config.log.3
-mv /opt/config/mod_data/log/fix_config.log.1 /opt/config/mod_data/log/fix_config.log.2
+mv /opt/config/mod_data/log/fix_config.4.log/opt/config/mod_data/log/fix_config.5.log
+mv /opt/config/mod_data/log/fix_config.3.log /opt/config/mod_data/log/fix_config.4.log
+mv /opt/config/mod_data/log/fix_config.2.log /opt/config/mod_data/log/fix_config.3.log
+mv /opt/config/mod_data/log/fix_config.1.log /opt/config/mod_data/log/fix_config.2.log
 mv /opt/config/mod_data/log/fix_config.log /opt/config/mod_data/log/fix_config.log.1
 
 fix_config "$1" &>/opt/config/mod_data/log/fix_config.log
