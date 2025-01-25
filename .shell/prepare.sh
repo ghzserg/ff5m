@@ -188,6 +188,9 @@ start_prepare()
     mkdir -p $MOD/data
     mount --bind /data $MOD/data
 
+    mkdir -p $MOD/opt/PROGRAM/control/
+    mount --bind /opt/PROGRAM/control/ $MOD/opt/PROGRAM/control/
+
     mkdir -p $MOD/root/printer_data/misc
     mkdir -p $MOD/root/printer_data/tmp
     mkdir -p $MOD/root/printer_data/comms
