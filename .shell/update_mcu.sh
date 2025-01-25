@@ -6,7 +6,9 @@ set -x
 
 WORK_DIR=`dirname $0`
 
-FIRMWARE_Board_M3=/opt/config/mod/.shell/root/mcu/Mainboard.bin
+cp /opt/config/mod/.shell/root/mcu/Mainboard.bin $WORK_DIR
+
+FIRMWARE_Board_M3=Mainboard.bin
 FIRMWARE_Head_M3=/opt/config/mod/.shell/root/mcu/Eboard.hex
 
 CHECH_ARCH=`uname -m`
