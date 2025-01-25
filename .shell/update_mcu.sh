@@ -18,6 +18,8 @@ if [ "${CHECH_ARCH}" != "armv7l" ];then
     exit 1
 fi
 
+killall python3.7 firmwareExe python3 || echo ok
+
 cat $WORK_DIR/mcu.img > /dev/fb0
 
 update_mcu()
@@ -26,7 +28,7 @@ update_mcu()
 	chmod a+x $WORK_DIR/NationsCommand
 	if [ -f $FIRMWARE_Board_M3 ];then
 		echo "burn M3 firmware..."
-		$WORK_DIR/NationsCommand -c -d --fn $FIRMWARE_Board_M3 --v -r
+		$WORK_DIR/NationsCommand -c -d --fn $WORK_DIR/$FIRMWARE_Board_M3 --v -r
 	fi
     fi
 
