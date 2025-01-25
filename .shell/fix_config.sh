@@ -183,7 +183,7 @@ press_gcode:
     fi
 
     # Возвращаем filament_switch_sensor e0_sensor
-    if ! grep -q '\[filament_switch_sensor e0_sensor' ${PRINTER_BASE}
+    if ! grep -q '\[filament_switch_sensor e0_sensor' ${PRINTER_BASE} && ! grep -q '\[filament_motion_sensor e0_sensor' ${PRINTER_BASE}
         then
             NEED_REBOOT=1
             echo '
