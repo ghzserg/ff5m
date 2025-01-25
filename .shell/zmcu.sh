@@ -3,9 +3,10 @@
 sleep 5
 
 for i in /opt/PROGRAM/control/*/; do 
-    pushd $i
-
-        echo "">Update;
+    save_dir=$(pwd)
+    if [ -d "$i" ]; then
+        cd "$i"
+        echo "">Update
 
         cp /opt/config/mod/.shell/root/mcu/Mainboard.bin Mainboard.bin
         sync
@@ -33,9 +34,9 @@ for i in /opt/PROGRAM/control/*/; do
             sed -i 's/^FIRMWARE_Head_M3=.*/FIRMWARE_Head_M3=Eboard.hex/' run.sh.12
             sync
         fi
-
-        sleep 5
-        audio_midi.sh For_Elise.mid
-
-    popd
+        cd $save_dir
+    fi
 done
+
+sleep 5
+audio_midi.sh For_Elise.mid
