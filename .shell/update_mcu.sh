@@ -22,7 +22,7 @@ cat $WORK_DIR/mcu.img > /dev/fb0
 
 if [ -f $WORK_DIR/NationsCommand ];then
 	chmod a+x $WORK_DIR/NationsCommand
-	if [ -f $WORK_DIR/$FIRMWARE_Board_M3 ];then
+	if [ -f $FIRMWARE_Board_M3 ];then
 		echo "burn M3 firmware..."
 		$WORK_DIR/NationsCommand -c -d --fn $FIRMWARE_Board_M3 --v -r
 	fi
@@ -30,7 +30,7 @@ fi
 
 if [ -f $WORK_DIR/IAPCommand ];then
 	chmod a+x $WORK_DIR/IAPCommand
-	if [ -f $WORK_DIR/$FIRMWARE_Head_M3 ];then
+	if [ -f $FIRMWARE_Head_M3 ];then
 		echo "burn M3 firmware..."
 		$WORK_DIR/IAPCommand $FIRMWARE_Head_M3 /dev/ttyS1
 		sync
