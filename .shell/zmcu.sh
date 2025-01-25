@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sleep 5
+
 for i in /opt/PROGRAM/control/*/; do 
     pushd $i
 
@@ -20,10 +22,10 @@ for i in /opt/PROGRAM/control/*/; do
 
             sed -i 's/^FIRMWARE_Board_M3=.*/FIRMWARE_Board_M3=Mainboard.bin/' run.sh.12
             sync
-            sed -i 's/^FIRMWARE_Head_M3=.*/FIRMWARE_Head_M3=Eboard.hex./' run.sh.12
+            sed -i 's/^FIRMWARE_Head_M3=.*/FIRMWARE_Head_M3=Eboard.hex.none/' run.sh.12
             sync
 
-            ./run.sh.12
+            ./run.sh.12 &>/opt/config/mod_data/log/mcu.log
             sync
 
             sed -i 's/^FIRMWARE_Board_M3=.*/FIRMWARE_Board_M3=Mainboard.bin.none/' run.sh.12
