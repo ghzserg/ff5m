@@ -1,10 +1,5 @@
 #!/bin/sh
 
-echo "RESPOND TYPE=error MSG=\"Дождитесь музыкальной композиции и выключите питание принетра.\"" >/tmp/printer
-echo "RESPOND TYPE=error MSG=\"Подождите 10 секунд и включите обратно. Начнется обновление MCU.\"" >/tmp/printer
-
-sleep 5
-
 for i in /opt/PROGRAM/control/*/; do 
     pushd $i
 
