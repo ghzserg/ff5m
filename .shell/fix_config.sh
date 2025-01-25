@@ -272,7 +272,7 @@ stepper: stepper_x, stepper_y, stepper_z
                 cur_dir=$(pwd)
                 cd "$a"
                     grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg && fix_run 1
-                    grep -q "klipper12 = 0" /opt/config/mod_data/variables.cfg && fix_run 0
+                    grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg || fix_run 0
                 cd $cur_dir
             done
         else
