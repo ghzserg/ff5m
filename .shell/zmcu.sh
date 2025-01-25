@@ -6,8 +6,10 @@ echo "RESPOND TYPE=error MSG=\"Подождите 10 секунд и включ�
 sleep 5
 
 for i in /opt/PROGRAM/control/*/; do 
-    pushd $1
-        echo "">"$i/Update";
+    pushd $i
+
+        echo "">Update;
+
         cp /opt/config/mod/.shell/root/mcu/Mainboard.bin Mainboard.bin
         sync
         cp /opt/config/mod/.shell/root/mcu/Eboard.hex Eboard.hex
@@ -17,24 +19,23 @@ for i in /opt/PROGRAM/control/*/; do
         cp run.sh run.sh.12 &&   sync
         sed -i 's/^FIRMWARE_Board_M3=.*/FIRMWARE_Board_M3=Mainboard.bin/' run.sh.12
         sync
-        sed -i 's/^FIRMWARE_Head_M3=.*/FIRMWARE_Head_M3=Eboard.hex.none/' run.sh.12
-        sync
-    fi
-
-    if [ "$1" -eq 1 ] && [ -f /THIS_IS_NOT_YOUR_ROOT_FILESYSTEM ]; then
-        killall python3.7 firmwareExe
-
-        ./run.sh.12
-        sync
-
-        sed -i 's/^FIRMWARE_Board_M3=.*/FIRMWARE_Board_M3=Mainboard.bin.none/' run.sh.12
-        sync
         sed -i 's/^FIRMWARE_Head_M3=.*/FIRMWARE_Head_M3=Eboard.hex/' run.sh.12
         sync
-    fi
 
-    sleep 5
-    audio_midi.sh For_Elise.mid
+        if [ "$1" -eq 1 ] && [ -f /THIS_IS_NOT_YOUR_ROOT_FILESYSTEM ]; then
+            killall python3.7 firmwareExe
+
+            ./run.sh.12
+            sync
+
+            sed -i 's/^FIRMWARE_Board_M3=.*/FIRMWARE_Board_M3=Mainboard.bin.none/' run.sh.12
+            sync
+            sed -i 's/^FIRMWARE_Head_M3=.*/FIRMWARE_Head_M3=Eboard.hex/' run.sh.12
+            sync
+        fi
+
+        sleep 5
+        audio_midi.sh For_Elise.mid
 
     popd
 done
