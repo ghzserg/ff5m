@@ -6,6 +6,8 @@ set -x
 
 WORK_DIR=$(pwd)
 
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+
 FIRMWARE_Board_M3=/opt/config/mod/.shell/root/mcu/Mainboard.bin
 FIRMWARE_Head_M3=/opt/config/mod/.shell/root/mcu/Eboard.hex
 
@@ -27,6 +29,7 @@ update_mcu_mainboard()
 		$WORK_DIR/NationsCommand -c -d --fn $FIRMWARE_Board_M3 --v -r
 	fi
     fi
+    audio_midi.sh For_Elise.mid
 }
 
 update_mcu_eboard()
@@ -39,7 +42,10 @@ update_mcu_eboard()
 		sync
 	fi
     fi
+    audio_midi.sh For_Elise.mid
 }
+
+killall python3.7 firmwareExe
 
 mkdir -p /opt/config/mod_data/log/
 
