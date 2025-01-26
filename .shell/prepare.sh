@@ -161,6 +161,24 @@ start_prepare()
       exit
     fi
 
+    if [ -f /opt/config/mod/FULL_REMOVE ]
+     then
+      restore_base
+
+      # Remove ROOT
+      rm -rf /etc/init.d/S50sshd /etc/init.d/S55date /bin/dropbearmulti /bin/dropbear /bin/dropbearkey /bin/scp /etc/dropbear /etc/init.d/S60dropbear
+      # Remove BEEP
+      rm -f /usr/bin/audio.py /usr/bin/audio /usr/lib/python3.7/site-packages/audio.py /usr/bin/audio_midi.sh /opt/klipper/klippy/extras/gcode_shell_command.py
+      rm -rf /usr/lib/python3.7/site-packages/mido/
+
+      sync
+      rm -rf /opt/config/mod_data/
+      rm -f /etc/init.d/prepare.sh
+      sync
+      reboot
+      exit
+    fi
+
     if [ -f /opt/config/mod/SOFT_REMOVE ]
      then
       restore_base
