@@ -13,6 +13,9 @@ for i in /opt/PROGRAM/control/*/; do
             start-stop-daemon -S -b -x /opt/config/mod/.shell/update_mcu.sh -- mainboard
         else
             /usr/bin/audio_midi.sh For_Elise.mid
+            sync
+            sleep 5
+            poweroff
         fi
         cd $save_dir
     fi
