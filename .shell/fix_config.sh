@@ -14,25 +14,6 @@ china_block()
     grep -q "$1" /etc/hosts || sed -i "2 i\127.0.0.1 $1" /etc/hosts
 }
 
-fix_run()
-{
-    [ -f "run.sh.save" ] || cp run.sh run.sh.save
-    if ! [ -f "run.sh.12" ]; then
-        cp run.sh run.sh.12
-        sync
-        sed -i 's/^FIRMWARE_Board_M3=.*/FIRMWARE_Board_M3=Mainboard.bin/' run.sh.12
-        sync
-        sed -i 's/^FIRMWARE_Head_M3=.*/FIRMWARE_Head_M3=Eboard.hex/' run.sh.12
-        sync
-        sleep 1
-        sync
-    fi
-    [ "$1" -eq 0 ] && cp run.sh.save run.sh
-    sync
-    [ "$1" -eq 1 ] && cp run.sh.12 run.sh
-    sync
-}
-
 fix_config()
 {
     echo "START fix_config"
@@ -264,20 +245,16 @@ stepper: stepper_x, stepper_y, stepper_z
     echo "END fix_config"
 
 
-    if [ "$1" == "start" ]; then
+    if [ "$1" == "start" ] && grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
         cnt=$(find /opt/PROGRAM/control/ -name Update|wc -l)
         if [ "$cnt" -ne 0 ]; then
             # Если обновляем MCU
             find /opt/PROGRAM/control/ -name Update| sed 's/Update//'| while read a; do
-                cur_dir=$(pwd)
-                cd "$a"
-                    grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg && fix_run 1
-                    grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg || fix_run 0
-                cd $cur_dir
+                mount -o bind /opt/config/mod/.shell/update_mcu.sh ${a}run.sh
             done
         else
             # Если обновлений нет
-            grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg && mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/start.sh
+            mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/start.sh
             sync
         fi
     fi
