@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 sleep 5
 
 for i in /opt/PROGRAM/control/*/; do 
