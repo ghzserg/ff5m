@@ -261,6 +261,9 @@ stepper: stepper_x, stepper_y, stepper_z
     sync
 }
 
+if [ -f /opt/config/mod/REMOVE ] || [ -f /opt/config/mod/FULL_REMOVE ] || [ -f /opt/config/mod/SOFT_REMOVE ] || [ -f /opt/config/mod/SKIP_ZMOD ]; then
+    exit 0
+fi
 
 mkdir -p /opt/config/mod_data/log/
 
