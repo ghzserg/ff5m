@@ -400,6 +400,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "visible": true
         },
         {
+            "alias": "Контроль сопла",
+            "categoryId": "244d667b-c410-4e01-9bf1-e8e0b9deabe2",
+            "color": "",
+            "disabledWhilePrinting": true,
+            "name": "nozzle_control",
+            "visible": true
+        },
+        {
             "alias": "Восстановить Z-offset",
             "categoryId": "244d667b-c410-4e01-9bf1-e8e0b9deabe2",
             "color": "",
@@ -840,6 +848,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                     "pos": 7,
                     "showInPause": true,
                     "showInPrinting": true,
+                    "showInStandby": true
+                },
+                {
+                    "color": "group",
+                    "name": "NOZZLE_CONTROL",
+                    "pos": 8,
+                    "showInPause": false,
+                    "showInPrinting": false,
                     "showInStandby": true
                 }
             ],
