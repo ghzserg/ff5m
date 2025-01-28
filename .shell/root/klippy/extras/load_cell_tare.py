@@ -1,1 +1,0 @@
-/opt/config/mod/.shell/load_cell_tare.py
