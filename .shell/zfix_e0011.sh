@@ -18,11 +18,11 @@ clear_klipper()
 if [ "$1" == "0" ]
     then
         grep -q "TRSYNC_TIMEOUT = 0.025" $F && exit 0
-        sed -i 's|^TRSYNC_TIMEOUT = .*|TRSYNC_TIMEOUT = 0.05|' $F
+        sed -i 's|^TRSYNC_TIMEOUT = .*|TRSYNC_TIMEOUT = 0.025|' $F
         sync
     else
         grep -q "TRSYNC_TIMEOUT = 0.05" $F && exit 0
-        sed -i 's|^TRSYNC_TIMEOUT = .*|TRSYNC_TIMEOUT = 0.025|' $F
+        sed -i 's|^TRSYNC_TIMEOUT = .*|TRSYNC_TIMEOUT = 0.05|' $F
         sync
 fi
 
