@@ -19,6 +19,8 @@ fix_config()
     echo "START fix_config"
     date
 
+    [ -f /opt/config/mod_data/nozzle.cfg ] || echo "">/opt/config/mod_data/nozzle.cfg
+
     NEED_REBOOT=0
     PRINTER_BASE_ORIG="/opt/config/printer.base.cfg"
     PRINTER_CFG_ORIG="/opt/config/printer.cfg"
