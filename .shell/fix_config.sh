@@ -19,6 +19,8 @@ fix_config()
     echo "START fix_config"
     date
 
+    [ -f /opt/config/mod_data/nozzle.cfg ] || echo "">/opt/config/mod_data/nozzle.cfg
+
     NEED_REBOOT=0
     PRINTER_BASE_ORIG="/opt/config/printer.base.cfg"
     PRINTER_CFG_ORIG="/opt/config/printer.cfg"
@@ -56,6 +58,7 @@ fix_config()
     fi
 
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py || cp /opt/config/mod/.shell/save_variables.py /opt/klipper/klippy/extras/save_variables.py
+    grep -q zmod /opt/klipper/klippy/extras/spi_temperature.py || cp /opt/config/mod/.shell/spi_temperature.py /opt/klipper/klippy/extras/spi_temperature.py
 
     # Fix possible ordering issue if a callback blocks in button handler#6440
     grep -q receive_time /opt/klipper/klippy/extras/buttons.py || cp /opt/config/mod/.shell/buttons.py /opt/klipper/klippy/extras/buttons.py
