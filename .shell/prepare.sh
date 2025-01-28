@@ -29,6 +29,12 @@ restore_base()
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py && cp /opt/config/mod/.shell/save_variables.py.orig /opt/klipper/klippy/extras/save_variables.py
     grep -q receive_time /opt/klipper/klippy/extras/buttons.py && cp /opt/config/mod/.shell/buttons.py.orig /opt/klipper/klippy/extras/buttons.py
 
+    F="/opt/klipper/klippy/toolhead.py"
+    grep -q "LOOKAHEAD_FLUSH_TIME = 0.5" $F || sed -i 's|^LOOKAHEAD_FLUSH_TIME.*|LOOKAHEAD_FLUSH_TIME = 0.5|' $F
+
+    F="/opt/klipper/klippy/mcu.py"
+    grep -q "TRSYNC_TIMEOUT = 0.025" $F || sed -i 's|^TRSYNC_TIMEOUT = .*|TRSYNC_TIMEOUT = 0.025|' $F
+
     # Удаляем controller_fan driver_fan
     if grep -q '^\[controller_fan driver_fan' /opt/config/printer.base.cfg
         then
