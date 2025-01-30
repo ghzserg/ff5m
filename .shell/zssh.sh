@@ -8,6 +8,11 @@ renice -10 $(ps |grep klippy.py| grep -v grep| awk '{print $1}')
 
 if [ $# -ne 8 ]; then echo "Используйте (START|STOP|RESTART|RELOAD) SSH_SERVER SSH_PORT SSH_USER VIDEO_PORT MOON_PORT REMOTE_RUN RESTART|NOTRESTART"; exit 1; fi
 
+if ! [ -f /opt/config/mod_data/ssh.key ] || ! [ -f /opt/config/mod_data/ssh.pub.txt ]; then
+    dropbearkey -t ed25519 -f /opt/config/mod_data/ssh.key
+    dropbearkey -y -t ed25519 -f /opt/config/mod_data/ssh.key |grep root@kunos >/opt/config/mod_data/ssh.pub.txt
+fi
+
 SSH_PUB=$( cat /opt/config/mod_data/ssh.pub.txt )
 
 START='off'
