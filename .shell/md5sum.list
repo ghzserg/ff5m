@@ -6055,7 +6055,6 @@ b39a1fbb029b5cab875e33f6e91de3c4  ./opt/klipper/klippy/extras/firmware_retractio
 0684f53aefe4c84b309da998ffc6bd49  ./opt/klipper/klippy/extras/led.py
 e4e9d17ed1cf9458a6984f4eee09d1cf  ./opt/klipper/klippy/extras/gcode_macro.py
 06283d4faf9e52cdfa1cf6a86b525a49  ./opt/klipper/klippy/extras/display_status.py
-5405fddb08cd21dbb4f9352fd2923c0d  ./opt/klipper/klippy/extras/gcode_shell_command.py
 32f6d990be7e3c9e1545726ce5a1dc3b  ./opt/klipper/klippy/extras/controller_fan.py
 2ace022d408bd9567232d6eba732e605  ./opt/klipper/klippy/extras/heater_generic.py
 130257a609e8e4d1d171cac3822372e2  ./opt/klipper/klippy/extras/print_stats.py
@@ -6091,7 +6090,6 @@ cc66733f86cd8f92d99f1e9c1610d4aa  ./opt/klipper/klippy/extras/force_move.py
 d330661f07ebfa89c6dd848fa85149a8  ./opt/klipper/klippy/extras/bed_tilt.py
 4b31b69a3f109c6c85f147a673254927  ./opt/klipper/klippy/extras/filament_motion_sensor.py
 9e0dae5afe2e0d1b7a3a69ae40497d38  ./opt/klipper/klippy/extras/tmc_uart.py
-d2ef4963d1010f3ac27d097e602c28c5  ./opt/klipper/klippy/extras/spi_temperature.py
 c2a000daa49fefe732d1e7d79aa99a42  ./opt/klipper/klippy/extras/sdcard_loop.py
 908e47bb60ecdc9b636956b7d952469f  ./opt/klipper/klippy/extras/dotstar.py
 7f59f90f63d85cfcc8f713705fe6623f  ./opt/klipper/klippy/extras/palette2.py
@@ -6109,7 +6107,6 @@ bfe459108d76e0e6f9e24b6f83b2fbe5  ./opt/klipper/klippy/extras/bed_screws.py
 155a4896e97a06278a203bb678d1c48b  ./opt/klipper/klippy/extras/homing.py
 e08c402ea90d3616e2783a1d8a360f1d  ./opt/klipper/klippy/extras/bed_mesh.py
 66a3d92b1aeb348450e3578e1bec8c43  ./opt/klipper/klippy/extras/mpu9250.py
-a972d10a4591b51ff2f9a10fec29063a  ./opt/klipper/klippy/extras/buttons.py
 3753f6d6c9942a25d99f3aafca937ea9  ./opt/klipper/klippy/extras/samd_sercom.py
 77c06cddda92bd3c82d5bd05efb96d43  ./opt/klipper/klippy/extras/adxl345.py
 b5cea866e6b76f3ca6277ba88b5842c4  ./opt/klipper/klippy/extras/input_shaper.py
@@ -13739,7 +13736,6 @@ d4f6ecd137832d3cb0a5a8e3511ca585  ./var/www/swupdate/css/dropzone.min.css
 2a4adaf9c7f249227ba544a3f80f5b8f  ./var/www/swupdate/webfonts/fa-solid-900.ttf
 645080129ce48e5c75e161a61ce4e639  ./var/www/swupdate/webfonts/fa-solid-900.woff
 847e29976058fc705da43283c420f75e  ./var/www/swupdate/webfonts/fa-solid-900.woff2
-7d9f15da24d2b04a59097fd31395738a  ./Settings/Trolltech.conf
 c9d38ccce05de56077f5d795d7dad2e4  ./etc/freerdp/keys/server.crt
 cc18425b7f06663509bb60a4ebbb3167  ./etc/freerdp/keys/server.key
 7c04e662b37e09a98c46141cf08fb247  ./etc/passwd-
@@ -13848,7 +13844,6 @@ d5ffbe82978229b3a3b402ed9752a04c  ./etc/dbus-1/system.d/dnsmasq.conf
 0082f8d27dd4b79f4ebff501d3314e37  ./etc/dbus-1/system.d/bluetooth.conf
 a700637c8eb19e4879c8eb754d464ff4  ./etc/dbus-1/system.d/wpa_supplicant.conf
 d9e182b4a33f9c2d109d7421eb6f5518  ./etc/hostapd.conf
-f1a41c5c3c91ba9933bc3084bd83bc4c  ./md5.sh2
 8c83499d7f83a0b5e2758bd2331d722c  ./bin/create-rsa.sh
 c83b037cb48139035b5975d3f3841c70  ./bin/dropbearmulti
 a99f5f05ea7e35f28c86e4c03638dc26  ./bin/compile_et

@@ -18,12 +18,12 @@ find .  \
     -and -not -path "./opt/PROGRAM/software/*" \
     -and -not -path "./root/version" \
     -and -not -path "./root/.viminfo" \
-    -and -not -path "./opt/klipper/klippy/spi_temperature.py" \
-    -and -not -path "./opt/klipper/klippy/gcode_shell_command.py" \
-    -and -not -path "./opt/klipper/klippy/buttons.py" \
+    -and -not -path "./opt/klipper/klippy/extras/spi_temperature.py" \
+    -and -not -path "./opt/klipper/klippy/extras/gcode_shell_command.py" \
+    -and -not -path "./opt/klipper/klippy/extras/buttons.py" \
+    -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
-    -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
     -and -not -path "./opt/key.priv" \
     -and -not -path "./opt/private.pem" \
     -and -not -path "./opt/key.pub" \
@@ -35,4 +35,5 @@ find .  \
     -and -not -path "./etc/MAC" \
     -and -not -path "./etc/wpa_supplicant.conf" \
     -and -not -path "./opt/tslib-1.12/etc/pointercal" \
+    -and -not -path "./Settings/Trolltech.conf" \
     -exec md5sum {} \; >md5sum.list
