@@ -240,6 +240,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "visible": true
         },
         {
+            "alias": "Проверить систему",
+            "categoryId": "0077449b-cd10-4059-aebd-bf17be6cb270",
+            "color": "",
+            "disabledWhilePrinting": true,
+            "name": "check_system",
+            "visible": true
+        },
+        {
             "alias": "",
             "categoryId": "944c031b-feef-4b75-badf-21c30508fb24",
             "color": "",
@@ -1082,6 +1090,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                     "pos": 27,
                     "showInPause": true,
                     "showInPrinting": true,
+                    "showInStandby": true
+                },
+                {
+                    "color": "group",
+                    "name": "CHECK_SYSTEM",
+                    "pos": 28,
+                    "showInPause": false,
+                    "showInPrinting": false,
                     "showInStandby": true
                 }
             ],

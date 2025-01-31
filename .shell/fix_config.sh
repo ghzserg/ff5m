@@ -18,6 +18,8 @@ fix_config()
 {
     echo "START fix_config"
     date
+    fstrim /data -v
+    fstrim / -v
 
     [ -f /opt/config/mod_data/nozzle.cfg ] || echo "">/opt/config/mod_data/nozzle.cfg
 
