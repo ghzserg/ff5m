@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Началась проверка. Она может занять много времени...."
-cd /
+
 find /opt/PROGRAM/ -name md5sum.list | while read a;
     do
         b=$(pwd)
@@ -17,7 +17,9 @@ find /opt/PROGRAM/ -name md5sum.list | while read a;
         fi
         cd "$b"
     done
+
 echo "/"
+cd /
 FF_VERSION="$(cat /root/version)"
 MIN_VERSION="3.1.3"
 if [ "${FF_VERSION//./}" -lt "${MIN_VERSION//./}" ]; then
@@ -27,5 +29,8 @@ if [ "${FF_VERSION//./}" -lt "${MIN_VERSION//./}" ]; then
 else
     md5sum -c /opt/config/mod/.shell/md5sum.list 2>/dev/null | grep -v -e "OK$"
 fi
+
+echo "Проверка символических ссылок"
+/opt/config/mod/.shell/list.link 2>/dev/null
 
 echo "Оригиналы файлов можно найти по ссылке https://github.com/ghzserg/zmod/tree/main/stock"
