@@ -13786,11 +13786,6 @@ debc90eb179e1c6abcbe11f0aee242b0  ./etc/dvrconfig.ini
 42d13304ed2e9e5b60b74d6ed29b3729  ./etc/fonts/conf.d/README
 b8c1c701b693b58fe8d06ffcca3ad3d6  ./etc/fonts/fonts.conf
 d8f9c3ba2715110176db92aa234815c6  ./etc/bt_play.sh
-f0fa6956ea12220a2c828e0eefbe95ca  ./etc/dropbear/dropbear_dss_host_key
-3f1f66751b9c5023b1829c948e119ac6  ./etc/dropbear/dropbear_rsa_host_key
-2c19a67369c063366f3824a829b7edfc  ./etc/dropbear/dropbear_ed25519_host_key
-13110321421e1331b158158a0ebbdea1  ./etc/dropbear/dropbear_ecdsa_host_key
-4f24b133ba38d8fd565168742c9aedeb  ./etc/timezone
 9ebdc6f90a6070a1cdac5ecde97fbd33  ./etc/services
 8dd850825798f47d9b60dffed52a2b19  ./etc/wlan-softap.sh
 359ec096fae48c11cdb9adb8e113bc3c  ./etc/profile.d/umask.sh

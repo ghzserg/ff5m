@@ -11,6 +11,8 @@ find .  \
     -and -not -path "./.rnd" \
     -and -not -path "./.wpa_cli_history" \
     -and -not -path "./root/printer_data/version.txt" \
+    -and -not -path "./etc/dropbear/*" \
+    -and -not -path "./etc/timezone" \
     -and -not -path "./opt/config/*" \
     -and -not -path "./opt/PROGRAM/control/*" \
     -and -not -path "./opt/PROGRAM/kernel/*" \
