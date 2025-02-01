@@ -8,13 +8,14 @@ find .  \
     -and -not -path "*__pycache__*" \
     -and -not -name "md5sum.list" \
     -and -not -name "md5.sh" \
-    -and -not -name "list.sh" \
+    -and -not -name "link.sh" \
     -and -not -name "list.link" \
     -and -not -path "./.rnd" \
     -and -not -path "./.wpa_cli_history" \
     -and -not -path "./root/printer_data/version.txt" \
     -and -not -path "./etc/dropbear/*" \
     -and -not -path "./etc/timezone" \
+    -and -not -path "./etc/localtime" \
     -and -not -path "./opt/config/*" \
     -and -not -path "./opt/PROGRAM/control/*" \
     -and -not -path "./opt/PROGRAM/kernel/*" \
@@ -43,6 +44,8 @@ find .  \
     -and -not -path "./Settings/Trolltech.conf" \
     -exec mkdir -p ../stock/{} \;
 
+echo "#!/bin/sh" >list.link
+chmod +x list.link
 find .  \
     -type l \
     -and -not -name "*.pyc" \
@@ -51,13 +54,14 @@ find .  \
     -and -not -path "*__pycache__*" \
     -and -not -name "md5sum.list" \
     -and -not -name "md5.sh" \
-    -and -not -name "list.sh" \
+    -and -not -name "link.sh" \
     -and -not -name "list.link" \
     -and -not -path "./.rnd" \
     -and -not -path "./.wpa_cli_history" \
     -and -not -path "./root/printer_data/version.txt" \
     -and -not -path "./etc/dropbear/*" \
     -and -not -path "./etc/timezone" \
+    -and -not -path "./etc/localtime" \
     -and -not -path "./opt/config/*" \
     -and -not -path "./opt/PROGRAM/control/*" \
     -and -not -path "./opt/PROGRAM/kernel/*" \
@@ -84,7 +88,7 @@ find .  \
     -and -not -path "./etc/wpa_supplicant.conf" \
     -and -not -path "./opt/tslib-1.12/etc/pointercal" \
     -and -not -path "./Settings/Trolltech.conf" \
-    -exec ./link.sh {} \; >list.link
+    -exec ./link.sh {} \; >>list.link
 
 find .  \
     -type f \
@@ -94,13 +98,14 @@ find .  \
     -and -not -path "*__pycache__*" \
     -and -not -name "md5sum.list" \
     -and -not -name "md5.sh" \
-    -and -not -name "list.sh" \
+    -and -not -name "link.sh" \
     -and -not -name "list.link" \
     -and -not -path "./.rnd" \
     -and -not -path "./.wpa_cli_history" \
     -and -not -path "./root/printer_data/version.txt" \
     -and -not -path "./etc/dropbear/*" \
     -and -not -path "./etc/timezone" \
+    -and -not -path "./etc/localtime" \
     -and -not -path "./opt/config/*" \
     -and -not -path "./opt/PROGRAM/control/*" \
     -and -not -path "./opt/PROGRAM/kernel/*" \
@@ -137,13 +142,14 @@ find .  \
     -and -not -path "*__pycache__*" \
     -and -not -name "md5sum.list" \
     -and -not -name "md5.sh" \
-    -and -not -name "list.sh" \
+    -and -not -name "link.sh" \
     -and -not -name "list.link" \
     -and -not -path "./.rnd" \
     -and -not -path "./.wpa_cli_history" \
     -and -not -path "./root/printer_data/version.txt" \
     -and -not -path "./etc/dropbear/*" \
     -and -not -path "./etc/timezone" \
+    -and -not -path "./etc/localtime" \
     -and -not -path "./opt/config/*" \
     -and -not -path "./opt/PROGRAM/control/*" \
     -and -not -path "./opt/PROGRAM/kernel/*" \
