@@ -18,6 +18,7 @@ find .  \
     -and -not -path "./opt/PROGRAM/kernel/*" \
     -and -not -path "./opt/PROGRAM/library/*" \
     -and -not -path "./opt/PROGRAM/software/*" \
+    -and -not -path "./opt/auto_run.sh" \
     -and -not -path "./root/version" \
     -and -not -path "./root/.viminfo" \
     -and -not -path "./opt/klipper/klippy/extras/spi_temperature.py" \
