@@ -31,6 +31,13 @@ else
 fi
 
 echo "Проверка символических ссылок"
-/opt/config/mod/.shell/list.link 2>/dev/null
+if [ "${FF_VERSION//./}" -lt "${MIN_VERSION//./}" ]; then
+    sed '/\/nim\//d' /opt/config/mod/.shell/list.link >/opt/config/mod/.shell/md5sum_nim.list
+    chmod +x /opt/config/mod/.shell/md5sum_nim.list
+    /opt/config/mod/.shell/md5sum_nim.list 2>/dev/null
+    rm -f /opt/config/mod/.shell/md5sum_nim.list
+else
+    /opt/config/mod/.shell/list.link 2>/dev/null
+fi
 
 echo "Оригиналы файлов можно найти по ссылке https://github.com/ghzserg/zmod/tree/main/stock"
