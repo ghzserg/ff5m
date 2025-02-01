@@ -7767,7 +7767,6 @@ b059213ee68f329907edd88c090e51cb  ./opt/klipper/test/configs/sam4s8c.config
 081d0340e2c3fd6286e3971de61b59bb  ./opt/klipper/test/configs/at90usb1286.config
 c4b6e1ed784c37398118a5684c2b989f  ./opt/klipper/test/configs/atmega1284p.config
 488b32772641c56d8313ea0bddaa03e5  ./opt/klipper/test/configs/sam4e8e.config
-84c02d009e7e682a13952b5d5fa2cfdc  ./opt/auto_run.sh
 3083e2d71619d482b4b6abbb005c0355  ./opt/share/terminfo/v/vt102
 df9446f7fd9c4fdb33d411ae92710c27  ./opt/share/terminfo/v/vt100
 ca3b114f0727da81a9b957b553a9915d  ./opt/share/terminfo/d/dumb
