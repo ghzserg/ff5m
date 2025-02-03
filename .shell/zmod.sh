@@ -31,5 +31,6 @@ case "$1" in
         echo "Usage: $0 {stop|up}"
         exit 1
 esac
-
+sync
+echo 3 > /proc/sys/vm/drop_caches
 exit $?
