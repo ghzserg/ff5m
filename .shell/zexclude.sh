@@ -13,7 +13,7 @@ cnt=$(cat /root/printer.txt| wc -l)
 
 # Igor Polunovskiy code
 sed -n '1,/;LAYER_CHANGE/s/;LAYER_CHANGE/;FIRST_LAYER_CHANGE/;1,/;LAYER_CHANGE/s/;LAYER_CHANGE/;SECOND_LAYER_CHANGE/;/;FIRST_LAYER_CHANGE/,/;SECOND_LAYER_CHANGE/p' "/data/$1" | \
-        awk 'BEGIN{maxy = -1000; maxx = -1000; miny = 1000; minx = 1000} $1~/G[123]/ {for (i = 2; i<=NF; i++) {if ("X" == substr($i,1,1)) {x=0+substr($i,2); if (maxx<x) maxx = x; if (minx>x) minx = x} else if  ("Y" == substr($i,1,1)) {y=0+substr($i,2); if (maxy<y) maxy = y; if (miny>y) miny = y}}}END{printf "EXCLUDE_OBJECT_DEFINE NAME=border CENTER=%.4f,%.4f POLYGON=[[%.4f,%.4f],[%.4f,%.4f],[%.4f,%.4f],[%.4f,%.4f]]\n",(minx+maxx)/2,(miny+maxy)/2,minx,miny,minx,maxy,maxx, maxy, maxx, miny}' >/root/printer.txt
+        awk 'BEGIN{maxy = -1000; maxx = -1000; miny = 1000; minx = 1000} $1~/G[123]/ {for (i = 2; i<=NF; i++) {if ("X" == substr($i,1,1)) {x=0+substr($i,2); if (maxx<x) maxx = x; if (minx>x) minx = x} else if  ("Y" == substr($i,1,1)) {y=0+substr($i,2); if (maxy<y) maxy = y; if (miny>y) miny = y}}}END{printf "EXCLUDE_OBJECT_DEFINE NAME=border CENTER=%.4f,%.4f POLYGON=[[%.4f,%.4f],[%.4f,%.4f],[%.4f,%.4f],[%.4f,%.4f]]\n",(minx+maxx)/2,(miny+maxy)/2,minx,miny,minx,maxy,maxx, maxy, maxx, miny}' >>/root/printer.txt
 
 if [ "$cnt" -ne 0 ]; then
 # Igor Polunovskiy code
