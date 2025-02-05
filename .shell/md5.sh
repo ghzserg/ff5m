@@ -31,6 +31,8 @@ find .  \
     -and -not -path "./opt/klipper/klippy/extras/gcode_shell_command.py" \
     -and -not -path "./opt/klipper/klippy/extras/buttons.py" \
     -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
+    -and -not -path "./opt/klipper/klippy/extras/shaper_calibrate.py" \
+    -and -not -path "./opt/klipper/klippy/extras/resonance_tester.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
     -and -not -path "./opt/key.priv" \
@@ -108,6 +110,8 @@ find .  \
     -and -not -path "./opt/klipper/klippy/extras/gcode_shell_command.py" \
     -and -not -path "./opt/klipper/klippy/extras/buttons.py" \
     -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
+    -and -not -path "./opt/klipper/klippy/extras/shaper_calibrate.py" \
+    -and -not -path "./opt/klipper/klippy/extras/resonance_tester.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
     -and -not -path "./opt/key.priv" \
@@ -154,6 +158,8 @@ find .  \
     -and -not -path "./opt/klipper/klippy/extras/gcode_shell_command.py" \
     -and -not -path "./opt/klipper/klippy/extras/buttons.py" \
     -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
+    -and -not -path "./opt/klipper/klippy/extras/shaper_calibrate.py" \
+    -and -not -path "./opt/klipper/klippy/extras/resonance_tester.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
     -and -not -path "./opt/key.priv" \
@@ -199,6 +205,8 @@ find .  \
     -and -not -path "./opt/klipper/klippy/extras/gcode_shell_command.py" \
     -and -not -path "./opt/klipper/klippy/extras/buttons.py" \
     -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
+    -and -not -path "./opt/klipper/klippy/extras/shaper_calibrate.py" \
+    -and -not -path "./opt/klipper/klippy/extras/resonance_tester.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
     -and -not -path "./opt/key.priv" \
@@ -243,6 +251,8 @@ find .  \
     -and -not -path "./opt/klipper/klippy/extras/gcode_shell_command.py" \
     -and -not -path "./opt/klipper/klippy/extras/buttons.py" \
     -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
+    -and -not -path "./opt/klipper/klippy/extras/shaper_calibrate.py" \
+    -and -not -path "./opt/klipper/klippy/extras/resonance_tester.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
     -and -not -path "./opt/key.priv" \
@@ -287,6 +297,8 @@ find .  \
     -and -not -path "./opt/klipper/klippy/extras/gcode_shell_command.py" \
     -and -not -path "./opt/klipper/klippy/extras/buttons.py" \
     -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
+    -and -not -path "./opt/klipper/klippy/extras/shaper_calibrate.py" \
+    -and -not -path "./opt/klipper/klippy/extras/resonance_tester.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
     -and -not -path "./opt/key.priv" \
