@@ -88,7 +88,7 @@ def plot_freq_response(lognames, calibration_data, shapers,
     fontP.set_size('x-small')
 
     fig, ax = matplotlib.pyplot.subplots()
-    ax.set_xlabel('Частота, Hz при SCV = %.1f', scv)
+    ax.set_xlabel("Частота, Hz при SCV = %.1f", % (scv) )
     ax.set_xlim([0, max_freq])
     ax.set_ylabel('Спектральная плотность мощности')
 
