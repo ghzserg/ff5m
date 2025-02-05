@@ -76,7 +76,7 @@ def calibrate_shaper(datas, csv_output, *, shapers, damping_ratio, scv,
 ######################################################################
 
 def plot_freq_response(lognames, calibration_data, shapers,
-                       selected_shaper, max_freq):
+                       selected_shaper, max_freq, scv):
     freqs = calibration_data.freq_bins
     psd = calibration_data.psd_sum[freqs <= max_freq]
     px = calibration_data.psd_x[freqs <= max_freq]
@@ -88,7 +88,7 @@ def plot_freq_response(lognames, calibration_data, shapers,
     fontP.set_size('x-small')
 
     fig, ax = matplotlib.pyplot.subplots()
-    ax.set_xlabel('Частота, Hz')
+    ax.set_xlabel('Частота, Hz при SCV = %.1f', scv)
     ax.set_xlim([0, max_freq])
     ax.set_ylabel('Спектральная плотность мощности')
 
@@ -238,7 +238,7 @@ def main():
         setup_matplotlib(options.output is not None)
 
         fig = plot_freq_response(args, calibration_data, shapers,
-                                 selected_shaper, max_freq)
+                                 selected_shaper, max_freq, scv)
 
         # Show graph
         if options.output is None:
