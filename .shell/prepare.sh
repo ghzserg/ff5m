@@ -29,8 +29,6 @@ restore_base()
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py && cp /opt/config/mod/.shell/save_variables.py.orig /opt/klipper/klippy/extras/save_variables.py
     grep -q zmod /opt/klipper/klippy/extras/spi_temperature.py && cp /opt/config/mod/.shell/spi_temperature.py.orig /opt/klipper/klippy/extras/spi_temperature.py
     grep -q receive_time /opt/klipper/klippy/extras/buttons.py && cp /opt/config/mod/.shell/buttons.py.orig /opt/klipper/klippy/extras/buttons.py
-    grep -q 'scv=scv' /opt/klipper/klippy/extras/shaper_calibrate.py && cp /opt/config/mod/.shell/shaper_calibrate.py.orig /opt/klipper/klippy/extras/shaper_calibrate.py
-    grep -q 'square_corner_velocity' /opt/klipper/klippy/extras/resonance_tester.py && cp /opt/config/mod/.shell/resonance_tester.py.orig /opt/klipper/klippy/extras/resonance_tester.py
 
     F="/opt/klipper/klippy/toolhead.py"
     grep -q "LOOKAHEAD_FLUSH_TIME = 0.5" $F || sed -i 's|^LOOKAHEAD_FLUSH_TIME.*|LOOKAHEAD_FLUSH_TIME = 0.5|' $F

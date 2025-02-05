@@ -65,15 +65,6 @@ fix_config()
     # Fix possible ordering issue if a callback blocks in button handler#6440
     grep -q receive_time /opt/klipper/klippy/extras/buttons.py || cp /opt/config/mod/.shell/buttons.py /opt/klipper/klippy/extras/buttons.py
 
-    # SCV
-    if grep -q "fix_scv = 1" /opt/config/mod_data/variables.cfg; then
-        grep -q 'scv=scv' /opt/klipper/klippy/extras/shaper_calibrate.py || cp /opt/config/mod/.shell/shaper_calibrate.py /opt/klipper/klippy/extras/shaper_calibrate.py
-        grep -q 'square_corner_velocity' /opt/klipper/klippy/extras/resonance_tester.py || cp /opt/config/mod/.shell/resonance_tester.py /opt/klipper/klippy/extras/resonance_tester.py
-    else
-        grep -q 'scv=scv' /opt/klipper/klippy/extras/shaper_calibrate.py && cp /opt/config/mod/.shell/shaper_calibrate.py.orig /opt/klipper/klippy/extras/shaper_calibrate.py
-        grep -q 'square_corner_velocity' /opt/klipper/klippy/extras/resonance_tester.py && cp /opt/config/mod/.shell/resonance_tester.py.orig /opt/klipper/klippy/extras/resonance_tester.py
-    fi
-
     grep -q zmod_1.0 /opt/klipper/klippy/extras/gcode_shell_command.py || cp /opt/config/mod/.shell/gcode_shell_command.py /opt/klipper/klippy/extras/gcode_shell_command.py
     if [ -L /opt/klipper/klippy/extras/load_cell_tare.py ] || [ -f /opt/klipper/klippy/extras/load_cell_tare.py ]; then
         rm -f /opt/klipper/klippy/extras/load_cell_tare.py
