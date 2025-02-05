@@ -238,7 +238,7 @@ def main():
         setup_matplotlib(options.output is not None)
 
         fig = plot_freq_response(args, calibration_data, shapers,
-                                 selected_shaper, max_freq, scv)
+                                 selected_shaper, max_freq, options.scv)
 
         # Show graph
         if options.output is None:
