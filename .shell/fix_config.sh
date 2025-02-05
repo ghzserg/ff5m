@@ -288,7 +288,7 @@ mv /opt/config/mod_data/log/fix_config.4.log/opt/config/mod_data/log/fix_config.
 mv /opt/config/mod_data/log/fix_config.3.log /opt/config/mod_data/log/fix_config.4.log
 mv /opt/config/mod_data/log/fix_config.2.log /opt/config/mod_data/log/fix_config.3.log
 mv /opt/config/mod_data/log/fix_config.1.log /opt/config/mod_data/log/fix_config.2.log
-mv /opt/config/mod_data/log/fix_config.log /opt/config/mod_data/log/fix_config.log.1
+mv /opt/config/mod_data/log/fix_config.log /opt/config/mod_data/log/fix_config.1.log
 
 fix_config "$1" &>/opt/config/mod_data/log/fix_config.log
 

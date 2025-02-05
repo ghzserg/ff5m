@@ -311,7 +311,7 @@ class ResonanceTester:
             best_shaper, all_shapers = helper.find_best_shaper(
                     calibration_data[axis], max_smoothing=max_smoothing,
                     scv=scv, max_freq=1.5*self.test.get_max_freq(),
-                    logging=gcmd.respond_info)
+                    logger=gcmd.respond_info)
             gcmd.respond_info(
                     "Recommended shaper_type_%s = %s, shaper_freq_%s = %.1f Hz"
                     % (axis_name, best_shaper.name,
