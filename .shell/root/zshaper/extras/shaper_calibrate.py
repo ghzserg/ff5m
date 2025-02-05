@@ -97,12 +97,12 @@ class ShaperCalibrate:
         while calc_proc.is_alive():
             if eventtime > last_report_time + 5.:
                 last_report_time = eventtime
-                gcode.respond_info("Wait for calculations..", log=False)
+                gcode.respond_info("Ждем расчета...", log=False)
             eventtime = reactor.pause(eventtime + .1)
         # Return results
         is_err, res = parent_conn.recv()
         if is_err:
-            raise self.error("Error in remote calculation: %s" % (res,))
+            raise self.error("Ошибка при расчете: %s" % (res,))
         calc_proc.join()
         parent_conn.close()
         return res
@@ -179,7 +179,7 @@ class ShaperCalibrate:
                 self.calc_freq_response, (data,))
         if calibration_data is None:
             raise self.error(
-                    "Internal error processing accelerometer data %s" % (data,))
+                    "Внутрення ошибка обработки данных от акселерометра %s" % (data,))
         calibration_data.set_numpy(self.numpy)
         return calibration_data
 
@@ -333,12 +333,12 @@ class ShaperCalibrate:
                 shaper_cfg, calibration_data, shaper_freqs, damping_ratio,
                 scv, max_smoothing, test_damping_ratios, max_freq))
             if logger is not None:
-                logger("Fitted shaper '%s' frequency = %.1f Hz "
-                       "(vibrations = %.1f%%, smoothing ~= %.3f)" % (
+                logger("Шейпер '%s' частота = %.1f Hz "
+                       "(вибрации = %.1f%%, сглаживание ~= %.3f)" % (
                            shaper.name, shaper.freq, shaper.vibrs * 100.,
                            shaper.smoothing))
-                logger("To avoid too much smoothing with '%s', suggested "
-                       "max_accel <= %.0f mm/sec^2" % (
+                logger("Чтобы избежать слишком сильного сглаживания с помощью '%s', предлагается "
+                       "max_accel <= %.0f мм/сек^2" % (
                            shaper.name, round(shaper.max_accel / 100.) * 100.))
             all_shapers.append(shaper)
             if (best_shaper is None or shaper.score * 1.2 < best_shaper.score or
@@ -395,4 +395,4 @@ class ShaperCalibrate:
                             csvfile.write(",%.3f" % (shaper.vals[i],))
                     csvfile.write("\n")
         except IOError as e:
-            raise self.error("Error writing to file '%s': %s", output, str(e))
+            raise self.error("Ошибка записи в файл '%s': %s", output, str(e))
