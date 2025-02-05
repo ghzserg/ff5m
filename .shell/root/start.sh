@@ -39,7 +39,7 @@ fi
 
 prepare_chroot
 
-VER="FF5M $2"
+VER="$3 $2"
 grep -q VERSION_CODENAME /etc/os-release || echo "VERSION_CODENAME=\"${VER}\"" >>/etc/os-release
 grep -q "VERSION_CODENAME=\"${VER}\"" /etc/os-release || sed -i "s|VERSION_CODENAME=.*|VERSION_CODENAME=\"${VER}\"|" /etc/os-release
 

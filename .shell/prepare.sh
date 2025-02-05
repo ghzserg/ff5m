@@ -135,8 +135,11 @@ start_moon()
             fi
     fi
 
+    MACHINE="Неизвестная машина"
+    grep -q '^MACHINE=Adventurer5MPro$' /opt/auto_run.sh && MACHINE=Adventurer5MPro
+    grep -q '^MACHINE=Adventurer5M$' /opt/auto_run.sh && MACHINE=Adventurer5M
     VER=$(cat /root/version)
-    chroot $MOD /opt/config/mod/.shell/root/start.sh "$SWAP" "$VER" &
+    chroot $MOD /opt/config/mod/.shell/root/start.sh "$SWAP" "$VER" "$MACHINE" &
 
     mkdir -p /data/lost+found
     sleep 10
@@ -213,8 +216,8 @@ start_prepare()
     mkdir -p $MOD/data
     mount --bind /data $MOD/data
 
-    mkdir -p $MOD/opt/PROGRAM/control/
-    mount --bind /opt/PROGRAM/control/ $MOD/opt/PROGRAM/control/
+    mkdir -p $MOD/opt/PROGRAM/
+    mount --bind /opt/PROGRAM/ $MOD/opt/PROGRAM/
 
     mkdir -p $MOD/root/printer_data/misc
     mkdir -p $MOD/root/printer_data/tmp

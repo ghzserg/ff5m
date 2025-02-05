@@ -55,10 +55,12 @@ class KlippyAPI(APITransport):
         self.host_subscription: Subscription = {}
         self.subscription_callbacks: List[SubCallback] = []
 
+        # FF5M Fix Print Bug
         self.server.register_endpoint(
              "/printer/objects/list", RequestType.GET,
             self._get_object_list
         )
+        # END FF5M Fix Print Bug
 
         # Register GCode Aliases
         self.server.register_endpoint(
@@ -252,6 +254,7 @@ class KlippyAPI(APITransport):
             return default
         raise self.server.error("Invalid response received from Klippy", 500)
 
+    # FF5M Fix Print Bug
     async def _get_object_list(
         self, web_request: WebRequest
     ):
@@ -272,9 +275,19 @@ class KlippyAPI(APITransport):
             result.remove('filament_switch_sensor check_level_pin_alt')
         if 'filament_switch_sensor e1_sensor' in result:
             result.remove('filament_switch_sensor e1_sensor')
+        if 'temperature_sensor tvocValue' in result:
+            found = False
+            with open('/etc/os-release') as file:
+              for line in file:
+                if re.search('VERSION_CODENAME="Adventurer5MPro ', line):
+                  found = True
+                  break
+            if not found:
+                result.remove('temperature_sensor tvocValue')
         return {
             "objects": result
         }
+    # END FF5M Fix Print Bug
 
 
     async def query_objects(self,
