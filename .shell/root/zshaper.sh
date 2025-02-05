@@ -7,13 +7,14 @@ sed 's/psd_x/psd_Y/' calibration_data_y_*.csv | sed 's/psd_y/psd_x/' | sed 's/ps
 
 SCV="5.0"
 grep -q '^square_corner_velocity' /opt/config/printer.base.cfg && SCV=$(grep '^square_corner_velocity' /opt/config/printer.base.cfg| cut -d ":" -f 2 | awk '{print $1}')
+grep -q '^square_corner_velocity' /opt/config/mod_data/user.cfg && SCV=$(grep '^square_corner_velocity' /opt/config/mod_data/user.cfg| cut -d ":" -f 2 | awk '{print $1}')
 
-echo "SCV=$SCV"
+echo "SCV (square_corner_velocity) = $SCV"
 
 echo "Подготовка изображения оси X. Ждите"
-python3 /opt/config/mod/.shell/root/zshaper/calibrate_shaper.py X -s 1.0 --scv=$SCV -o calibration_data_X.png
+python3 /opt/config/mod/.shell/root/zshaper/calibrate_shaper.py X --scv=$SCV -o calibration_data_X.png
 
 echo "Подготовка изображения оси Y. Ждите"
-python3 /opt/config/mod/.shell/root/zshaper/calibrate_shaper.py Y -s 1.0 --scv=$SCV -o calibration_data_Y.png
+python3 /opt/config/mod/.shell/root/zshaper/calibrate_shaper.py Y --scv=$SCV -o calibration_data_Y.png
 
 rm -f X Y
