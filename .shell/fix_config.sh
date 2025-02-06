@@ -36,9 +36,10 @@ fix_config()
     [ -f /etc/init.d/S50sshd ] && rm -f /etc/init.d/S50sshd
     [ -f /etc/init.d/S55date ] && rm -f /etc/init.d/S55date
     [ -f /bin/dropbearmulti ] && rm -f /bin/dropbearmulti
-    [ -f /bin/dropbear ] && rm -f /bin/dropbear
 
     check_link /bin/dropbearkey /opt/config/mod/.shell/eabi/dropbear
+    check_link /bin/dropbear /opt/config/mod/.shell/eabi/dropbear
+    check_link /bin/dbclient /opt/config/mod/.shell/eabi/dropbear
     check_link /bin/scp /opt/config/mod/.shell/eabi/dropbear
     check_link /bin/ssh /opt/config/mod/.shell/eabi/dropbear
     check_link /etc/init.d/S60dropbear /opt/config/mod/.shell/S60dropbear
