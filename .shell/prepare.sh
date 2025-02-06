@@ -189,17 +189,6 @@ start_prepare()
       exit
     fi
 
-    if [ -f /opt/config/mod/SOFT_REMOVE ]
-     then
-      restore_base
-
-      sync
-      rm -f /etc/init.d/prepare.sh
-      sync
-      reboot
-      exit
-    fi
-
     #/opt/config/mod/.shell/fix_config.sh
     [ -L /etc/init.d/S00fix ] || ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
     echo "System start" >/opt/config/mod_data/log/ssh.log

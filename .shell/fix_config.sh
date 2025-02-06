@@ -14,6 +14,16 @@ china_block()
     grep -q "$1" /etc/hosts || sed -i "2 i\127.0.0.1 $1" /etc/hosts
 }
 
+check_link()
+{
+    a=$(readlink "$1" 2>/dev/null)
+    if [ "$a" != "$2" ]; then
+        echo -n "$1 - Ошибочная ссылка ($a!=$2): "
+        rm -f "$1" 2>/dev/null
+        ln -s "$2" "$1" 2>/dev/null && echo "Исправлено"  || echo "Ошибка исправления"
+    fi
+}
+
 fix_config()
 {
     echo "START fix_config"
@@ -22,6 +32,19 @@ fix_config()
     fstrim / -v
 
     [ -f /opt/config/mod_data/nozzle.cfg ] || echo "">/opt/config/mod_data/nozzle.cfg
+
+    [ -f /etc/init.d/S50sshd ] && rm -f /etc/init.d/S50sshd
+    [ -f /etc/init.d/S55date ] && rm -f /etc/init.d/S55date
+    [ -f /bin/dropbearmulti ] && rm -f /bin/dropbearmulti
+
+    check_link /bin/dropbearkey /opt/config/mod/.shell/eabi/dropbear
+    check_link /bin/dropbear /opt/config/mod/.shell/eabi/dropbear
+    check_link /bin/dbclient /opt/config/mod/.shell/eabi/dropbear
+    check_link /bin/scp /opt/config/mod/.shell/eabi/dropbear
+    check_link /bin/ssh /opt/config/mod/.shell/eabi/dropbear
+    check_link /etc/init.d/S60dropbear /opt/config/mod/.shell/S60dropbear
+    check_link /etc/init.d/S00fix /opt/config/mod/.shell/fix_config.sh
+    check_link /usr/bin/audio.py /opt/config/mod/.shell/root/audio/audio.py
 
     NEED_REBOOT=0
     PRINTER_BASE_ORIG="/opt/config/printer.base.cfg"
@@ -266,14 +289,11 @@ stepper: stepper_x, stepper_y, stepper_z
     sync
 }
 
-if [ -f /opt/config/mod/REMOVE ] || [ -f /opt/config/mod/FULL_REMOVE ] || [ -f /opt/config/mod/SOFT_REMOVE ] || [ -f /opt/config/mod/SKIP_ZMOD ]; then
+if [ -f /opt/config/mod/REMOVE ] || [ -f /opt/config/mod/FULL_REMOVE ] || [ -f /opt/config/mod/SKIP_ZMOD ]; then
     exit 0
 fi
 
 mkdir -p /opt/config/mod_data/log/
-
-[ -L /etc/init.d/S00fix ] || ln -s /opt/config/mod/.shell/fix_config.sh /etc/init.d/S00fix
-[ -L /usr/bin/audio.py ]  || ln -s /opt/config/mod/.shell/root/audio/audio.py /usr/bin/audio.py
 
 mv /opt/config/mod_data/log/fix_config.4.log/opt/config/mod_data/log/fix_config.5.log
 mv /opt/config/mod_data/log/fix_config.3.log /opt/config/mod_data/log/fix_config.4.log

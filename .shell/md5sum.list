@@ -13757,7 +13757,6 @@ f31926d2997918edcedda53b179331ee  ./etc/init.d/S02klogd
 323d36790bd6eae8b06915ec36c606e1  ./etc/init.d/S01syslogd
 a25c992521dd2fd966b670c2d391960e  ./etc/init.d/rcS
 0dcc6e0aea156f8ca2e7fb2b3ecc484c  ./etc/init.d/S40network
-97035bf37c7d9c2d00258961990db04b  ./etc/init.d/S60dropbear
 6b31f620c36bb2d6c54cfaf71cc5a086  ./etc/init.d/rcK
 928ffa5aed0619a97b9bf403cb8e11b3  ./etc/init.d/S80dnsmasq
 79fd951f2bb4e4bb6467651fdb9fae33  ./etc/init.d/S30dbus
@@ -13839,7 +13838,6 @@ d5ffbe82978229b3a3b402ed9752a04c  ./etc/dbus-1/system.d/dnsmasq.conf
 a700637c8eb19e4879c8eb754d464ff4  ./etc/dbus-1/system.d/wpa_supplicant.conf
 d9e182b4a33f9c2d109d7421eb6f5518  ./etc/hostapd.conf
 8c83499d7f83a0b5e2758bd2331d722c  ./bin/create-rsa.sh
-c83b037cb48139035b5975d3f3841c70  ./bin/dropbearmulti
 a99f5f05ea7e35f28c86e4c03638dc26  ./bin/compile_et
 c7f13a41ed4fa955d8d5eed904bcac2b  ./bin/wifi_reconnect
 9389e3c85cb326950a820af72d50aafb  ./bin/busybox
