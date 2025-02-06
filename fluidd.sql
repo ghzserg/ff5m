@@ -296,14 +296,6 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "visible": true
         },
         {
-            "alias": "",
-            "categoryId": "0077449b-cd10-4059-aebd-bf17be6cb270",
-            "color": "",
-            "disabledWhilePrinting": false,
-            "name": "soft_remove",
-            "visible": true
-        },
-        {
             "alias": "Отключить ZMOD камеру",
             "categoryId": "0077449b-cd10-4059-aebd-bf17be6cb270",
             "color": "",
@@ -1046,7 +1038,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "SOFT_REMOVE",
+                    "name": "ZSSH_RESTART",
                     "pos": 20,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -1054,7 +1046,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "ZSSH_RESTART",
+                    "name": "TEST_EMMC",
                     "pos": 21,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -1062,7 +1054,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "TEST_EMMC",
+                    "name": "CLEAR_EMMC",
                     "pos": 22,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -1070,7 +1062,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "CLEAR_EMMC",
+                    "name": "ZSSH_ON",
                     "pos": 23,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -1078,7 +1070,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "ZSSH_ON",
+                    "name": "ZSSH_OFF",
                     "pos": 24,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -1086,7 +1078,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "ZSSH_OFF",
+                    "name": "ZSSH_RELOAD",
                     "pos": 25,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -1094,7 +1086,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "ZSSH_RELOAD",
+                    "name": "UPDATE_MCU",
                     "pos": 26,
                     "showInPause": true,
                     "showInPrinting": true,
@@ -1102,16 +1094,8 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "UPDATE_MCU",
-                    "pos": 27,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
                     "name": "CHECK_SYSTEM",
-                    "pos": 28,
+                    "pos": 27,
                     "showInPause": false,
                     "showInPrinting": false,
                     "showInStandby": true
