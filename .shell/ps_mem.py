@@ -555,10 +555,10 @@ def get_memory_usage(pids_to_show, split_args, discriminate_by_pid,
     return sorted_cmds, shareds, count, total, swaps, total_swap
 
 def print_header(show_swap, discriminate_by_pid):
-    output_string = " Private  +   Shared  =  RAM used"
+    output_string = "Приватная +   Общая   =  RAM всего"
     if show_swap:
-        output_string += "   Swap used"
-    output_string += "\tProgram"
+        output_string += "   Swap     "
+    output_string += "\tПрограмма"
     if discriminate_by_pid:
         output_string += "[pid]"
     output_string += "\n\n"
