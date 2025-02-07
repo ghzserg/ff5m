@@ -7,6 +7,8 @@ prepare_chroot()
     mv /tmp/pointercal /etc/pointercal
     mv /tmp/ts.conf /etc/ts.conf
 
+    [ -f /root/guppyscreen/guppyscreen ] || ln /bin/guppyscreen /root/guppyscreen/guppyscreen
+
     [ -L /root/printer_data/scripts ] || ln -s /opt/config/mod/.shell /root/printer_data/scripts
 
     [ -L /root/klipper-env/lib/python3.11/site-packages/numpy ] || ln -s /usr/lib/python3.11/site-packages/numpy /root/klipper-env/lib/python3.11/site-packages/

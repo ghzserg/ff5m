@@ -1,12 +1,12 @@
 {
-  "default_printer": "ff5m",
+  "default_printer": "FF5M",
   "display_brightness": 90,
   "display_rotate": 0,
   "display_sleep_sec": 600,
   "guppy_init_script": "/etc/init.d/S80guppyscreen",
   "log_path": "/opt/config/mod_data/log/guppyscreen.log",
   "printers": {
-    "ff5m": {
+    "FF5M": {
       "default_macros": {
         "cooldown": "SET_HEATER_TEMPERATURE HEATER=extruder TARGET=0\nSET_HEATER_TEMPERATURE HEATER=heater_bed TARGET=0",
         "load_filament": "LOAD_FILAMENT",
@@ -18,8 +18,16 @@
           "id": "fan_generic chamber_fan"
         },
         {
-          "display_name": "Part fan",
-          "id": "fan"
+          "display_name": "Driver",
+          "id": "controller_fan driver_fan"
+        },
+        {
+          "display_name": "Heater",
+          "id": "heater_fan heat_fan"
+        },
+        {
+          "display_name": "M106",
+          "id": "fan_generic fanM106"
         }
       ],
       "leds": null,
@@ -28,19 +36,19 @@
         {
           "color": "red",
           "controllable": true,
-          "display_name": "Экструдер",
+          "display_name": "Extruder",
           "id": "extruder"
         },
         {
           "color": "purple",
           "controllable": true,
-          "display_name": "Стол",
+          "display_name": "Bed",
           "id": "heater_bed"
         },
         {
           "color": "orange",
           "controllable": false,
-          "display_name": "Вес",
+          "display_name": "Weight",
           "id": "temperature_sensor weightValue"
         }
       ],
@@ -51,5 +59,6 @@
   },
   "prompt_emergency_stop": true,
   "thumbnail_path": "/data/thumbnails",
-  "touch_calibrated": false
+  "touch_calibrated": false,
+  "wpa_supplicant": "/var/run/wpa_supplicant"
 }
