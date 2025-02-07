@@ -1,4 +1,5 @@
 {
+  "config_path": "/root/guppyscreen/guppyconfig.json",
   "default_printer": "FF5M",
   "display_brightness": 90,
   "display_rotate": 0,
