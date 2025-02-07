@@ -226,6 +226,8 @@ start_prepare()
     fi
 
     cat /etc/localtime >/tmp/localtime
+    cp /opt/tslib-1.12/etc/pointercal /tmp/pointercal
+    cp /opt/tslib-1.12/etc/ts.conf /tmp/ts.conf
 
     start_moon
 }

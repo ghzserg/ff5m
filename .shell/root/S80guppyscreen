@@ -8,10 +8,12 @@ PID_FILE=/run/guppyscreen.pid
 NICENESS=10
 
 start() {
+    /etc/init.d/S35tslib start
     start-stop-daemon -S -b -m -p $PID_FILE -N $NICENESS --exec /bin/sh -- -c $GUPPYSCREEN
 }
 
 stop() {
+    /etc/init.d/S35tslib stop
     start-stop-daemon -K -q -p $PID_FILE
 }
 

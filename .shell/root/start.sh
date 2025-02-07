@@ -2,6 +2,11 @@
 
 prepare_chroot()
 {
+    mv /tmp/localtime /etc/localtime
+
+    mv /tmp/pointercal /etc/pointercal
+    mv /tmp/ts.conf /etc/ts.conf
+
     [ -L /root/printer_data/scripts ] || ln -s /opt/config/mod/.shell /root/printer_data/scripts
 
     [ -L /root/klipper-env/lib/python3.11/site-packages/numpy ] || ln -s /usr/lib/python3.11/site-packages/numpy /root/klipper-env/lib/python3.11/site-packages/
@@ -10,6 +15,9 @@ prepare_chroot()
 
     [ -L /etc/init.d/S98zssh ] || ln -s /opt/config/mod/.shell/S98zssh /etc/init.d/
     [ -L /etc/init.d/S98camera ] || ln -s /opt/config/mod/.shell/S98camera /etc/init.d/
+
+    [ -L /etc/init.d/S35tslib ] || ln -s /opt/config/mod/.shell/root/S35tslib /etc/init.d/
+    [ -L /etc/init.d/S80guppyscreen ] || ln -s /opt/config/mod/.shell/root/S80guppyscreen /etc/init.d/
 
     [ -L /etc/init.d/S60klipper ] || ln -s /opt/config/mod/.shell/root/S60klipper /etc/init.d/
     [ -L /etc/init.d/S65moonraker ] || ln -s /opt/config/mod/.shell/root/S65moonraker /etc/init.d/
@@ -28,8 +36,6 @@ prepare_chroot()
 SWAP="$1"
 echo "SWAP=$SWAP"
 
-mv /tmp/localtime /etc/localtime
-
 if ! [ -f /root/swap ]; then dd if=/dev/zero of=/root/swap bs=1024 count=131072; mkswap /root/swap; fi;
 
 if [ "$SWAP" == "/root/swap" ]
@@ -39,15 +45,14 @@ fi
 
 prepare_chroot
 
-if [ "$3" == "Adventurer5M"]; then
+if [ "$3" == "Adventurer5M" ]; then
     rm -f /root/guppyscreen/guppyconfig.json
-    ln -s /op/config/mod/guppyconfig.json /root/guppyscreen/guppyconfig.json
+    ln -s /opt/config/mod/guppyconfig.json /root/guppyscreen/guppyconfig.json
 fi
-if [ "$3" == "Adventurer5MPro"]; then
+if [ "$3" == "Adventurer5MPro" ]; then
     rm -f /root/guppyscreen/guppyconfig.json
-    ln -s /op/config/mod/guppyconfig_pro.json /root/guppyscreen/guppyconfig.json
+    ln -s /opt/config/mod/guppyconfig_pro.json /root/guppyscreen/guppyconfig.json
 fi
-
 
 VER="$3 $2"
 grep -q VERSION_CODENAME /etc/os-release || echo "VERSION_CODENAME=\"${VER}\"" >>/etc/os-release
