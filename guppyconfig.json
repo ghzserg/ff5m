@@ -14,18 +14,6 @@
       },
       "fans": [
         {
-          "display_name": "Chamber",
-          "id": "fan_generic chamber_fan"
-        },
-        {
-          "display_name": "Driver",
-          "id": "controller_fan driver_fan"
-        },
-        {
-          "display_name": "Heater",
-          "id": "heater_fan heat_fan"
-        },
-        {
           "display_name": "M106",
           "id": "fan_generic fanM106"
         }

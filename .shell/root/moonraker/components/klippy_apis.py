@@ -259,6 +259,12 @@ class KlippyAPI(APITransport):
         self, web_request: WebRequest
     ):
         result = await self.get_object_list(default=None)
+        found = False
+        with open('/etc/os-release') as file:
+          for line in file:
+            if re.search('VERSION_CODENAME="Adventurer5MPro ', line):
+              found = True
+              break
         if 'output_pin level_h1' in result:
             result.remove('output_pin level_h1')
         if 'output_pin level_h2' in result:
@@ -275,14 +281,14 @@ class KlippyAPI(APITransport):
             result.remove('filament_switch_sensor check_level_pin_alt')
         if 'filament_switch_sensor e1_sensor' in result:
             result.remove('filament_switch_sensor e1_sensor')
-        if 'temperature_sensor tvocValue' in result:
-            found = False
-            with open('/etc/os-release') as file:
-              for line in file:
-                if re.search('VERSION_CODENAME="Adventurer5MPro ', line):
-                  found = True
-                  break
-            if not found:
+        if not found:
+            if 'fan_generic external_fan' in result:
+                result.remove('fan_generic external_fan')
+            if 'fan_generic internal_fan' in result:
+                result.remove('fan_generic internal_fan')
+            if 'Оказываетfan_generic chamber_fan' in result:
+                result.remove('Оказываетfan_generic chamber_fan')
+            if 'temperature_sensor tvocValue' in result:
                 result.remove('temperature_sensor tvocValue')
         return {
             "objects": result
