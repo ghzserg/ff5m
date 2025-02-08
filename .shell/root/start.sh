@@ -8,7 +8,8 @@ prepare_chroot()
     mv /tmp/ts.conf /etc/ts.conf
 
     rm -f /root/guppyscreen/guppyscreen
-    cp /opt/config/mod/.shell/root/guppyscreen /root/guppyscreen/guppyscreen
+#    cp /opt/config/mod/.shell/root/guppyscreen /root/guppyscreen/guppyscreen
+    ln /bin/guppyscreen /root/guppyscreen/guppyscreen
 
     [ -L /root/printer_data/scripts ] || ln -s /opt/config/mod/.shell /root/printer_data/scripts
 
