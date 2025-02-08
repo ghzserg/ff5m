@@ -205,6 +205,9 @@ start_prepare()
     mkdir -p $MOD/data
     mount --bind /data $MOD/data
 
+    mkdir -p $MOD/var/run/
+    mount --bind /var/run/ $MOD/var/run/
+
     mkdir -p $MOD/opt/PROGRAM/
     mount --bind /opt/PROGRAM/ $MOD/opt/PROGRAM/
 
