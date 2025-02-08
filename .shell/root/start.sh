@@ -51,10 +51,10 @@ rm -f /root/guppyscreen/guppyconfig.json
 ln -s /opt/config/mod_data/guppyconfig.json /root/guppyscreen/guppyconfig.json
 
 if [ "$3" == "Adventurer5M" ]; then
-    [ -f /opt/config/mod_data/guppyconfig.json ] && cp ln -s /opt/config/mod/guppyconfig.json /opt/config/mod_data/guppyconfig.json
+    [ -f /opt/config/mod_data/guppyconfig.json ] || cp ln -s /opt/config/mod/guppyconfig.json /opt/config/mod_data/guppyconfig.json
 fi
 if [ "$3" == "Adventurer5MPro" ]; then
-    [ -f /opt/config/mod_data/guppyconfig.json ] && cp ln -s /opt/config/mod/guppyconfig_pro.json /opt/config/mod_data/guppyconfig.json
+    [ -f /opt/config/mod_data/guppyconfig.json ] || cp ln -s /opt/config/mod/guppyconfig_pro.json /opt/config/mod_data/guppyconfig.json
 fi
 
 VER="$3 $2"
