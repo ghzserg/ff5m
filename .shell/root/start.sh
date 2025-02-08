@@ -7,7 +7,8 @@ prepare_chroot()
     mv /tmp/pointercal /etc/pointercal
     mv /tmp/ts.conf /etc/ts.conf
 
-    [ -f /root/guppyscreen/guppyscreen ] || ln /bin/guppyscreen /root/guppyscreen/guppyscreen
+    rm -f /root/guppyscreen/guppyscreen
+    cp /opt/config/mod/.shell/root/guppyscreen /root/guppyscreen/guppyscreen
 
     [ -L /root/printer_data/scripts ] || ln -s /opt/config/mod/.shell /root/printer_data/scripts
 
