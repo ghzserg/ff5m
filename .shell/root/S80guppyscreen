@@ -11,12 +11,13 @@ start() {
     backlight 0
     /etc/init.d/S35tslib start
     backlight 75
+    killall guppyscreen
     start-stop-daemon -S -b -m -p $PID_FILE -N $NICENESS --exec /bin/sh -- -c $GUPPYSCREEN
 }
 
 stop() {
     /etc/init.d/S35tslib stop
-    start-stop-daemon -K -q -p $PID_FILE
+    killall guppyscreen
 }
 
 restart() {

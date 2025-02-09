@@ -10,8 +10,7 @@
     "FF5M": {
       "default_macros": {
         "cooldown": "SET_HEATER_TEMPERATURE HEATER=extruder TARGET=0\nSET_HEATER_TEMPERATURE HEATER=heater_bed TARGET=0",
-        "load_filament": "LOAD_FILAMENT",
-        "unload_filament": "UNLOAD_FILAMENT"
+        "load_filament": "LOAD_FILAMENT"
       },
       "fans": [
         {
@@ -25,19 +24,19 @@
         {
           "color": "red",
           "controllable": true,
-          "display_name": "Extruder",
+          "display_name": "Экструдер",
           "id": "extruder"
         },
         {
           "color": "purple",
           "controllable": true,
-          "display_name": "Bed",
+          "display_name": "Стол",
           "id": "heater_bed"
         },
         {
           "color": "orange",
           "controllable": false,
-          "display_name": "Weight",
+          "display_name": "Вес",
           "id": "temperature_sensor weightValue"
         }
       ],
