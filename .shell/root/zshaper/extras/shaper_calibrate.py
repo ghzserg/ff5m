@@ -322,10 +322,11 @@ class ShaperCalibrate:
     def find_best_shaper(self, calibration_data, shapers=None,
                          damping_ratio=None, scv=None, shaper_freqs=None,
                          max_smoothing=None, test_damping_ratios=None,
-                         max_freq=None, logger=None):
+                         max_freq=None, logger=None, resp_json=0.0):
         best_shaper = None
         all_shapers = []
         shapers = shapers or AUTOTUNE_SHAPERS
+        resp = {}
         for shaper_cfg in shaper_defs.INPUT_SHAPERS:
             if shaper_cfg.name not in shapers:
                 continue
@@ -333,13 +334,21 @@ class ShaperCalibrate:
                 shaper_cfg, calibration_data, shaper_freqs, damping_ratio,
                 scv, max_smoothing, test_damping_ratios, max_freq))
             if logger is not None:
-                logger("Шейпер '%s' частота = %.1f Hz "
-                       "(вибрации = %.1f%%, сглаживание ~= %.3f)" % (
+                if resp_json == 0.0:
+                    logger("Шейпер '%s' частота = %.1f Hz "
+                           "(вибрации = %.1f%%, сглаживание ~= %.3f)" % (
                            shaper.name, shaper.freq, shaper.vibrs * 100.,
                            shaper.smoothing))
-                logger("Чтобы избежать слишком сильного сглаживания с помощью '%s', предлагается "
-                       "max_accel <= %.0f мм/сек^2" % (
+                    logger("Чтобы избежать слишком сильного сглаживания с помощью '%s', предлагается "
+                           "max_accel <= %.0f мм/сек^2" % (
                            shaper.name, round(shaper.max_accel / 100.) * 100.))
+                else:
+                    resp[shaper.name] = {
+                        'freq': shaper.freq,
+                        'vib': shaper.vibrs * 100.,
+                        'smooth': shaper.smoothing,
+                        'max_acel': round(shaper.max_accel / 100.) * 100.
+                    }
             all_shapers.append(shaper)
             if (best_shaper is None or shaper.score * 1.2 < best_shaper.score or
                     (shaper.score * 1.05 < best_shaper.score and
@@ -347,7 +356,7 @@ class ShaperCalibrate:
                 # Either the shaper significantly improves the score (by 20%),
                 # or it improves the score and smoothing (by 5% and 10% resp.)
                 best_shaper = shaper
-        return best_shaper, all_shapers
+        return best_shaper, all_shapers, {'shapers': resp, 'best': best_shaper.name}
 
     def save_params(self, configfile, axis, shaper_name, shaper_freq):
         if axis == 'xy':

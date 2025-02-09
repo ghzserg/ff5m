@@ -9,6 +9,7 @@ from __future__ import print_function
 import importlib, optparse, os, sys
 from textwrap import wrap
 import numpy as np, matplotlib
+import json
 #sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)),
 #                             '..', 'klippy'))
 shaper_calibrate = importlib.import_module('.shaper_calibrate', 'extras')
@@ -42,7 +43,7 @@ def parse_log(logname):
 # Find the best shaper parameters
 def calibrate_shaper(datas, csv_output, *, shapers, damping_ratio, scv,
                      shaper_freqs, max_smoothing, test_damping_ratios,
-                     max_freq):
+                     max_freq, resp_json):
     helper = shaper_calibrate.ShaperCalibrate(printer=None)
     if isinstance(datas[0], shaper_calibrate.CalibrationData):
         calibration_data = datas[0]
@@ -56,20 +57,21 @@ def calibrate_shaper(datas, csv_output, *, shapers, damping_ratio, scv,
         calibration_data.normalize_to_frequencies()
 
 
-    shaper, all_shapers = helper.find_best_shaper(
+    shaper, all_shapers, resp = helper.find_best_shaper(
             calibration_data, shapers=shapers, damping_ratio=damping_ratio,
             scv=scv, shaper_freqs=shaper_freqs, max_smoothing=max_smoothing,
             test_damping_ratios=test_damping_ratios, max_freq=max_freq,
-            logger=print)
+            logger=print, resp_json=resp_json)
     if not shaper:
         print("Нет рекомендуемых шейперов, возможно ошибочное значение для --shapers=%s" %
               (','.join(shapers)))
         return None, None, None
-    print("Рекомендуемый шейпер %s @ %.1f Hz" % (shaper.name, shaper.freq))
+    if resp_json == 0.0:
+        print("Рекомендуемый шейпер %s @ %.1f Hz" % (shaper.name, shaper.freq))
     if csv_output is not None:
         helper.save_calibration_data(
                 csv_output, calibration_data, all_shapers)
-    return shaper.name, all_shapers, calibration_data
+    return shaper.name, all_shapers, calibration_data, resp
 
 ######################################################################
 # Plot frequency response and suggested input shapers
@@ -169,6 +171,13 @@ def main():
                     dest="test_damping_ratios", default=None,
                     help="a comma-separated liat of damping ratios to test " +
                     "input shaper for")
+    opts.add_option("-w", "--width", type="float", dest="width",
+                    default=8, help="width (inches) of the graph(s)")
+    opts.add_option("-l", "--height", type="float", dest="height",
+                    default=6, help="height (inches) of the graph(s)")
+    opts.add_option("-r", "--resp", type="float", dest="resp_json",
+                    default=0, help="rep json")
+
     options, args = opts.parse_args()
     if len(args) < 1:
         opts.error("Incorrect number of arguments")
@@ -224,15 +233,17 @@ def main():
     datas = [parse_log(fn) for fn in args]
 
     # Calibrate shaper and generate outputs
-    selected_shaper, shapers, calibration_data = calibrate_shaper(
+    selected_shaper, shapers, calibration_data, resp = calibrate_shaper(
             datas, options.csv, shapers=shapers,
             damping_ratio=options.damping_ratio,
             scv=options.scv, shaper_freqs=shaper_freqs,
             max_smoothing=options.max_smoothing,
             test_damping_ratios=test_damping_ratios,
-            max_freq=max_freq)
+            max_freq=max_freq, resp_json=options.resp_json)
     if selected_shaper is None:
         return
+
+    resp['logfile'] = args[0]
 
     if not options.csv or options.output:
         # Draw graph
@@ -245,8 +256,13 @@ def main():
         if options.output is None:
             matplotlib.pyplot.show()
         else:
-            fig.set_size_inches(8, 6)
+            pathlib.Path(options.output).unlink(missing_ok=True)
+            fig.set_size_inches(options.width, options.height)
             fig.savefig(options.output)
+            resp['png'] = options.output
+
+    if options.resp_json != 0:
+        print(json.dumps(resp))
 
 if __name__ == '__main__':
     main()
