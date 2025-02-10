@@ -57,6 +57,15 @@ fix_config()
     cat ${PRINTER_BASE}
     cat ${PRINTER_CFG}
 
+    if ! [ -f /opt/config/mod_data/power_off.sh ]; then
+        echo "#!/bin/sh
+unset LD_PRELOAD
+
+#/opt/cloud/curl-7.55.1-https/bin/curl -k https://mail.ru
+" >/opt/config/mod_data/power_off.sh
+    chmod +x /opt/config/mod_data/power_off.sh
+    fi
+
     # Rem стукач
     if grep -q "china_cloud = 1" /opt/config/mod_data/variables.cfg; then
         china_razbl api.cloud.flashforge.com
