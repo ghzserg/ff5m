@@ -400,6 +400,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "visible": true
         },
         {
+            "alias": "Калибровка ремней",
+            "categoryId": "244d667b-c410-4e01-9bf1-e8e0b9deabe2",
+            "color": "",
+            "disabledWhilePrinting": true,
+            "name": "belts_shaper_calibration",
+            "visible": true
+        },
+        {
             "alias": "Регулировка винтов стола",
             "categoryId": "244d667b-c410-4e01-9bf1-e8e0b9deabe2",
             "color": "",
@@ -812,34 +820,34 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
             "macros": [
                 {
                     "color": "group",
-                    "name": "Auto_Full_Bed_Level",
+                    "name": "AUTO_FULL_BED_LEVEL",
                     "pos": 1,
-                    "showInPause": true,
-                    "showInPrinting": true,
+                    "showInPause": false,
+                    "showInPrinting": false,
                     "showInStandby": true
                 },
                 {
                     "color": "group",
-                    "name": "Bed_Level_Screws_Tune",
+                    "name": "BED_LEVEL_SCREWS_TUNE",
                     "pos": 2,
-                    "showInPause": true,
-                    "showInPrinting": true,
+                    "showInPause": false,
+                    "showInPrinting": false,
                     "showInStandby": true
                 },
                 {
                     "color": "group",
-                    "name": "PID_Tune_BED",
+                    "name": "PID_TUNE_BED",
                     "pos": 3,
-                    "showInPause": true,
-                    "showInPrinting": true,
+                    "showInPause": false,
+                    "showInPrinting": false,
                     "showInStandby": true
                 },
                 {
                     "color": "group",
-                    "name": "PID_Tune_EXTRUDER",
+                    "name": "PID_TUNE_EXTRUDER",
                     "pos": 4,
-                    "showInPause": true,
-                    "showInPrinting": true,
+                    "showInPause": false,
+                    "showInPrinting": false,
                     "showInStandby": true
                 },
                 {
@@ -854,14 +862,22 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                     "color": "group",
                     "name": "ZSHAPER",
                     "pos": 6,
-                    "showInPause": true,
-                    "showInPrinting": true,
+                    "showInPause": false,
+                    "showInPrinting": false,
+                    "showInStandby": true
+                },
+                {
+                    "color": "group",
+                    "name": "BELTS_SHAPER_CALIBRATION",
+                    "pos": 7,
+                    "showInPause": false,
+                    "showInPrinting": false,
                     "showInStandby": true
                 },
                 {
                     "color": "group",
                     "name": "LOAD_GCODE_OFFSET",
-                    "pos": 7,
+                    "pos": 8,
                     "showInPause": true,
                     "showInPrinting": true,
                     "showInStandby": true
@@ -869,7 +885,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 {
                     "color": "group",
                     "name": "NOZZLE_CONTROL",
-                    "pos": 8,
+                    "pos": 9,
                     "showInPause": false,
                     "showInPrinting": false,
                     "showInStandby": true

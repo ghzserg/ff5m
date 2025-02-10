@@ -47,9 +47,6 @@ KLIPPAIN_COLORS = {
 
 
 # Set the best locale for time and date formating (generation of the titles)
-try:
-    locale.setlocale(locale.LC_TIME, locale.getdefaultlocale())
-except locale.Error:
     locale.setlocale(locale.LC_TIME, 'C')
 
 # Override the built-in print function to avoid problem in Klipper due to locale settings
@@ -275,17 +272,17 @@ def compute_mhi(combined_data, similarity_coefficient, num_unpaired_peaks):
 # LUT to transform the MHI into a textual value easy to understand for the users of the script
 def mhi_lut(mhi):
     if 0 <= mhi <= 30:
-        return "Excellent mechanical health"
+        return "Отличное механическое состояние"
     elif 30 < mhi <= 45:
-        return "Good mechanical health"
+        return "Хорошее механическое состояние"
     elif 45 < mhi <= 55:
-        return "Acceptable mechanical health"
+        return "Приемлемое механическое состояние"
     elif 55 < mhi <= 70:
-        return "Potential signs of a mechanical issue"
+        return "Возможные признаки механической неисправности"
     elif 70 < mhi <= 85:
-        return "Likely a mechanical issue"
+        return "Вероятно, механическая проблема"
     elif 85 < mhi <= 100:
-        return "Mechanical issue detected"
+        return "Обнаружена механическая проблема"
 
 
 ######################################################################
@@ -297,24 +294,24 @@ def plot_compare_frequency(ax, lognames, signal1, signal2, max_freq):
     signal1_belt = (lognames[0].split('/')[-1]).split('_')[-1][0]
     signal2_belt = (lognames[1].split('/')[-1]).split('_')[-1][0]
 
-    if signal1_belt == 'A' and signal2_belt == 'B':
+    if signal1_belt == 'a' and signal2_belt == 'b':
         signal1_belt += " (axis 1,-1)"
         signal2_belt += " (axis 1, 1)"
-    elif signal1_belt == 'B' and signal2_belt == 'A':
+    elif signal1_belt == 'b' and signal2_belt == 'a':
         signal1_belt += " (axis 1, 1)"
         signal2_belt += " (axis 1,-1)"
     else:
-        print("Warning: belts doesn't seem to have the correct name A and B (extracted from the filename.csv)")
+        print("Внимание: похоже, у belts неверные названия A и B (извлечено из filename.csv)")
 
     # Plot the two belts PSD signals
-    ax.plot(signal1.freqs, signal1.psd, label="Belt " + signal1_belt, color=KLIPPAIN_COLORS['purple'])
-    ax.plot(signal2.freqs, signal2.psd, label="Belt " + signal2_belt, color=KLIPPAIN_COLORS['orange'])
+    ax.plot(signal1.freqs, signal1.psd, label="Ремень " + signal1_belt, color=KLIPPAIN_COLORS['purple'])
+    ax.plot(signal2.freqs, signal2.psd, label="Ремень " + signal2_belt, color=KLIPPAIN_COLORS['orange'])
 
     # Trace the "relax region" (also used as a threshold to filter and detect the peaks)
     psd_lowest_max = min(signal1.psd.max(), signal2.psd.max())
     peaks_warning_threshold = PEAKS_DETECTION_THRESHOLD * psd_lowest_max
     ax.axhline(y=peaks_warning_threshold, color='black', linestyle='--', linewidth=0.5)
-    ax.fill_between(signal1.freqs, 0, peaks_warning_threshold, color='green', alpha=0.15, label='Relax Region')
+    ax.fill_between(signal1.freqs, 0, peaks_warning_threshold, color='green', alpha=0.15, label='Релакс-регион')
 
     # Trace and annotate the peaks on the graph
     paired_peak_count = 0
@@ -325,7 +322,7 @@ def plot_compare_frequency(ax, lognames, signal1, signal2, max_freq):
         label = ALPHABET[paired_peak_count]
         amplitude_offset = abs(((signal2.psd[peak2[0]] - signal1.psd[peak1[0]]) / max(signal1.psd[peak1[0]], signal2.psd[peak2[0]])) * 100)
         frequency_offset = abs(signal2.freqs[peak2[0]] - signal1.freqs[peak1[0]])
-        offsets_table_data.append([f"Peaks {label}", f"{frequency_offset:.1f} Hz", f"{amplitude_offset:.1f} %"])
+        offsets_table_data.append([f"Пик {label}", f"{frequency_offset:.1f} Hz", f"{amplitude_offset:.1f} %"])
         
         ax.plot(signal1.freqs[peak1[0]], signal1.psd[peak1[0]], "x", color='black')
         ax.plot(signal2.freqs[peak2[0]], signal2.psd[peak2[0]], "x", color='black')
@@ -357,14 +354,14 @@ def plot_compare_frequency(ax, lognames, signal1, signal2, max_freq):
     ax2 = ax.twinx() # To split the legends in two box
     ax2.yaxis.set_visible(False)
     similarity_factor = compute_curve_similarity_factor(signal1, signal2)
-    ax2.plot([], [], ' ', label=f'Estimated similarity: {similarity_factor:.1f}%')
-    ax2.plot([], [], ' ', label=f'Number of unpaired peaks: {unpaired_peak_count}')
-    print(f"Belts estimated similarity: {similarity_factor:.1f}%")
+    ax2.plot([], [], ' ', label=f'Предполагаемое сходство: {similarity_factor:.1f}%')
+    ax2.plot([], [], ' ', label=f'Количество непарных пиков: {unpaired_peak_count}')
+    print(f"Оценочное сходство ремней: {similarity_factor:.1f}%")
 
     # Setting axis parameters, grid and graph title
-    ax.set_xlabel('Frequency (Hz)')
+    ax.set_xlabel('Частота (Hz)')
     ax.set_xlim([0, max_freq])
-    ax.set_ylabel('Power spectral density')
+    ax.set_ylabel('Спектральная плотность мощности')
     psd_highest_max = max(signal1.psd.max(), signal2.psd.max())
     ax.set_ylim([0, psd_highest_max + psd_highest_max * 0.05])
 
@@ -375,11 +372,11 @@ def plot_compare_frequency(ax, lognames, signal1, signal2, max_freq):
     ax.grid(which='minor', color='lightgrey')
     fontP = matplotlib.font_manager.FontProperties()
     fontP.set_size('small')
-    ax.set_title('Belts Frequency Profiles (estimated similarity: {:.1f}%)'.format(similarity_factor), fontsize=10, color=KLIPPAIN_COLORS['dark_orange'], weight='bold')
+    ax.set_title('Профили частот ремней (предполагаемое сходство: {:.1f}%)'.format(similarity_factor), fontsize=10, color=KLIPPAIN_COLORS['dark_orange'], weight='bold')
 
     # Print the table of offsets ontop of the graph below the original legend (upper right)
     if len(offsets_table_data) > 0:
-        columns = ["", "Frequency delta", "Amplitude delta", ]
+        columns = ["", "Дельта частоты", "Дельта амплитуды", ]
         offset_table = ax.table(cellText=offsets_table_data, colLabels=columns, bbox=[0.66, 0.75, 0.33, 0.15], loc='upper right', cellLoc='center')
         offset_table.auto_set_font_size(False)
         offset_table.set_fontsize(8)
@@ -403,9 +400,9 @@ def plot_difference_spectrogram(ax, data1, data2, signal1, signal2, similarity_f
     # the similarity factor and the number or unpaired peaks from the belts frequency profile
     # Be careful, this value is highly opinionated and is pretty experimental!
     mhi, textual_mhi = compute_mhi(combined_sum, similarity_factor, len(signal1.unpaired_peaks) + len(signal2.unpaired_peaks))
-    print(f"[experimental] Mechanical Health Indicator: {textual_mhi.lower()} ({mhi:.1f}%)")
-    ax.set_title(f"Differential Spectrogram", fontsize=14, color=KLIPPAIN_COLORS['dark_orange'], weight='bold')
-    ax.plot([], [], ' ', label=f'{textual_mhi} (experimental)')
+    print(f"[экспериментальный] Индикатор механического состояния: {textual_mhi.lower()} ({mhi:.1f}%)")
+    ax.set_title(f"Дифференциальная спектрограмма", fontsize=14, color=KLIPPAIN_COLORS['dark_orange'], weight='bold')
+    ax.plot([], [], ' ', label=f'{textual_mhi} (экспериментально)')
     
     # Draw the differential spectrogram with a specific custom norm to get orange or purple values where there is signal or white near zeros
     colors = [KLIPPAIN_COLORS['dark_orange'], KLIPPAIN_COLORS['orange'], 'white', KLIPPAIN_COLORS['purple'], KLIPPAIN_COLORS['dark_purple']]  
@@ -413,9 +410,9 @@ def plot_difference_spectrogram(ax, data1, data2, signal1, signal2, similarity_f
     norm = matplotlib.colors.TwoSlopeNorm(vmin=np.min(combined_divergent), vcenter=0, vmax=np.max(combined_divergent))
     ax.pcolormesh(t, bins, combined_divergent.T, cmap=cm, norm=norm, shading='gouraud')
 
-    ax.set_xlabel('Frequency (hz)')
+    ax.set_xlabel('Частота (hz)')
     ax.set_xlim([0., max_freq])
-    ax.set_ylabel('Time (s)')
+    ax.set_ylabel('Время (s)')
     ax.set_ylim([0, bins[-1]])
 
     fontP = matplotlib.font_manager.FontProperties()
@@ -426,14 +423,14 @@ def plot_difference_spectrogram(ax, data1, data2, signal1, signal2, similarity_f
     unpaired_peak_count = 0
     for _, peak in enumerate(signal1.unpaired_peaks):
         ax.axvline(signal1.freqs[peak], color=KLIPPAIN_COLORS['red_pink'], linestyle='dotted', linewidth=1.5)
-        ax.annotate(f"Peak {unpaired_peak_count + 1}", (signal1.freqs[peak], t[-1]*0.05),
+        ax.annotate(f"Пик {unpaired_peak_count + 1}", (signal1.freqs[peak], t[-1]*0.05),
                     textcoords="data", color=KLIPPAIN_COLORS['red_pink'], rotation=90, fontsize=10,
                     verticalalignment='bottom', horizontalalignment='right')
         unpaired_peak_count +=1
 
     for _, peak in enumerate(signal2.unpaired_peaks):
         ax.axvline(signal2.freqs[peak], color=KLIPPAIN_COLORS['red_pink'], linestyle='dotted', linewidth=1.5)
-        ax.annotate(f"Peak {unpaired_peak_count + 1}", (signal2.freqs[peak], t[-1]*0.05),
+        ax.annotate(f"Пик {unpaired_peak_count + 1}", (signal2.freqs[peak], t[-1]*0.05),
                     textcoords="data", color=KLIPPAIN_COLORS['red_pink'], rotation=90, fontsize=10,
                     verticalalignment='bottom', horizontalalignment='right')
         unpaired_peak_count +=1
@@ -446,7 +443,7 @@ def plot_difference_spectrogram(ax, data1, data2, signal1, signal2, similarity_f
         ax.axvline(x_min, color=KLIPPAIN_COLORS['dark_purple'], linestyle='dotted', linewidth=1.5)
         ax.axvline(x_max, color=KLIPPAIN_COLORS['dark_purple'], linestyle='dotted', linewidth=1.5)
         ax.fill_between([x_min, x_max], 0, np.max(combined_divergent), color=KLIPPAIN_COLORS['dark_purple'], alpha=0.3)
-        ax.annotate(f"Peaks {label}", (x_min, t[-1]*0.05),
+        ax.annotate(f"Пики {label}", (x_min, t[-1]*0.05),
                 textcoords="data", color=KLIPPAIN_COLORS['dark_purple'], rotation=90, fontsize=10,
                 verticalalignment='bottom', horizontalalignment='right')
 
@@ -524,8 +521,8 @@ def belts_calibration(lognames, klipperdir="~/klipper", max_freq=200., graph_spe
         dt = datetime.strptime(f"{filename.split('_')[1]} {filename.split('_')[2]}", "%Y%m%d %H%M%S")
         title_line2 = dt.strftime('%x %X')
     except:
-        print("Warning: CSV filenames look to be different than expected (%s , %s)" % (lognames[0], lognames[1]))
-        title_line2 = lognames[0].split('/')[-1] + " / " +  lognames[1].split('/')[-1]
+        #print("Warning: CSV filenames look to be different than expected (%s , %s)" % (lognames[0], lognames[1]))
+        title_line2 = lognames[0].split('/')[-1] + " / " +  lognames[1].split('/')[-1] + " ZMOD"
     fig.suptitle(title_line2)
 
     # Plot the graphs
@@ -567,8 +564,6 @@ def main():
                             options.width, options.height)
     pathlib.Path(options.output).unlink(missing_ok=True) 
     fig.savefig(options.output)
-    print("// Command {guppy_belts_calibration} finished")
-
 
 if __name__ == '__main__':
     main()
