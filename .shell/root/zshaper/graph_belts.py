@@ -47,7 +47,7 @@ KLIPPAIN_COLORS = {
 
 
 # Set the best locale for time and date formating (generation of the titles)
-    locale.setlocale(locale.LC_TIME, 'C')
+locale.setlocale(locale.LC_TIME, 'C')
 
 # Override the built-in print function to avoid problem in Klipper due to locale settings
 original_print = print
