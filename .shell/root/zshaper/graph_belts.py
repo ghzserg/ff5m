@@ -376,7 +376,7 @@ def plot_compare_frequency(ax, lognames, signal1, signal2, max_freq):
 
     # Print the table of offsets ontop of the graph below the original legend (upper right)
     if len(offsets_table_data) > 0:
-        columns = ["", "Дельта частоты", "Дельта амплитуды", ]
+        columns = ["", "D частоты", "D амплитуды", ]
         offset_table = ax.table(cellText=offsets_table_data, colLabels=columns, bbox=[0.66, 0.75, 0.33, 0.15], loc='upper right', cellLoc='center')
         offset_table.auto_set_font_size(False)
         offset_table.set_fontsize(8)
