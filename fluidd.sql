@@ -245,7 +245,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "color": "",
             "disabledWhilePrinting": false,
             "name": "update_mcu",
-            "visible": true
+            "visible": false
         },
         {
             "alias": "Проверить систему",
@@ -1104,9 +1104,9 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                     "color": "group",
                     "name": "UPDATE_MCU",
                     "pos": 26,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
+                    "showInPause": false,
+                    "showInPrinting": false,
+                    "showInStandby": false
                 },
                 {
                     "color": "group",
