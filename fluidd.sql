@@ -1236,4 +1236,205 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
     "mode": "expert"
 }');
 DELETE FROM "main"."namespace_store"  WHERE namespace="guppyscreen" AND key="macros";
-INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('guppyscreen', 'macros', '{"settings":{"AIR_CIRCULATION_EXTERNAL":{"hidden":false},"AUTO_FULL_BED_LEVEL":{"hidden":true},"BED_MESH_CALIBRATE":{"hidden":true},"BELTS_SHAPER_CALIBRATION":{"hidden":true},"CAMERA_OFF":{"hidden":true},"CAMERA_ON":{"hidden":true},"CAMERA_RESTART":{"hidden":true},"CANCEL_PRINT":{"hidden":true},"CHECK_MD5":{"hidden":true},"CHECK_SYSTEM":{"hidden":true},"CLEAR_EMMC":{"hidden":true},"CLEAR_NOZZLE":{"hidden":true},"CLOSE_DIALOGS":{"hidden":true},"DATE_GET":{"hidden":true},"DATE_SET":{"hidden":true},"DISPLAY_OFF":{"hidden":true},"DISPLAY_ON":{"hidden":true},"END_PRINT":{"hidden":true},"FAST_CLOSE_DIALOGS":{"hidden":true},"G28":{"hidden":true},"GET_ZMOD_DATA":{"hidden":true},"KAMP":{"hidden":true},"LED":{"hidden":true},"LED_OFF":{"hidden":true},"LED_ON":{"hidden":true},"LINE_PURGE":{"hidden":true},"LOAD_FILAMENT":{"hidden":true},"LOAD_GCODE_OFFSET":{"hidden":true},"M106":{"hidden":true},"M107":{"hidden":true},"M300":{"hidden":true},"M356":{"hidden":true},"M357":{"hidden":true},"M600":{"hidden":true},"M900":{"hidden":true},"NEW_SAVE_CONFIG":{"hidden":true},"NOZZLE_CONTROL":{"hidden":true},"PAUSE":{"hidden":true},"PLAY_MIDI":{"hidden":true},"PURGE_FILAMENT":{"hidden":true},"REBOOT":{"hidden":true},"REMOVE_ZMOD":{"hidden":true},"RESUME":{"hidden":true},"SAVE_ZMOD_DATA":{"hidden":true},"SET_FAN_SPEED":{"hidden":true},"SET_GCODE_OFFSET":{"hidden":true},"SET_PAUSE_AT_LAYER":{"hidden":true},"SET_PAUSE_NEXT_LAYER":{"hidden":true},"SET_PRINT_STATS_INFO":{"hidden":true},"SET_TIMEZONE":{"hidden":true},"SKIP_ZMOD":{"hidden":true},"START_PRINT":{"hidden":true},"START_ZMOD":{"hidden":true},"STOP_ZMOD":{"hidden":true},"TAR_CONFIG":{"hidden":true},"TEST_EMMC":{"hidden":true},"UNLOAD_FILAMENT":{"hidden":true},"UPDATE_MCU":{"hidden":true},"WEB":{"hidden":true},"ZSHAPER":{"hidden":true},"ZSSH_OFF":{"hidden":true},"ZSSH_ON":{"hidden":true},"ZSSH_RELOAD":{"hidden":true},"ZSSH_RESTART":{"hidden":true}}}');
+INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('guppyscreen', 'macros', '{
+  "settings": {
+    "AIR_CIRCULATION_EXTERNAL": {
+      "hidden": false
+    },
+    "AUTO_FULL_BED_LEVEL": {
+      "hidden": true
+    },
+    "BED_MESH_CALIBRATE": {
+      "hidden": true
+    },
+    "BELTS_SHAPER_CALIBRATION": {
+      "hidden": true
+    },
+    "CAMERA_OFF": {
+      "hidden": true
+    },
+    "CAMERA_ON": {
+      "hidden": true
+    },
+    "CAMERA_RESTART": {
+      "hidden": true
+    },
+    "CANCEL_PRINT": {
+      "hidden": true
+    },
+    "CHECK_MD5": {
+      "hidden": true
+    },
+    "CHECK_SYSTEM": {
+      "hidden": true
+    },
+    "CLEAR_EMMC": {
+      "hidden": true
+    },
+    "CLEAR_NOZZLE": {
+      "hidden": true
+    },
+    "CLOSE_DIALOGS": {
+      "hidden": true
+    },
+    "DATE_GET": {
+      "hidden": true
+    },
+    "DATE_SET": {
+      "hidden": true
+    },
+    "DISPLAY_OFF": {
+      "hidden": true
+    },
+    "DISPLAY_ON": {
+      "hidden": true
+    },
+    "END_PRINT": {
+      "hidden": true
+    },
+    "FAST_CLOSE_DIALOGS": {
+      "hidden": true
+    },
+    "G28": {
+      "hidden": true
+    },
+    "GET_ZMOD_DATA": {
+      "hidden": true
+    },
+    "KAMP": {
+      "hidden": true
+    },
+    "LED": {
+      "hidden": true
+    },
+    "LED_OFF": {
+      "hidden": true
+    },
+    "LED_ON": {
+      "hidden": true
+    },
+    "LINE_PURGE": {
+      "hidden": true
+    },
+    "LOAD_FILAMENT": {
+      "hidden": true
+    },
+    "LOAD_GCODE_OFFSET": {
+      "hidden": true
+    },
+    "M106": {
+      "hidden": true
+    },
+    "M107": {
+      "hidden": true
+    },
+    "M24": {
+      "hidden": true
+    },
+    "M25": {
+      "hidden": true
+    },
+    "M300": {
+      "hidden": true
+    },
+    "M356": {
+      "hidden": true
+    },
+    "M357": {
+      "hidden": true
+    },
+    "M600": {
+      "hidden": true
+    },
+    "M900": {
+      "hidden": true
+    },
+    "NEW_SAVE_CONFIG": {
+      "hidden": true
+    },
+    "NOZZLE_CONTROL": {
+      "hidden": true
+    },
+    "PAUSE": {
+      "hidden": true
+    },
+    "PLAY_MIDI": {
+      "hidden": true
+    },
+    "PURGE_FILAMENT": {
+      "hidden": true
+    },
+    "REBOOT": {
+      "hidden": true
+    },
+    "REMOVE_ZMOD": {
+      "hidden": true
+    },
+    "RESUME": {
+      "hidden": true
+    },
+    "SAVE_ZMOD_DATA": {
+      "hidden": true
+    },
+    "SET_FAN_SPEED": {
+      "hidden": true
+    },
+    "SET_GCODE_OFFSET": {
+      "hidden": true
+    },
+    "SET_PAUSE_AT_LAYER": {
+      "hidden": true
+    },
+    "SET_PAUSE_NEXT_LAYER": {
+      "hidden": true
+    },
+    "SET_PRINT_STATS_INFO": {
+      "hidden": true
+    },
+    "SET_TIMEZONE": {
+      "hidden": true
+    },
+    "SKIP_ZMOD": {
+      "hidden": true
+    },
+    "START_PRINT": {
+      "hidden": true
+    },
+    "START_ZMOD": {
+      "hidden": true
+    },
+    "STOP_ZMOD": {
+      "hidden": true
+    },
+    "TAR_CONFIG": {
+      "hidden": true
+    },
+    "TEST_EMMC": {
+      "hidden": true
+    },
+    "UNLOAD_FILAMENT": {
+      "hidden": true
+    },
+    "UPDATE_MCU": {
+      "hidden": true
+    },
+    "WEB": {
+      "hidden": true
+    },
+    "ZSHAPER": {
+      "hidden": true
+    },
+    "ZSSH_OFF": {
+      "hidden": true
+    },
+    "ZSSH_ON": {
+      "hidden": true
+    },
+    "ZSSH_RELOAD": {
+      "hidden": true
+    },
+    "ZSSH_RESTART": {
+      "hidden": true
+    }
+  }
+}');
