@@ -180,6 +180,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "categoryId": "0",
             "color": "",
             "disabledWhilePrinting": false,
+            "name": "m24",
+            "visible": false
+        },
+        {
+            "alias": "",
+            "categoryId": "0",
+            "color": "",
+            "disabledWhilePrinting": false,
             "name": "m25",
             "visible": false
         },
@@ -802,12 +810,22 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                 },
                 {
                     "color": "group",
-                    "name": "M25",
+                    "name": "M24",
                     "pos": 13,
                     "showInPause": false,
                     "showInPrinting": false,
                     "showInStandby": false
-                }
+                },
+                {
+                    "color": "group",
+                    "name": "M25",
+                    "pos": 14,
+                    "showInPause": false,
+                    "showInPrinting": false,
+                    "showInStandby": false
+                },
+
+
             ],
             "name": "0. Основное",
             "showInPause": true,
@@ -1220,346 +1238,352 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
 DELETE FROM "main"."namespace_store"  WHERE namespace="guppyscreen" AND key="macros";
 INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('guppyscreen', 'macros', '{
     "settings": {
-        AIR_CIRCULATION_EXTERNAL: {
+        "AIR_CIRCULATION_EXTERNAL": {
             hidden: false
         },
-        AIR_CIRCULATION_INTERNAL: {
+        "AIR_CIRCULATION_INTERNAL": {
             hidden: false
         },
-        AIR_CIRCULATION_STOP: {
+        "AIR_CIRCULATION_STOP": {
             hidden: false
         },
-        AUTO_FULL_BED_LEVEL: {
+        "AUTO_FULL_BED_LEVEL": {
             hidden: true
         },
-        BED_LEVEL_SCREWS_TUNE: {
+        "BED_LEVEL_SCREWS_TUNE": {
             hidden: false
         },
-        BED_MESH_CALIBRATE: {
+        "BED_MESH_CALIBRATE": {
             hidden: true
         },
-        BELTS_SHAPER_CALIBRATION: {
+        "BELTS_SHAPER_CALIBRATION": {
             hidden: true
         },
-        CAMERA_OFF: {
+        "CAMERA_OFF": {
             hidden: true
         },
-        CAMERA_ON: {
+        "CAMERA_ON": {
             hidden: true
         },
-        CAMERA_RESTART: {
+        "CAMERA_RESTART": {
             hidden: true
         },
-        _CANCEL_PRINT: {
+        "_CANCEL_PRINT": {
             hidden: true
         },
-        CANCEL_PRINT: {
+        "CANCEL_PRINT": {
             hidden: true
         },
-        _CHECK_MD5: {
+        "_CHECK_MD5": {
             hidden: true
         },
-        CHECK_MD5: {
+        "CHECK_MD5": {
             hidden: true
         },
-        CHECK_SYSTEM: {
+        "CHECK_SYSTEM": {
             hidden: true
         },
-        _CLEAR1: {
+        "_CLEAR1": {
             hidden: true
         },
-        _CLEAR2: {
+        "_CLEAR2": {
             hidden: true
         },
-        _CLEAR3: {
+        "_CLEAR3": {
             hidden: true
         },
-        _CLEAR4: {
+        "_CLEAR4": {
             hidden: true
         },
-        CLEAR_EMMC: {
+        "CLEAR_EMMC": {
             hidden: true
         },
-        _CLEAR_NOZZLE: {
+        "_CLEAR_NOZZLE": {
             hidden: true
         },
-        CLEAR_NOZZLE: {
+        "CLEAR_NOZZLE": {
             hidden: true
         },
-        _CLIENT_EXTRUDE: {
+        "_CLIENT_EXTRUDE": {
             hidden: true
         },
-        _CLIENT_LINEAR_MOVE: {
+        "_CLIENT_LINEAR_MOVE": {
             hidden: true
         },
-        _CLIENT_RETRACT: {
+        "_CLIENT_RETRACT": {
             hidden: true
         },
-        _CLIENT_VARIABLE: {
+        "_CLIENT_VARIABLE": {
             hidden: true
         },
-        CLOSE_DIALOGS: {
+        "CLOSE_DIALOGS": {
             hidden: true
         },
-        COLDPULL: {
+        "COLDPULL": {
             hidden: false
         },
-        _COLDPULL_LOAD_MATERIAL: {
+        "_COLDPULL_LOAD_MATERIAL": {
             hidden: true
         },
-        _COLDPULL_LOAD_MATERIAL_END: {
+        "_COLDPULL_LOAD_MATERIAL_END": {
             hidden: true
         },
-        _COMMON_END_PRINT: {
+        "_COMMON_END_PRINT": {
             hidden: true
         },
-        DATE_GET: {
+        "DATE_GET": {
             hidden: true
         },
-        DATE_SET: {
+        "DATE_SET": {
             hidden: true
         },
-        DISPLAY_OFF: {
+        "DISPLAY_OFF": {
             hidden: true
         },
-        DISPLAY_ON: {
+        "DISPLAY_ON": {
             hidden: true
         },
-        END_PRINT: {
+        "END_PRINT": {
             hidden: true
         },
-        FAST_CLOSE_DIALOGS: {
+        "FAST_CLOSE_DIALOGS": {
             hidden: true
         },
-        _FINAL_CHECK_MD5: {
+        "_FINAL_CHECK_MD5": {
             hidden: true
         },
-        _FINAL_STOP_MD5: {
+        "_FINAL_STOP_MD5": {
             hidden: true
         },
-        _FULL_BED_LEVEL: {
+        "_FULL_BED_LEVEL": {
             hidden: true
         },
-        _G28: {
+        "_G28": {
             hidden: true
         },
-        G28: {
+        "G28": {
             hidden: true
         },
-        GET_ZMOD_DATA: {
+        "GET_ZMOD_DATA": {
             hidden: true
         },
-        _GUPPY_BELTS_SHAPER_CALIBRATION: {
+        "_GUPPY_BELTS_SHAPER_CALIBRATION": {
             hidden: true
         },
-        _GUPPY_EXCITATE_AXIS_AT_FREQ: {
+        "_GUPPY_EXCITATE_AXIS_AT_FREQ": {
             hidden: true
         },
-        _GUPPY_MACRO: {
+        "_GUPPY_MACRO": {
             hidden: true
         },
-        _INTERACTIVE_LOAD_END: {
+        "_INTERACTIVE_LOAD_END": {
             hidden: true
         },
-        KAMP: {
+        "KAMP": {
             hidden: true
         },
-        _KAMP_BED_MESH_CALIBRATE: {
+        "_KAMP_BED_MESH_CALIBRATE": {
             hidden: true
         },
-        _KAMP_Settings: {
+        "_KAMP_Settings": {
             hidden: true
         },
-        LED: {
+        LED": {
             hidden: true
         },
-        LED_OFF: {
+        "LED_OFF": {
             hidden: true
         },
-        LED_ON: {
+        "LED_ON": {
             hidden: true
         },
-        _LINE_PURGE: {
+        "_LINE_PURGE": {
             hidden: true
         },
-        LINE_PURGE: {
+        "LINE_PURGE": {
             hidden: true
         },
-        LOAD_CELL_TARE: {
+        "LOAD_CELL_TARE": {
             hidden: true
         },
-        _LOAD_CELL_TARE_CHECK: {
+        "_LOAD_CELL_TARE_CHECK": {
             hidden: true
         },
-        _LOAD_CELL_TARE_FINAL_CHECK: {
+        "_LOAD_CELL_TARE_FINAL_CHECK": {
             hidden: true
         },
-        _LOAD_CELL_TARE_IF_NO_SUCCESS: {
+        "_LOAD_CELL_TARE_IF_NO_SUCCESS": {
             hidden: true
         },
-        _LOAD_CELL_TARE_PROBE: {
+        "_LOAD_CELL_TARE_PROBE": {
             hidden: true
         },
-        _LOAD_CELL_TARE_SET: {
+        "_LOAD_CELL_TARE_SET": {
             hidden: true
         },
-        LOAD_FILAMENT: {
+        "LOAD_FILAMENT": {
             hidden: true
         },
-        LOAD_GCODE_OFFSET: {
+        "LOAD_GCODE_OFFSET": {
             hidden: true
         },
-        LOAD_MATERIAL: {
+        "LOAD_MATERIAL": {
             hidden: true
         },
-        _LOAD_MATERIAL_ACTION: {
+        "_LOAD_MATERIAL_ACTION": {
             hidden: true
         },
-        _LOAD_MATERIAL_END: {
+        "_LOAD_MATERIAL_END": {
             hidden: true
         },
-        _LOAD_MATERIAL_HEATUP: {
+        "_LOAD_MATERIAL_HEATUP": {
             hidden: true
         },
-        _LOAD_MATERIAL_SELECT: {
+        "_LOAD_MATERIAL_SELECT": {
             hidden: true
         },
-        M300: {
+        "M300": {
             hidden: true
         },
-        M356: {
+        "M356": {
             hidden: true
         },
-        M357: {
+        "M357": {
             hidden: true
         },
-        M600: {
+        "M600": {
             hidden: true
         },
-        MEM: {
+        "MEM": {
             hidden: false
         },
-        NEW_SAVE_CONFIG: {
+        "NEW_SAVE_CONFIG": {
             hidden: true
         },
-        NOZZLE_CONTROL: {
+        "NOZZLE_CONTROL": {
             hidden: true
         },
-        PAUSE: {
+        "PAUSE": {
             hidden: true
         },
-        PID_TUNE_BED: {
+        "PID_TUNE_BED": {
             hidden: false
         },
-        PID_TUNE_EXTRUDER: {
+        "PID_TUNE_EXTRUDER": {
             hidden: false
         },
-        PLAY_MIDI: {
+        "PLAY_MIDI": {
             hidden: true
         },
-        _PRE_CLEAR_NOZZLE: {
+        "_PRE_CLEAR_NOZZLE": {
             hidden: true
         },
-        PURGE_FILAMENT: {
+        "PURGE_FILAMENT": {
             hidden: true
         },
-        REBOOT: {
+        "REBOOT": {
             hidden: true
         },
-        REMOVE_ZMOD: {
+        "REMOVE_ZMOD": {
             hidden: true
         },
-        RESUME: {
+        "RESUME": {
             hidden: true
         },
-        SAVE_ZMOD_DATA: {
+        "SAVE_ZMOD_DATA": {
             hidden: true
         },
-        SET_FAN_SPEED: {
+        "SET_FAN_SPEED": {
             hidden: true
         },
-        SET_GCODE_OFFSET: {
+        "SET_GCODE_OFFSET": {
             hidden: true
         },
-        SET_PAUSE_AT_LAYER: {
-            hidden: true
-        },
-        SET_PAUSE_NEXT_LAYER: {
-            hidden: true
-        },
-        SET_PRINT_STATS_INFO: {
-            hidden: true
-        },
-        SET_TIMEZONE: {
-            hidden: true
-        },
-        SHUTDOWN: {
+        "SET_PAUSE_AT_LAYER": {
             hidden: false
         },
-        SKIP_ZMOD: {
+        "SET_PAUSE_NEXT_LAYER": {
+            hidden: false
+        },
+        "SET_PRINT_STATS_INFO": {
             hidden: true
         },
-        _SMART_PARK: {
+        "SET_TIMEZONE": {
             hidden: true
         },
-        _START_MESH: {
+        "SHUTDOWN": {
+            hidden: false
+        },
+        "SKIP_ZMOD": {
             hidden: true
         },
-        _START_PRECLEAR: {
+        "_SMART_PARK": {
             hidden: true
         },
-        _START_PRINT: {
+        "_START_MESH": {
             hidden: true
         },
-        START_PRINT: {
+        "_START_PRECLEAR": {
             hidden: true
         },
-        START_ZMOD: {
+        "_START_PRINT": {
             hidden: true
         },
-        _STOP: {
+        "START_PRINT": {
             hidden: true
         },
-        STOP_ZMOD: {
+        "START_ZMOD": {
             hidden: true
         },
-        _SVG28: {
+        "_STOP": {
             hidden: true
         },
-        TAR_CONFIG: {
+        "STOP_ZMOD": {
             hidden: true
         },
-        TEST_EMMC: {
+        "_SVG28": {
             hidden: true
         },
-        _TOOLHEAD_PARK_PAUSE_CANCEL: {
+        "TAR_CONFIG": {
             hidden: true
         },
-        _UGOL_PARK: {
+        "TEST_EMMC": {
             hidden: true
         },
-        UNLOAD_FILAMENT: {
+        "_TOOLHEAD_PARK_PAUSE_CANCEL": {
             hidden: true
         },
-        UPDATE_MCU: {
+        "_UGOL_PARK": {
             hidden: true
         },
-        WEB: {
+        "UNLOAD_FILAMENT": {
             hidden: true
         },
-        ZSHAPER: {
+        "UPDATE_MCU": {
             hidden: true
         },
-        ZSSH_OFF: {
+        "WEB": {
             hidden: true
         },
-        ZSSH_ON: {
+        "ZSHAPER": {
             hidden: true
         },
-        ZSSH_RELOAD: {
+        "ZSSH_OFF": {
             hidden: true
         },
-        ZSSH_RESTART: {
+        "ZSSH_ON": {
+            hidden: true
+        },
+        "ZSSH_RELOAD": {
+            hidden: true
+        },
+        "ZSSH_RESTART": {
+            hidden: true
+        },
+        "M24": {
+            hidden: true
+        },
+        "M25": {
             hidden: true
         }
     }
