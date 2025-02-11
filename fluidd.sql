@@ -1217,3 +1217,351 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
     },
     "mode": "expert"
 }');
+DELETE FROM "main"."namespace_store"  WHERE namespace="guppyscreen" AND key="macros";
+INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('guppyscreen', 'macros', '{
+    "settings": {
+        AIR_CIRCULATION_EXTERNAL: {
+            hidden: false
+        },
+        AIR_CIRCULATION_INTERNAL: {
+            hidden: false
+        },
+        AIR_CIRCULATION_STOP: {
+            hidden: false
+        },
+        AUTO_FULL_BED_LEVEL: {
+            hidden: true
+        },
+        BED_LEVEL_SCREWS_TUNE: {
+            hidden: false
+        },
+        BED_MESH_CALIBRATE: {
+            hidden: true
+        },
+        BELTS_SHAPER_CALIBRATION: {
+            hidden: true
+        },
+        CAMERA_OFF: {
+            hidden: true
+        },
+        CAMERA_ON: {
+            hidden: true
+        },
+        CAMERA_RESTART: {
+            hidden: true
+        },
+        _CANCEL_PRINT: {
+            hidden: true
+        },
+        CANCEL_PRINT: {
+            hidden: true
+        },
+        _CHECK_MD5: {
+            hidden: true
+        },
+        CHECK_MD5: {
+            hidden: true
+        },
+        CHECK_SYSTEM: {
+            hidden: true
+        },
+        _CLEAR1: {
+            hidden: true
+        },
+        _CLEAR2: {
+            hidden: true
+        },
+        _CLEAR3: {
+            hidden: true
+        },
+        _CLEAR4: {
+            hidden: true
+        },
+        CLEAR_EMMC: {
+            hidden: true
+        },
+        _CLEAR_NOZZLE: {
+            hidden: true
+        },
+        CLEAR_NOZZLE: {
+            hidden: true
+        },
+        _CLIENT_EXTRUDE: {
+            hidden: true
+        },
+        _CLIENT_LINEAR_MOVE: {
+            hidden: true
+        },
+        _CLIENT_RETRACT: {
+            hidden: true
+        },
+        _CLIENT_VARIABLE: {
+            hidden: true
+        },
+        CLOSE_DIALOGS: {
+            hidden: true
+        },
+        COLDPULL: {
+            hidden: false
+        },
+        _COLDPULL_LOAD_MATERIAL: {
+            hidden: true
+        },
+        _COLDPULL_LOAD_MATERIAL_END: {
+            hidden: true
+        },
+        _COMMON_END_PRINT: {
+            hidden: true
+        },
+        DATE_GET: {
+            hidden: true
+        },
+        DATE_SET: {
+            hidden: true
+        },
+        DISPLAY_OFF: {
+            hidden: true
+        },
+        DISPLAY_ON: {
+            hidden: true
+        },
+        END_PRINT: {
+            hidden: true
+        },
+        FAST_CLOSE_DIALOGS: {
+            hidden: true
+        },
+        _FINAL_CHECK_MD5: {
+            hidden: true
+        },
+        _FINAL_STOP_MD5: {
+            hidden: true
+        },
+        _FULL_BED_LEVEL: {
+            hidden: true
+        },
+        _G28: {
+            hidden: true
+        },
+        G28: {
+            hidden: true
+        },
+        GET_ZMOD_DATA: {
+            hidden: true
+        },
+        _GUPPY_BELTS_SHAPER_CALIBRATION: {
+            hidden: true
+        },
+        _GUPPY_EXCITATE_AXIS_AT_FREQ: {
+            hidden: true
+        },
+        _GUPPY_MACRO: {
+            hidden: true
+        },
+        _INTERACTIVE_LOAD_END: {
+            hidden: true
+        },
+        KAMP: {
+            hidden: true
+        },
+        _KAMP_BED_MESH_CALIBRATE: {
+            hidden: true
+        },
+        _KAMP_Settings: {
+            hidden: true
+        },
+        LED: {
+            hidden: true
+        },
+        LED_OFF: {
+            hidden: true
+        },
+        LED_ON: {
+            hidden: true
+        },
+        _LINE_PURGE: {
+            hidden: true
+        },
+        LINE_PURGE: {
+            hidden: true
+        },
+        LOAD_CELL_TARE: {
+            hidden: true
+        },
+        _LOAD_CELL_TARE_CHECK: {
+            hidden: true
+        },
+        _LOAD_CELL_TARE_FINAL_CHECK: {
+            hidden: true
+        },
+        _LOAD_CELL_TARE_IF_NO_SUCCESS: {
+            hidden: true
+        },
+        _LOAD_CELL_TARE_PROBE: {
+            hidden: true
+        },
+        _LOAD_CELL_TARE_SET: {
+            hidden: true
+        },
+        LOAD_FILAMENT: {
+            hidden: true
+        },
+        LOAD_GCODE_OFFSET: {
+            hidden: true
+        },
+        LOAD_MATERIAL: {
+            hidden: true
+        },
+        _LOAD_MATERIAL_ACTION: {
+            hidden: true
+        },
+        _LOAD_MATERIAL_END: {
+            hidden: true
+        },
+        _LOAD_MATERIAL_HEATUP: {
+            hidden: true
+        },
+        _LOAD_MATERIAL_SELECT: {
+            hidden: true
+        },
+        M300: {
+            hidden: true
+        },
+        M356: {
+            hidden: true
+        },
+        M357: {
+            hidden: true
+        },
+        M600: {
+            hidden: true
+        },
+        MEM: {
+            hidden: false
+        },
+        NEW_SAVE_CONFIG: {
+            hidden: true
+        },
+        NOZZLE_CONTROL: {
+            hidden: true
+        },
+        PAUSE: {
+            hidden: true
+        },
+        PID_TUNE_BED: {
+            hidden: false
+        },
+        PID_TUNE_EXTRUDER: {
+            hidden: false
+        },
+        PLAY_MIDI: {
+            hidden: true
+        },
+        _PRE_CLEAR_NOZZLE: {
+            hidden: true
+        },
+        PURGE_FILAMENT: {
+            hidden: true
+        },
+        REBOOT: {
+            hidden: true
+        },
+        REMOVE_ZMOD: {
+            hidden: true
+        },
+        RESUME: {
+            hidden: true
+        },
+        SAVE_ZMOD_DATA: {
+            hidden: true
+        },
+        SET_FAN_SPEED: {
+            hidden: true
+        },
+        SET_GCODE_OFFSET: {
+            hidden: true
+        },
+        SET_PAUSE_AT_LAYER: {
+            hidden: true
+        },
+        SET_PAUSE_NEXT_LAYER: {
+            hidden: true
+        },
+        SET_PRINT_STATS_INFO: {
+            hidden: true
+        },
+        SET_TIMEZONE: {
+            hidden: true
+        },
+        SHUTDOWN: {
+            hidden: false
+        },
+        SKIP_ZMOD: {
+            hidden: true
+        },
+        _SMART_PARK: {
+            hidden: true
+        },
+        _START_MESH: {
+            hidden: true
+        },
+        _START_PRECLEAR: {
+            hidden: true
+        },
+        _START_PRINT: {
+            hidden: true
+        },
+        START_PRINT: {
+            hidden: true
+        },
+        START_ZMOD: {
+            hidden: true
+        },
+        _STOP: {
+            hidden: true
+        },
+        STOP_ZMOD: {
+            hidden: true
+        },
+        _SVG28: {
+            hidden: true
+        },
+        TAR_CONFIG: {
+            hidden: true
+        },
+        TEST_EMMC: {
+            hidden: true
+        },
+        _TOOLHEAD_PARK_PAUSE_CANCEL: {
+            hidden: true
+        },
+        _UGOL_PARK: {
+            hidden: true
+        },
+        UNLOAD_FILAMENT: {
+            hidden: true
+        },
+        UPDATE_MCU: {
+            hidden: true
+        },
+        WEB: {
+            hidden: true
+        },
+        ZSHAPER: {
+            hidden: true
+        },
+        ZSSH_OFF: {
+            hidden: true
+        },
+        ZSSH_ON: {
+            hidden: true
+        },
+        ZSSH_RELOAD: {
+            hidden: true
+        },
+        ZSSH_RESTART: {
+            hidden: true
+        }
+    }
+}');
+
