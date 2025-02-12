@@ -29,9 +29,22 @@ class SensorBase:
         self.mcu = mcu = self.spi.get_mcu()
         # Reader chip configuration
         self.oid = oid = mcu.create_oid()
+
+        self.zcontrol = 0
+        if (chip_type == 'MAX31856'):
+            self.gcode = self.printer.lookup_object('gcode')
+            self.gcode.register_command('ZCONTROL_ON', self.cmd_ZCONTROL_ON)
+            self.gcode.register_command('ZCONTROL_OFF', self.cmd_ZCONTROL_OFF)
         mcu.register_response(self._handle_spi_response,
                               "thermocouple_result", oid)
         mcu.register_config_callback(self._build_config)
+
+    def cmd_ZCONTROL_ON(self, gcmd):
+        self.zcontrol = 1
+
+    def cmd_ZCONTROL_OFF(self, gcmd):
+        self.zcontrol = 0
+
     def setup_minmax(self, min_temp, max_temp):
         adc_range = [self.calc_adc(min_temp), self.calc_adc(max_temp)]
         self.min_sample_value = min(adc_range)
@@ -59,7 +72,7 @@ class SensorBase:
             return
         temp = self.calc_temp(params['value'])
         # zmod
-        if temp>self.max_temp:
+        if temp>self.max_temp and self.zcontrol == 1:
             self.printer.invoke_async_shutdown("Удар сопла о стол или отрыв детали")
             return
         next_clock      = self.mcu.clock32_to_clock64(params['next_clock'])

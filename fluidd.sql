@@ -1277,6 +1277,9 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('gupp
     "CLOSE_DIALOGS": {
       "hidden": true
     },
+    "COLDPULL": {
+      "hidden": true
+    },
     "DATE_GET": {
       "hidden": true
     },
