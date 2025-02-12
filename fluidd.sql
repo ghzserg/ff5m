@@ -660,6 +660,22 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "categoryId": "944c031b-feef-4b75-badf-21c30508fb24",
             "color": "",
             "disabledWhilePrinting": false,
+            "name": "sdcard_print_file",
+            "visible": false
+        },
+        {
+            "alias": "",
+            "categoryId": "944c031b-feef-4b75-badf-21c30508fb24",
+            "color": "",
+            "disabledWhilePrinting": false,
+            "name": "sdcard_reset_file",
+            "visible": false
+        },
+        {
+            "alias": "",
+            "categoryId": "944c031b-feef-4b75-badf-21c30508fb24",
+            "color": "",
+            "disabledWhilePrinting": false,
             "name": "noleveling_print_file",
             "visible": false
         },
@@ -824,8 +840,22 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                     "showInPrinting": false,
                     "showInStandby": false
                 },
-
-
+                {
+                    "color": "group",
+                    "name": "SDCARD_RESET_FILE",
+                    "pos": 15,
+                    "showInPause": false,
+                    "showInPrinting": false,
+                    "showInStandby": false
+                },
+                {
+                    "color": "group",
+                    "name": "SDCARD_PRINT_FILE",
+                    "pos": 16,
+                    "showInPause": false,
+                    "showInPrinting": false,
+                    "showInStandby": false
+                },
             ],
             "name": "0. Основное",
             "showInPause": true,
@@ -1377,6 +1407,12 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('gupp
       "hidden": true
     },
     "SAVE_ZMOD_DATA": {
+      "hidden": true
+    },
+    "SDCARD_PRINT_FILE": {
+      "hidden": true
+    },
+    "SDCARD_RESET_FILE": {
       "hidden": true
     },
     "SET_FAN_SPEED": {

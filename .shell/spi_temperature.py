@@ -34,6 +34,7 @@ class SensorBase:
         if (chip_type == 'MAX31856'):
             self.gcode = self.printer.lookup_object('gcode')
             self.gcode.register_command('ZCONTROL_ON', self.cmd_ZCONTROL_ON)
+            self.gcode.register_command('ZCONTROL_STATUS', self.cmd_ZCONTROL_STATUS)
             self.gcode.register_command('ZCONTROL_OFF', self.cmd_ZCONTROL_OFF)
         mcu.register_response(self._handle_spi_response,
                               "thermocouple_result", oid)
@@ -41,6 +42,12 @@ class SensorBase:
 
     def cmd_ZCONTROL_ON(self, gcmd):
         self.zcontrol = 1
+
+    def cmd_ZCONTROL_STATUS(self, gcmd):
+        if self.zcontrol == 1:
+            gcmd.respond_info("Контроль включен для веса %d" % (self.max_temp))
+        else:
+            gcmd.respond_info("Контроль выключен для веса %d" % (self.max_temp))
 
     def cmd_ZCONTROL_OFF(self, gcmd):
         self.zcontrol = 0
