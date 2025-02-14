@@ -1269,7 +1269,13 @@ DELETE FROM "main"."namespace_store"  WHERE namespace="guppyscreen" AND key="mac
 INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('guppyscreen', 'macros', '{
   "settings": {
     "AIR_CIRCULATION_EXTERNAL": {
-      "hidden": false
+      "hidden": true
+    },
+    "AIR_CIRCULATION_INTERNAL": {
+      "hidden": true
+    },
+    "AIR_CIRCULATION_STOP": {
+      "hidden": true
     },
     "AUTO_FULL_BED_LEVEL": {
       "hidden": true
