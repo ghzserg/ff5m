@@ -1334,6 +1334,15 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('gupp
     "FAST_CLOSE_DIALOGS": {
       "hidden": true
     },
+    "G17": {
+      "hidden": true
+    },
+    "G18": {
+      "hidden": true
+    },
+    "G19": {
+      "hidden": true
+    },
     "G28": {
       "hidden": true
     },
