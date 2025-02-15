@@ -17,8 +17,8 @@ start() {
     mv /opt/config/mod_data/log/guppyscreen.log /opt/config/mod_data/log/guppyscreen.1.log
 
     /etc/init.d/S35tslib start
-    backlight 75
     killall guppyscreen
+    backlight 60
     start-stop-daemon -S -b -m -p $PID_FILE -N $NICENESS --exec /bin/sh -- -c $GUPPYSCREEN
 }
 
