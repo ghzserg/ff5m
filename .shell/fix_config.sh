@@ -31,6 +31,14 @@ fix_config()
     fstrim /data -v
     fstrim / -v
 
+
+    # Защита от самонадеянных, кто выклчюает SWAP при 128 мегабайтах оперативной памяти
+    if grep -q "use_swap = 0" /opt/config/mod_data/variables.cfg; then
+        MEM=$(cat /proc/meminfo | grep MemTotal| awk '{print $2}')
+        MEM=$(($MEM/1024))
+        [ "$MEM" -le 128 ] && sed -i "s/use_swap = 0/use_swap = 1/" /opt/config/mod_data/variables.cfg
+    fi
+
     [ -f /opt/config/mod_data/nozzle.cfg ] || echo "">/opt/config/mod_data/nozzle.cfg
 
     [ -f /etc/init.d/S50sshd ] && rm -f /etc/init.d/S50sshd
