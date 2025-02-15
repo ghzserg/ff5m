@@ -715,556 +715,557 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
 }');
 DELETE FROM "main"."namespace_store"  WHERE namespace="mainsail" AND key="macros";
 INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('mainsail', 'macros', '{
-    "macrogroups": {
-        "731852b2-3bf0-422a-a1fb-56d2f1f972a5": {
-            "color": "primary",
-            "colorCustom": "#fff",
-            "macros": [
-                {
-                    "color": "group",
-                    "name": "REBOOT",
-                    "pos": 1,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "SHUTDOWN",
-                    "pos": 2,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "LED_ON",
-                    "pos": 3,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "LED_OFF",
-                    "pos": 4,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "LED",
-                    "pos": 5,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "PLAY_MIDI",
-                    "pos": 6,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "NEW_SAVE_CONFIG",
-                    "pos": 11,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "CLEAR_NOZZLE",
-                    "pos": 7,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "LEVELING_PRINT_FILE",
-                    "pos": 8,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": false
-                },
-                {
-                    "color": "group",
-                    "name": "CLOSE_DIALOGS",
-                    "pos": 9,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "FAST_CLOSE_DIALOGS",
-                    "pos": 10,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "NOLEVELING_PRINT_FILE",
-                    "pos": 11,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": false
-                },
-                {
-                    "color": "group",
-                    "name": "G28",
-                    "pos": 12,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": false
-                },
-                {
-                    "color": "group",
-                    "name": "M24",
-                    "pos": 13,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": false
-                },
-                {
-                    "color": "group",
-                    "name": "M25",
-                    "pos": 14,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": false
-                },
-                {
-                    "color": "group",
-                    "name": "SDCARD_RESET_FILE",
-                    "pos": 15,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": false
-                },
-                {
-                    "color": "group",
-                    "name": "SDCARD_PRINT_FILE",
-                    "pos": 16,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": false
-                },
-            ],
-            "name": "0. Основное",
-            "showInPause": true,
-            "showInPrinting": true,
-            "showInStandby": true
-        },
-        "1517f6e7-1f5a-49da-8f35-8b68eab60038": {
-            "color": "primary",
-            "colorCustom": "#fff",
-            "macros": [
-                {
-                    "color": "group",
-                    "name": "AUTO_FULL_BED_LEVEL",
-                    "pos": 1,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "BED_LEVEL_SCREWS_TUNE",
-                    "pos": 2,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "PID_TUNE_BED",
-                    "pos": 3,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "PID_TUNE_EXTRUDER",
-                    "pos": 4,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "LOAD_CELL_TARE",
-                    "pos": 5,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "ZSHAPER",
-                    "pos": 6,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "BELTS_SHAPER_CALIBRATION",
-                    "pos": 7,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "LOAD_GCODE_OFFSET",
-                    "pos": 8,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "NOZZLE_CONTROL",
-                    "pos": 9,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": true
-                }
-            ],
-            "name": "1. Калибровки",
-            "showInPause": true,
-            "showInPrinting": true,
-            "showInStandby": true
-        },
-        "9c23dcdb-a9bf-49fe-9473-12b149deb188": {
-            "color": "primary",
-            "colorCustom": "#fff",
-            "macros": [
-                {
-                    "color": "group",
-                    "name": "REBOOT",
-                    "pos": 1,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "SHUTDOWN",
-                    "pos": 2,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "WEB",
-                    "pos": 3,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "DISPLAY_ON",
-                    "pos": 4,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "DISPLAY_OFF",
-                    "pos": 5,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "MEM",
-                    "pos": 6,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "CAMERA_ON",
-                    "pos": 7,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "CAMERA_RESTART",
-                    "pos": 8,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "CAMERA_OFF",
-                    "pos": 9,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "DATE_GET",
-                    "pos": 10,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "DATE_SET",
-                    "pos": 11,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "SET_TIMEZONE",
-                    "pos": 12,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "TAR_CONFIG",
-                    "pos": 13,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "GET_ZMOD_DATA",
-                    "pos": 14,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "SAVE_ZMOD_DATA",
-                    "pos": 15,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "START_ZMOD",
-                    "pos": 16,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "STOP_ZMOD",
-                    "pos": 17,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "SKIP_ZMOD",
-                    "pos": 18,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "REMOVE_ZMOD",
-                    "pos": 19,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "ZSSH_RESTART",
-                    "pos": 20,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "TEST_EMMC",
-                    "pos": 21,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "CLEAR_EMMC",
-                    "pos": 22,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "ZSSH_ON",
-                    "pos": 23,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "ZSSH_OFF",
-                    "pos": 24,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "ZSSH_RELOAD",
-                    "pos": 25,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "UPDATE_MCU",
-                    "pos": 26,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": false
-                },
-                {
-                    "color": "group",
-                    "name": "CHECK_SYSTEM",
-                    "pos": 27,
-                    "showInPause": false,
-                    "showInPrinting": false,
-                    "showInStandby": true
-                }
-            ],
-            "name": "2. Система",
-            "showInPause": true,
-            "showInPrinting": true,
-            "showInStandby": true
-        },
-        "58151d61-dccd-4951-9836-e18f4d59ed65": {
-            "color": "primary",
-            "colorCustom": "#fff",
-            "macros": [
-                {
-                    "color": "group",
-                    "name": "LOAD_FILAMENT",
-                    "pos": 1,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "LOAD_MATERIAL",
-                    "pos": 2,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "PURGE_FILAMENT",
-                    "pos": 3,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "UNLOAD_FILAMENT",
-                    "pos": 4,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "COLDPULL",
-                    "pos": 5,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "M600",
-                    "pos": 6,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                }
-            ],
-            "name": "3. Филамент",
-            "showInPause": true,
-            "showInPrinting": true,
-            "showInStandby": true
-        },
-        "af5e2632-c4e2-4d53-aed9-f9127b1e5a38": {
-            "color": "primary",
-            "colorCustom": "#fff",
-            "macros": [
-                {
-                    "color": "group",
-                    "name": "AIR_CIRCULATION_EXTERNAL",
-                    "pos": 1,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "AIR_CIRCULATION_INTERNAL",
-                    "pos": 2,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                },
-                {
-                    "color": "group",
-                    "name": "AIR_CIRCULATION_STOP",
-                    "pos": 3,
-                    "showInPause": true,
-                    "showInPrinting": true,
-                    "showInStandby": true
-                }
-            ],
-            "name": "4. Pro",
-            "showInPause": true,
-            "showInPrinting": true,
-            "showInStandby": true
-        }
-    },
-    "mode": "expert"
-}');
+   "macrogroups" : {
+      "1517f6e7-1f5a-49da-8f35-8b68eab60038" : {
+         "color" : "primary",
+         "colorCustom" : "#fff",
+         "macros" : [
+            {
+               "color" : "group",
+               "name" : "AUTO_FULL_BED_LEVEL",
+               "pos" : 1,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "BED_LEVEL_SCREWS_TUNE",
+               "pos" : 2,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "PID_TUNE_BED",
+               "pos" : 3,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "PID_TUNE_EXTRUDER",
+               "pos" : 4,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "LOAD_CELL_TARE",
+               "pos" : 5,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "ZSHAPER",
+               "pos" : 6,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "BELTS_SHAPER_CALIBRATION",
+               "pos" : 7,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "LOAD_GCODE_OFFSET",
+               "pos" : 8,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "NOZZLE_CONTROL",
+               "pos" : 9,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : true
+            }
+         ],
+         "name" : "1. Калибровки",
+         "showInPause" : true,
+         "showInPrinting" : true,
+         "showInStandby" : true
+      },
+      "58151d61-dccd-4951-9836-e18f4d59ed65" : {
+         "color" : "primary",
+         "colorCustom" : "#fff",
+         "macros" : [
+            {
+               "color" : "group",
+               "name" : "LOAD_FILAMENT",
+               "pos" : 1,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "LOAD_MATERIAL",
+               "pos" : 2,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "PURGE_FILAMENT",
+               "pos" : 3,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "UNLOAD_FILAMENT",
+               "pos" : 4,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "COLDPULL",
+               "pos" : 5,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "M600",
+               "pos" : 6,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            }
+         ],
+         "name" : "3. Филамент",
+         "showInPause" : true,
+         "showInPrinting" : true,
+         "showInStandby" : true
+      },
+      "731852b2-3bf0-422a-a1fb-56d2f1f972a5" : {
+         "color" : "primary",
+         "colorCustom" : "#fff",
+         "macros" : [
+            {
+               "color" : "group",
+               "name" : "REBOOT",
+               "pos" : 1,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "SHUTDOWN",
+               "pos" : 2,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "LED_ON",
+               "pos" : 3,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "LED_OFF",
+               "pos" : 4,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "LED",
+               "pos" : 5,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "PLAY_MIDI",
+               "pos" : 6,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "CLEAR_NOZZLE",
+               "pos" : 7,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "LEVELING_PRINT_FILE",
+               "pos" : 8,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : false
+            },
+            {
+               "color" : "group",
+               "name" : "CLOSE_DIALOGS",
+               "pos" : 9,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "FAST_CLOSE_DIALOGS",
+               "pos" : 10,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "NEW_SAVE_CONFIG",
+               "pos" : 11,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "NOLEVELING_PRINT_FILE",
+               "pos" : 12,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : false
+            },
+            {
+               "color" : "group",
+               "name" : "G28",
+               "pos" : 13,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : false
+            },
+            {
+               "color" : "group",
+               "name" : "M24",
+               "pos" : 14,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : false
+            },
+            {
+               "color" : "group",
+               "name" : "M25",
+               "pos" : 15,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : false
+            },
+            {
+               "color" : "group",
+               "name" : "SDCARD_RESET_FILE",
+               "pos" : 16,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : false
+            },
+            {
+               "color" : "group",
+               "name" : "SDCARD_PRINT_FILE",
+               "pos" : 17,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : false
+            }
+         ],
+         "name" : "0. Основное",
+         "showInPause" : true,
+         "showInPrinting" : true,
+         "showInStandby" : true
+      },
+      "9c23dcdb-a9bf-49fe-9473-12b149deb188" : {
+         "color" : "primary",
+         "colorCustom" : "#fff",
+         "macros" : [
+            {
+               "color" : "group",
+               "name" : "REBOOT",
+               "pos" : 1,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "SHUTDOWN",
+               "pos" : 2,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "WEB",
+               "pos" : 3,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "DISPLAY_ON",
+               "pos" : 4,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "DISPLAY_OFF",
+               "pos" : 5,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "MEM",
+               "pos" : 6,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "CAMERA_ON",
+               "pos" : 7,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "CAMERA_RESTART",
+               "pos" : 8,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "CAMERA_OFF",
+               "pos" : 9,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "DATE_GET",
+               "pos" : 10,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "DATE_SET",
+               "pos" : 11,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "SET_TIMEZONE",
+               "pos" : 12,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "TAR_CONFIG",
+               "pos" : 13,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "GET_ZMOD_DATA",
+               "pos" : 14,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "SAVE_ZMOD_DATA",
+               "pos" : 15,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "START_ZMOD",
+               "pos" : 16,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "STOP_ZMOD",
+               "pos" : 17,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "SKIP_ZMOD",
+               "pos" : 18,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "REMOVE_ZMOD",
+               "pos" : 19,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "ZSSH_RESTART",
+               "pos" : 20,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "TEST_EMMC",
+               "pos" : 21,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "CLEAR_EMMC",
+               "pos" : 22,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "ZSSH_ON",
+               "pos" : 23,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "ZSSH_OFF",
+               "pos" : 24,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "ZSSH_RELOAD",
+               "pos" : 25,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "UPDATE_MCU",
+               "pos" : 26,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : false
+            },
+            {
+               "color" : "group",
+               "name" : "CHECK_SYSTEM",
+               "pos" : 27,
+               "showInPause" : false,
+               "showInPrinting" : false,
+               "showInStandby" : true
+            }
+         ],
+         "name" : "2. Система",
+         "showInPause" : true,
+         "showInPrinting" : true,
+         "showInStandby" : true
+      },
+      "af5e2632-c4e2-4d53-aed9-f9127b1e5a38" : {
+         "color" : "primary",
+         "colorCustom" : "#fff",
+         "macros" : [
+            {
+               "color" : "group",
+               "name" : "AIR_CIRCULATION_EXTERNAL",
+               "pos" : 1,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "AIR_CIRCULATION_INTERNAL",
+               "pos" : 2,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "AIR_CIRCULATION_STOP",
+               "pos" : 3,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            }
+         ],
+         "name" : "4. Pro",
+         "showInPause" : true,
+         "showInPrinting" : true,
+         "showInStandby" : true
+      }
+   },
+   "mode" : "expert"
+}
+');
 DELETE FROM "main"."namespace_store"  WHERE namespace="guppyscreen" AND key="macros";
 INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('guppyscreen', 'macros', '{
   "settings": {
