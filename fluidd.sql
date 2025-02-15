@@ -1281,6 +1281,9 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('gupp
     "AUTO_FULL_BED_LEVEL": {
       "hidden": true
     },
+    "BED_LEVEL_SCREWS_TUNE": {
+      "hidden": true
+    },
     "BED_MESH_CALIBRATE": {
       "hidden": true
     },
@@ -1365,6 +1368,9 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('gupp
     "LINE_PURGE": {
       "hidden": true
     },
+    "LOAD_CELL_TARE": {
+      "hidden": true
+    },
     "LOAD_FILAMENT": {
       "hidden": true
     },
@@ -1407,6 +1413,12 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('gupp
     "PAUSE": {
       "hidden": true
     },
+    "PID_TUNE_BED": {
+      "hidden": true
+    },
+    "PID_TUNE_EXTRUDER": {
+      "hidden": true
+    },
     "PLAY_MIDI": {
       "hidden": true
     },
@@ -1423,6 +1435,9 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('gupp
       "hidden": true
     },
     "SAVE_ZMOD_DATA": {
+      "hidden": true
+    },
+    "SHUTDOWN": {
       "hidden": true
     },
     "SDCARD_PRINT_FILE": {
