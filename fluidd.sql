@@ -276,7 +276,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "categoryId": "944c031b-feef-4b75-badf-21c30508fb24",
             "color": "",
             "disabledWhilePrinting": false,
-            "name": "reboot",
+            "name": "mute",
             "visible": true
         },
         {
@@ -995,6 +995,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                "showInPause" : false,
                "showInPrinting" : false,
                "showInStandby" : false
+            },
+            {
+               "color" : "group",
+               "name" : "MUTE",
+               "pos" : 18,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
             }
          ],
          "name" : "0. Основное",
