@@ -68,8 +68,8 @@ def calibrate_shaper(datas, csv_output, *, shapers, damping_ratio, scv,
               (','.join(shapers)))
         return None, None, None
     if send_klipper == "X" or send_klipper == "Y":
-        with open('/tmp/print', 'a') as file:
-            file.write("SET_INPUT_SHAPER SHAPER_FREQ_%s=%s SHAPER_TYPE_%s=%s" % (send_klipper, shaper.name, send_klipper, shaper.freq))
+        with open('/tmp/printer', 'a') as file:
+            file.write("SET_INPUT_SHAPER SHAPER_FREQ_%s=%s SHAPER_TYPE_%s=%s\n" % (send_klipper, shaper.name, send_klipper, shaper.freq))
     if resp_json == 0.0:
         print("Рекомендуемый шейпер %s @ %.1f Hz" % (shaper.name, shaper.freq))
     if csv_output is not None:
