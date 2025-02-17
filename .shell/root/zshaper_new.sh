@@ -18,8 +18,8 @@ DT=$(date '+%Y%m%d_%H%M')
 
 cd /opt/config/mod_data/
 
-sed 's/psd_x/psd_Y/' /tmp/resonances_x_X.csv | sed 's/psd_y/psd_x/' | sed 's/psd_Y/psd_y/' | awk -F ',' '{print $1","$3","$2","$4","$5}' >X
-sed 's/psd_x/psd_Y/' /tmp/resonances_y_Y.csv | sed 's/psd_y/psd_x/' | sed 's/psd_Y/psd_y/' | awk -F ',' '{print $1","$3","$2","$4","$5}' >Y
+sed 's/psd_x/psd_Y/' /tmp/resonances_x_x.csv | sed 's/psd_y/psd_x/' | sed 's/psd_Y/psd_y/' | awk -F ',' '{print $1","$3","$2","$4","$5}' >X
+sed 's/psd_x/psd_Y/' /tmp/resonances_y_y.csv | sed 's/psd_y/psd_x/' | sed 's/psd_Y/psd_y/' | awk -F ',' '{print $1","$3","$2","$4","$5}' >Y
 
 echo "Подготовка изображения оси X. Ждите..."
 python3 /opt/config/mod/.shell/root/zshaper/calibrate_shaper.py X --scv=$SCV -o resonances_x.png -w 8 -l 4.8 --send X
