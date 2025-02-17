@@ -14,4 +14,4 @@ if grep -q "fix_scv = 1" /opt/config/mod_data/variables.cfg; then
     fi
 fi
 
-python3 /opt/config/mod/.shell/root/zshaper/calibrate_shaper.py $@ --scv=$SCV -r 1
+python3 /opt/config/mod/.shell/root/zshaper/calibrate_shaper.py $@ --scv=$SCV
