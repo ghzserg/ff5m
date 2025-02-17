@@ -23,11 +23,9 @@ sed 's/psd_x/psd_Y/' /tmp/resonances_y_y.csv | sed 's/psd_y/psd_x/' | sed 's/psd
 
 echo "Подготовка изображения оси X. Ждите..."
 python3 /opt/config/mod/.shell/root/zshaper/calibrate_shaper.py X --scv=$SCV -o resonances_x.png -w 8 -l 4.8 --send X
-cp calibration_data_X_$DT.png resonances_x.png
 
 echo "Подготовка изображения оси Y. Ждите..."
 python3 /opt/config/mod/.shell/root/zshaper/calibrate_shaper.py Y --scv=$SCV -o resonances_y.png -w 8 -l 4.8 --send Y
-cp calibration_data_Y_$DT.png resonances_y.png
 
 mkdir -p shapers
 mv X shapers/X_$DT.csv
