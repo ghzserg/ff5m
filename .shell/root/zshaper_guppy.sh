@@ -16,5 +16,4 @@ fi
 
 echo "SCV (square_corner_velocity) = $SCV"
 
-
 python3 /opt/config/mod/.shell/root/zshaper/calibrate_shaper.py $@ --scv=$SCV -r 1

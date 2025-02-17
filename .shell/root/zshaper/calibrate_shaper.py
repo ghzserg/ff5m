@@ -6,6 +6,7 @@
 #
 # This file may be distributed under the terms of the GNU GPLv3 license.
 from __future__ import print_function
+from datetime import datetime
 import importlib, optparse, os, sys
 from textwrap import wrap
 import numpy as np, matplotlib
@@ -43,7 +44,7 @@ def parse_log(logname):
 # Find the best shaper parameters
 def calibrate_shaper(datas, csv_output, *, shapers, damping_ratio, scv,
                      shaper_freqs, max_smoothing, test_damping_ratios,
-                     max_freq, resp_json):
+                     max_freq, resp_json, send_klipper):
     helper = shaper_calibrate.ShaperCalibrate(printer=None)
     if isinstance(datas[0], shaper_calibrate.CalibrationData):
         calibration_data = datas[0]
@@ -66,6 +67,9 @@ def calibrate_shaper(datas, csv_output, *, shapers, damping_ratio, scv,
         print("Нет рекомендуемых шейперов, возможно ошибочное значение для --shapers=%s" %
               (','.join(shapers)))
         return None, None, None
+    if send_klipper == "X" or send_klipper == "Y":
+        with open('/tmp/print', 'a') as file:
+            file.write("SET_INPUT_SHAPER SHAPER_FREQ_%s=%s SHAPER_TYPE_%s=%s" % (send_klipper, shaper.name, send_klipper, shaper.freq))
     if resp_json == 0.0:
         print("Рекомендуемый шейпер %s @ %.1f Hz" % (shaper.name, shaper.freq))
     if csv_output is not None:
@@ -100,7 +104,9 @@ def plot_freq_response(lognames, calibration_data, shapers,
     ax.plot(freqs, py, label='Y', color='green')
     ax.plot(freqs, pz, label='Z', color='blue')
 
-    title = "Частотная характеристика и шейперы %s (zmod)" % (', '.join(lognames))
+    current_time = datetime.now()
+    formatted_time = current_time.strftime("%d.%m.%y %H:%M")
+    title = "Шейперы %s (zmod) %s" % (', '.join(lognames), formatted_time)
     ax.set_title("\n".join(wrap(title, MAX_TITLE_LENGTH)))
     ax.xaxis.set_minor_locator(matplotlib.ticker.MultipleLocator(5))
     ax.yaxis.set_minor_locator(matplotlib.ticker.AutoMinorLocator())
@@ -177,6 +183,8 @@ def main():
                     default=6, help="height (inches) of the graph(s)")
     opts.add_option("-r", "--resp", type="float", dest="resp_json",
                     default=0, help="rep json")
+    opts.add_option("--send", type="string", dest="send_klipper",
+                    default="", help="Send to Klipper [X|Y]")
 
     options, args = opts.parse_args()
     if len(args) < 1:
@@ -239,7 +247,7 @@ def main():
             scv=options.scv, shaper_freqs=shaper_freqs,
             max_smoothing=options.max_smoothing,
             test_damping_ratios=test_damping_ratios,
-            max_freq=max_freq, resp_json=options.resp_json)
+            max_freq=max_freq, resp_json=options.resp_json, send_klipper=options.send_klipper)
     if selected_shaper is None:
         return
 
