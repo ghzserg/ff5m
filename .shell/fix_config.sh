@@ -233,7 +233,7 @@ press_gcode:
         then
             NEED_REBOOT=1
 
-            grep -q "motion_sensor" /opt/config/mod_data/variables.cfg && echo "motion_sensor = 0" >>/opt/config/mod_data/variables.cfg
+            ! grep -q "motion_sensor" /opt/config/mod_data/variables.cfg && sed -i '1 i\motion_sensor = 0' /opt/config/mod_data/variables.cfg
             sed -i "s/^motion_sensor.*/motion_sensor = 0/" /opt/config/mod_data/variables.cfg
 
             sed -e '/^\[filament_switch_sensor e0_sensor/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
@@ -251,7 +251,7 @@ press_gcode:
         then
             NEED_REBOOT=1
 
-            grep -q "motion_sensor" /opt/config/mod_data/variables.cfg && echo "motion_sensor = 1" >>/opt/config/mod_data/variables.cfg
+            ! grep -q "motion_sensor" /opt/config/mod_data/variables.cfg && sed -i '1 i\motion_sensor = 1' /opt/config/mod_data/variables.cfg
             sed -i "s/^motion_sensor.*/motion_sensor = 1/" /opt/config/mod_data/variables.cfg
 
             sed -e '/^\[filament_motion_sensor e0_sensor/,/^\[/d' ${PRINTER_BASE} >printer.base.tmp
@@ -293,7 +293,8 @@ stepper: stepper_x, stepper_y, stepper_z
         fi
     fi
 
-    grep -q "motion_sensor" /opt/config/mod_data/variables.cfg && echo "motion_sensor = 0" >>/opt/config/mod_data/variables.cfg
+
+    ! grep -q "motion_sensor" /opt/config/mod_data/variables.cfg && sed -i '1 i\motion_sensor = 0' /opt/config/mod_data/variables.cfg
 
     # Режим с экраном
     if grep -q '^\[include mod.user.cfg\]' ${PRINTER_CFG}; then
