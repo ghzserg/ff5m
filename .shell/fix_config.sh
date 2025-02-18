@@ -54,6 +54,7 @@ fix_config()
     check_link /etc/init.d/S00fix /opt/config/mod/.shell/fix_config.sh
     check_link /usr/bin/audio.py /opt/config/mod/.shell/root/audio/audio.py
 
+
     NEED_REBOOT=0
     PRINTER_BASE_ORIG="/opt/config/printer.base.cfg"
     PRINTER_CFG_ORIG="/opt/config/printer.cfg"
@@ -100,7 +101,8 @@ unset LD_PRELOAD
     fi
 
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py || cp /opt/config/mod/.shell/save_variables.py /opt/klipper/klippy/extras/save_variables.py
-    grep -q ZCONTROL_STATUS /opt/klipper/klippy/extras/spi_temperature.py || cp /opt/config/mod/.shell/spi_temperature.py /opt/klipper/klippy/extras/spi_temperature.py
+    grep -q "Zcontrol 1.1" /opt/klipper/klippy/extras/spi_temperature.py || cp /opt/config/mod/.shell/spi_temperature.py /opt/klipper/klippy/extras/spi_temperature.py
+    check_link /opt/config/mod/.shell/zmod.py /opt/klipper/klippy/extras/zmod.py
 
     # Fix possible ordering issue if a callback blocks in button handler#6440
     grep -q receive_time /opt/klipper/klippy/extras/buttons.py || cp /opt/config/mod/.shell/buttons.py /opt/klipper/klippy/extras/buttons.py

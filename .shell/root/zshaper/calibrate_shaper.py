@@ -67,10 +67,9 @@ def calibrate_shaper(datas, csv_output, *, shapers, damping_ratio, scv,
         print("Нет рекомендуемых шейперов, возможно ошибочное значение для --shapers=%s" %
               (','.join(shapers)))
         return None, None, None
-    if send_klipper == "X":
-        save_params(configfile, 'x', shaper_name, shaper_freq)
-    if send_klipper == "Y":
-        save_params(configfile, 'y', shaper_name, shaper_freq)
+    if send_klipper == "X" or send_klipper == "Y":
+        with open('/tmp/printer', 'a') as file:
+            file.write("SAVE_SHAPER AXIS=%s NAME=%s FREQUENCY=%.1f\n" % (send_klipper, shaper.name, shaper.freq))
     if resp_json == 0.0:
         print("Рекомендуемый шейпер %s @ %.1f Hz" % (shaper.name, shaper.freq))
     if csv_output is not None:

@@ -7,6 +7,7 @@
 import math, logging
 from . import bus
 
+# Zcontrol 1.1
 
 ######################################################################
 # SensorBase
@@ -44,10 +45,13 @@ class SensorBase:
         self.zcontrol = 1
 
     def cmd_ZCONTROL_STATUS(self, gcmd):
-        if self.zcontrol == 1:
-            gcmd.respond_info("Контроль включен для веса %d" % (self.max_temp))
+        if self.max_temp == 2048:
+            gcmd.respond_info("Контроль веса не настроен. // Для настройки: NOZZLE_CONTROL WEIGHT=1500")
         else:
-            gcmd.respond_info("Контроль выключен для веса %d" % (self.max_temp))
+            if self.zcontrol == 1:
+                gcmd.respond_info("Вес: %d; Контроль настроен и активен." % (self.max_temp))
+            else:
+                gcmd.respond_info("Вес: %d; Контроль настроен и не активен." % (self.max_temp))
 
     def cmd_ZCONTROL_OFF(self, gcmd):
         self.zcontrol = 0
