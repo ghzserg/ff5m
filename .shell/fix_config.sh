@@ -297,7 +297,7 @@ stepper: stepper_x, stepper_y, stepper_z
     ! grep -q "motion_sensor" /opt/config/mod_data/variables.cfg && sed -i '1 i\motion_sensor = 0' /opt/config/mod_data/variables.cfg
 
     # Режим с экраном
-    if grep -q '^\[include mod.user.cfg\]' ${PRINTER_CFG}; then
+    if grep -q '^\[include ./mod/mod.cfg\]' ${PRINTER_CFG}; then
         grep -q '^\[include ./mod/switch_sensor_display_off.cfg\]' ${PRINTER_CFG} && sed -i '/^\[include .\/mod\/switch_sensor_display_off.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
         if grep -q "motion_sensor = 1" /opt/config/mod_data/variables.cfg; then
             ! grep -q '^\[include ./mod/motion_sensor.cfg\]'       ${PRINTER_CFG} && sed -i '/^\[include \.\/mod\/mod\.cfg\]/a [include ./mod/motion_sensor.cfg]' ${PRINTER_CFG} && NEED_REBOOT=1
@@ -309,7 +309,7 @@ stepper: stepper_x, stepper_y, stepper_z
     fi
 
     # Режим без экрана
-    if grep -q '^\[include display.off.cfg\]' ${PRINTER_CFG}; then
+    if grep -q '^\[include ./mod/display_off.cfg\]' ${PRINTER_CFG}; then
         grep -q '^\[include ./mod/switch_sensor.cfg\]'                   ${PRINTER_CFG} && sed -i '/^\[include .\/mod\/switch_sensor.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
         if grep -q "motion_sensor = 1" /opt/config/mod_data/variables.cfg; then
             ! grep -q '^\[include ./mod/motion_sensor.cfg\]' ${PRINTER_CFG} && sed -i '/^\[include \.\/mod\/diplay_off\.cfg\]/a [include ./mod/motion_sensor.cfg]' ${PRINTER_CFG} && NEED_REBOOT=1
