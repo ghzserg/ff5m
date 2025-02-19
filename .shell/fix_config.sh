@@ -100,6 +100,7 @@ unset LD_PRELOAD
         china_block polar3d.com
     fi
 
+    grep -q _output_callback_gcode /opt/klipper/klippy/webhooks.py || cp /opt/config/mod/.shell/webhooks.py /opt/klipper/klippy/webhooks.py
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py || cp /opt/config/mod/.shell/save_variables.py /opt/klipper/klippy/extras/save_variables.py
     grep -q "Zcontrol 1.1" /opt/klipper/klippy/extras/spi_temperature.py || cp /opt/config/mod/.shell/spi_temperature.py /opt/klipper/klippy/extras/spi_temperature.py
     check_link /opt/klipper/klippy/extras/zmod.py /opt/config/mod/.shell/zmod.py

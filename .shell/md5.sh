@@ -33,6 +33,7 @@ find .  \
     -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
+    -and -not -path "./opt/klipper/klippy/webhooks.py" \
     -and -not -path "./opt/key.priv" \
     -and -not -path "./opt/private.pem" \
     -and -not -path "./opt/key.pub" \
@@ -110,6 +111,7 @@ find .  \
     -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
+    -and -not -path "./opt/klipper/klippy/webhooks.py" \
     -and -not -path "./opt/key.priv" \
     -and -not -path "./opt/private.pem" \
     -and -not -path "./opt/key.pub" \
@@ -156,6 +158,7 @@ find .  \
     -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
+    -and -not -path "./opt/klipper/klippy/webhooks.py" \
     -and -not -path "./opt/key.priv" \
     -and -not -path "./opt/private.pem" \
     -and -not -path "./opt/key.pub" \
@@ -201,6 +204,7 @@ find .  \
     -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
+    -and -not -path "./opt/klipper/klippy/webhooks.py" \
     -and -not -path "./opt/key.priv" \
     -and -not -path "./opt/private.pem" \
     -and -not -path "./opt/key.pub" \
@@ -245,6 +249,7 @@ find .  \
     -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
+    -and -not -path "./opt/klipper/klippy/webhooks.py" \
     -and -not -path "./opt/key.priv" \
     -and -not -path "./opt/private.pem" \
     -and -not -path "./opt/key.pub" \
@@ -289,6 +294,7 @@ find .  \
     -and -not -path "./opt/klipper/klippy/extras/save_variables.py" \
     -and -not -path "./opt/klipper/klippy/mcu.py" \
     -and -not -path "./opt/klipper/klippy/toolhead.py" \
+    -and -not -path "./opt/klipper/klippy/webhooks.py" \
     -and -not -path "./opt/key.priv" \
     -and -not -path "./opt/private.pem" \
     -and -not -path "./opt/key.pub" \

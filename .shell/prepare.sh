@@ -26,6 +26,7 @@ restore_base()
     ns_off cloud.sz3dp.com
     ns_off polar3d.com
 
+    grep -q _output_callback_gcode /opt/klipper/klippy/webhooks.py && cp /opt/config/mod/.shell/webhooks.py.orig /opt/klipper/klippy/webhooks.py
     grep -q ZLOAD_VARIABLE /opt/klipper/klippy/extras/save_variables.py && cp /opt/config/mod/.shell/save_variables.py.orig /opt/klipper/klippy/extras/save_variables.py
     grep -q zmod /opt/klipper/klippy/extras/spi_temperature.py && cp /opt/config/mod/.shell/spi_temperature.py.orig /opt/klipper/klippy/extras/spi_temperature.py
     grep -q receive_time /opt/klipper/klippy/extras/buttons.py && cp /opt/config/mod/.shell/buttons.py.orig /opt/klipper/klippy/extras/buttons.py
