@@ -31,6 +31,7 @@ fix_config()
     fstrim /data -v
     fstrim / -v
 
+    [ -f /opt/config/mod_data/variables.cfg ] || echo "[Variables]" >/opt/config/mod_data/variables.cfg
 
     # Защита от самонадеянных, кто выклчюает SWAP при 128 мегабайтах оперативной памяти
     if grep -q "use_swap = 0" /opt/config/mod_data/variables.cfg; then
