@@ -9,7 +9,6 @@ prepare_chroot()
 
     rm -f /root/guppyscreen/guppyscreen
     cp /opt/config/mod/.shell/root/guppyscreen /root/guppyscreen/guppyscreen
-#    ln /bin/guppyscreen /root/guppyscreen/guppyscreen
 
     [ -L /root/printer_data/scripts ] || ln -s /opt/config/mod/.shell /root/printer_data/scripts
 
@@ -49,6 +48,8 @@ if [ "$SWAP" == "/root/swap" ]
 fi
 
 prepare_chroot
+
+/opt/config/mod/.shell/root/console_log
 
 rm -f /root/guppyscreen/guppyconfig.json
 ln -s /opt/config/mod_data/guppyconfig.json /root/guppyscreen/guppyconfig.json
