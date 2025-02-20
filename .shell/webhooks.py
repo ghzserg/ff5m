@@ -3,6 +3,7 @@
 # Copyright (C) 2020 Eric Callahan <arksine.code@gmail.com>
 #
 # This file may be distributed under the terms of the GNU GPLv3 license
+# zmod 1.1
 import logging, socket, os, sys, errno, json, collections
 import gcode
 
@@ -422,15 +423,16 @@ class GCodeHelper:
     def _handle_help(self, web_request):
         web_request.send(self.gcode.get_command_help())
     def _output_callback_gcode(self, msg):
-        for cconn, template in list(self.clients.items()):
-            if cconn.is_closed():
-                del self.clients[cconn]
-                continue
-            tmp = dict(template)
-            if tmp['key'] == 1945:
-                tmp['params'] = {'response': msg}
-                cconn.send(tmp)
-                break;
+        if self.is_output_registered:
+            for cconn, template in list(self.clients.items()):
+                if cconn.is_closed():
+                    del self.clients[cconn]
+                    continue
+                tmp = dict(template)
+                if 'key' in tmp and tmp['key'] == 1945:
+                    tmp['params'] = {'response': msg}
+                    cconn.send(tmp)
+                    break;
     def _handle_script(self, web_request):
         self._output_callback_gcode(">> " + web_request.get_str('script'))
         self.gcode.run_script(web_request.get_str('script'))
