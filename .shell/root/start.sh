@@ -49,7 +49,15 @@ fi
 
 prepare_chroot
 
-/opt/config/mod/.shell/root/console_log
+if grep -q display_off.cfg /opt/config/printer.cfg; then
+    if grep -q "save_restore = 0" /opt/config/mod_data/variables.cfg; then
+        /opt/config/mod/.shell/root/console_log --not-save
+    else
+        /opt/config/mod/.shell/root/console_log --save
+    fi
+else
+    /opt/config/mod/.shell/root/console_log --not-save
+fi
 
 rm -f /root/guppyscreen/guppyconfig.json
 ln -s /opt/config/mod_data/guppyconfig.json /root/guppyscreen/guppyconfig.json

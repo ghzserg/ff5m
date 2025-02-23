@@ -5,8 +5,8 @@ MOD=/data/.mod/.zmod
 unset LD_PRELOAD
 
 if [ "$1" == "test" ]; then
-    [ -f /opt/config/mod_data/klipper_data.json ] && echo "!! Найдена незаконченая печать, используйте ZRESTORE для восстановления !!"
-    exit;
+    [ -f /opt/config/mod_data/klipper_data.json ] && echo "!! Найдена незаконченая печать, используйте ZRESTORE для восстановления !!" && echo "Для удаления данных восстановления ZRESTORE TEST=2"
+    exit
 fi
 
 if [ -f /opt/config/mod_data/klipper_data.json ]; then

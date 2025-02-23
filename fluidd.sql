@@ -272,6 +272,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "visible": true
         },
         {
+            "alias": "Восстановить печать",
+            "categoryId": "944c031b-feef-4b75-badf-21c30508fb24",
+            "color": "",
+            "disabledWhilePrinting": false,
+            "name": "zrestore",
+            "visible": true
+        },
+        {
             "alias": "",
             "categoryId": "944c031b-feef-4b75-badf-21c30508fb24",
             "color": "",
@@ -1000,6 +1008,14 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('main
                "color" : "group",
                "name" : "MUTE",
                "pos" : 18,
+               "showInPause" : true,
+               "showInPrinting" : true,
+               "showInStandby" : true
+            },
+            {
+               "color" : "group",
+               "name" : "ZRESTORE",
+               "pos" : 19,
                "showInPause" : true,
                "showInPrinting" : true,
                "showInStandby" : true
