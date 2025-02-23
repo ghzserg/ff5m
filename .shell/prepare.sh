@@ -58,9 +58,7 @@ restore_base()
         then
             echo '
 [fan_generic pcb_fan]
-pause_on_runout: False
-switch_pin: !PB14
-event_delay: 1.0
+pin:PB7
 ' >>/opt/config/printer.base.cfg
     fi
 
