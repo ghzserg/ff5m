@@ -113,6 +113,9 @@ unset LD_PRELOAD
         rm -f /opt/klipper/klippy/extras/load_cell_tare.py
     fi
 
+    [[ $(tail -c1 ${PRINTER_CFG}) != "" ]] && echo >> ${PRINTER_CFG} && NEED_REBOOT=1
+    [[ $(tail -c1 ${PRINTER_BASE}) != "" ]] && echo >> ${PRINTER_BASE} && NEED_REBOOT=1
+
     grep -q '^\[include check_md5.cfg\]' ${PRINTER_CFG} && sed -i '/^\[include check_md5.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
 
     grep -q '^\[include ./mod/mod.cfg\]' ${PRINTER_CFG} && grep -q '^\[include ./mod/display_off.cfg\]' ${PRINTER_CFG} && sed -i '/^\[include .\/mod\/display_off.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
@@ -321,6 +324,10 @@ stepper: stepper_x, stepper_y, stepper_z
               grep -q '^\[include ./mod/motion_sensor.cfg\]'             ${PRINTER_CFG} && sed -i '/^\[include .\/mod\/motion_sensor.cfg\]/d' ${PRINTER_CFG} && NEED_REBOOT=1
         fi
     fi
+
+    [[ $(tail -c1 ${PRINTER_CFG}) != "" ]] && echo >> ${PRINTER_CFG} && NEED_REBOOT=1
+    [[ $(tail -c1 ${PRINTER_BASE}) != "" ]] && echo >> ${PRINTER_BASE} && NEED_REBOOT=1
+
 
     if [ ${NEED_REBOOT} -eq 1 ]
         then
