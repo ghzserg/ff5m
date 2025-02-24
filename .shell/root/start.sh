@@ -47,6 +47,7 @@ if [ "$SWAP" == "/root/swap" ]
         grep -q "use_swap = 0" /opt/config/mod_data/variables.cfg || swapon $SWAP
 fi
 
+date 2024.01.01-00:00:00
 prepare_chroot
 
 if grep -q display_off.cfg /opt/config/printer.cfg; then
@@ -86,8 +87,6 @@ mount --bind /data/lost+found /data/.mod
 if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
     /opt/config/mod/.shell/root/S60klipper start
 fi
-
-date 2024.01.01-00:00:00
 
 # Пробуем синхронизировать время
 ntpd -dd -n -q -p ru.pool.ntp.org || \
