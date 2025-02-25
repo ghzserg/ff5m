@@ -205,7 +205,7 @@ start_prepare()
 
     mkdir -p $MOD/data
     mount --bind /data $MOD/data
-    mount --bind /mnt/usb $MOD/data/usb
+#    mount --bind /mnt/usb $MOD/data/usb
 
 #    mkdir -p $MOD/var/run/
 #    mount --bind /var/run/ $MOD/var/run/
