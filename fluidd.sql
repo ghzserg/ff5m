@@ -23,7 +23,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
         },
         {
             "id": "5ceaef9c-2e66-4bbf-998b-94fcab116597",
-            "name": "5. Без экрана"
+            "name": "6. Вызов макроса на слое"
         }
     ],
     "expanded": [
@@ -616,7 +616,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "visible": false
         },
         {
-            "alias": "",
+            "alias": "Вызвать макрос на слое",
             "categoryId": "5ceaef9c-2e66-4bbf-998b-94fcab116597",
             "color": "",
             "disabledWhilePrinting": false,
@@ -624,7 +624,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "visible": true
         },
         {
-            "alias": "",
+            "alias": "Вызвать макрос на следующем слое",
             "categoryId": "5ceaef9c-2e66-4bbf-998b-94fcab116597",
             "color": "",
             "disabledWhilePrinting": false,
