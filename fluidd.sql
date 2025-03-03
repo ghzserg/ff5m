@@ -637,7 +637,7 @@ INSERT INTO "main"."namespace_store" ("namespace", "key", "value") VALUES ('flui
             "color": "",
             "disabledWhilePrinting": false,
             "name": "set_print_stats_info",
-            "visible": true
+            "visible": false
         },
         {
             "alias": "",
