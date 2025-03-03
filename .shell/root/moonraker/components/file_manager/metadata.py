@@ -69,6 +69,15 @@ def regex_find_ints(pattern: str, data: str) -> List[int]:
             pass
     return []
 
+def regex_find_strings(pattern: str, separators: str, data: str) -> List[str]:
+    pattern = pattern.replace(r"(%S)", r"(.*)")
+    separators = re.escape(separators)
+    delimiters = rf"[{separators}]"
+    match = re.search(pattern, data)
+    if match and match.group(1):
+        return re.split(delimiters, match.group(1).strip('"'))
+    return []
+
 def regex_find_float(pattern: str, data: str) -> Optional[float]:
     pattern = pattern.replace(r"(%F)", r"([0-9]*\.?[0-9]+)")
     match = re.search(pattern, data)
@@ -198,10 +207,28 @@ class BaseSlicer(object):
     def parse_filament_weight_total(self) -> Optional[float]:
         return None
 
+    def parse_filament_weights(self) -> Optional[List[float]]:
+        return None
+
     def parse_filament_name(self) -> Optional[str]:
         return None
 
     def parse_filament_type(self) -> Optional[str]:
+        return None
+
+    def parse_filament_colors(self) -> Optional[List[str]]:
+        return None
+
+    def parse_extruder_colors(self) -> Optional[List[str]]:
+        return None
+
+    def parse_filament_temps(self) -> Optional[List[int]]:
+        return None
+
+    def parse_referenced_tools(self) -> Optional[List[int]]:
+        return None
+
+    def parse_mmu_print(self) -> Optional[int]:
         return None
 
     def parse_estimated_time(self) -> Optional[float]:
@@ -214,6 +241,9 @@ class BaseSlicer(object):
         return None
 
     def parse_first_layer_extr_temp(self) -> Optional[float]:
+        return None
+
+    def parse_filament_change_count(self) -> Optional[int]:
         return None
 
     def parse_thumbnails(self) -> Optional[List[Dict[str, Any]]]:
@@ -380,12 +410,57 @@ class PrusaSlicer(BaseSlicer):
             self.footer_data
         )
 
+    def parse_filament_weights(self) -> Optional[List[float]]:
+        line = regex_find_string(r'filament\sused\s\[g\]\s=\s(%S)\n', self.footer_data)
+        if line:
+            weights = regex_find_floats(
+                r"(%F)", line
+            )
+            if weights:
+                return weights
+        return None
+
     def parse_filament_type(self) -> Optional[str]:
-        return regex_find_string(r";\sfilament_type\s=\s(%S)", self.footer_data)
+        return regex_find_string(
+            r";\sfilament_type\s=\s(%S)", self.footer_data
+        )
 
     def parse_filament_name(self) -> Optional[str]:
         return regex_find_string(
             r";\sfilament_settings_id\s=\s(%S)", self.footer_data
+        )
+
+    def parse_filament_colors(self) -> Optional[List[str]]:
+        return regex_find_strings(
+            r";\sfilament_colour\s=\s(%S)", ",;", self.footer_data
+        )
+
+    def parse_extruder_colors(self) -> Optional[List[str]]:
+        return regex_find_strings(
+            r";\sextruder_colour\s=\s(%S)", ",;", self.footer_data
+        )
+
+    def parse_filament_temps(self) -> Optional[List[int]]:
+        temps = regex_find_strings(
+            r";\s(?:nozzle_)?temperature\s=\s(%S)", ",;", self.footer_data
+        )
+        try:
+            return [int(t) for t in temps]
+        except ValueError:
+            return None
+
+    def parse_referenced_tools(self) -> Optional[List[int]]:
+        tools = regex_find_strings(
+            r";\sreferenced_tools\s=\s(%S)", ",;", self.footer_data
+        )
+        try:
+            return [int(t) for t in tools]
+        except ValueError:
+            return None
+
+    def parse_mmu_print(self) -> Optional[int]:
+        return regex_find_int(
+            r";\ssingle_extruder_multi_material\s=\s(%D)", self.footer_data
         )
 
     def parse_estimated_time(self) -> Optional[float]:
@@ -428,6 +503,9 @@ class PrusaSlicer(BaseSlicer):
 
     def parse_layer_count(self) -> Optional[int]:
         return regex_find_int(r"; total layers count = (%D)", self.footer_data)
+
+    def parse_filament_change_count(self) -> Optional[int]:
+        return regex_find_int(r"; total filament change = (%D)", self.footer_data)
 
 class Slic3rPE(PrusaSlicer):
     def check_identity(self, data: str) -> bool:
@@ -939,8 +1017,15 @@ SUPPORTED_DATA = [
     'chamber_temp',
     'filament_name',
     'filament_type',
+    'filament_colors',
+    'filament_change_count',
+    'extruder_colors',
+    'filament_temps',
+    'referenced_tools',
+    'mmu_print',
     'filament_total',
     'filament_weight_total',
+    'filament_weights',
     'thumbnails'
 ]
 
