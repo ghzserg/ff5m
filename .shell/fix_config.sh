@@ -512,17 +512,21 @@ stepper: stepper_x, stepper_y, stepper_z
     diff -u ${PRINTER_CFG} ${PRINTER_CFG_ORIG}
     echo "END fix_config"
 
-    if [ "$1" == "start" ] && grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
-        cnt=$(find /opt/PROGRAM/control/ -name Update|wc -l)
-        if [ "$cnt" -ne 0 ]; then
-            # Если обновляем MCU
-            find /opt/PROGRAM/control/ -name Update| sed 's/Update//'| while read a; do
-                mount -o bind /opt/config/mod/.shell/update_mcu.sh ${a}run.sh
-            done
+    if [ "$1" == "start" ]; then
+        if grep -q "klipper12 = 1" /opt/config/mod_data/variables.cfg; then
+            cnt=$(find /opt/PROGRAM/control/ -name Update|wc -l)
+            if [ "$cnt" -ne 0 ]; then
+                # Если обновляем MCU
+                find /opt/PROGRAM/control/ -name Update| sed 's/Update//'| while read a; do
+                    mount -o bind /opt/config/mod/.shell/update_mcu.sh ${a}run.sh
+                done
+            else
+                # Если обновлений нет
+                mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/start.sh
+                sync
+            fi
         else
-            # Если обновлений нет
-            mount -o bind /opt/config/mod/.shell/klipper12.sh /opt/klipper/start.sh
-            sync
+            find /opt/PROGRAM/control/ -name NationsCommand -exec {} -r \;
         fi
     fi
     sync
