@@ -69,6 +69,8 @@ restore_base()
     grep -q '^\[include ./mod/mod.cfg' /opt/config/printer.cfg && sed -i '/mod.cfg/d' /opt/config/printer.cfg
     grep -q '^\[include ./mod_data/user.cfg' /opt/config/printer.cfg && sed -i '/user.cfg/d' /opt/config/printer.cfg
     grep -q '^\[include ./mod/switch_sensor.cfg' /opt/config/printer.cfg && sed -i '/switch_sensor.cfg/d' /opt/config/printer.cfg
+    grep -q '^\[include ./mod/motion_sensor.cfg' /opt/config/printer.cfg && sed -i '/motion_sensor.cfg/d' /opt/config/printer.cfg
+    grep -q '^\[include ./mod/switch_sensor_display_off.cfg' /opt/config/printer.cfg && sed -i '/switch_sensor_display_off.cfg/d' /opt/config/printer.cfg
     grep -q '^\[include ./mod/display_off.cfg' /opt/config/printer.cfg && sed -i '/display_off.cfg/d' /opt/config/printer.cfg
 
     china_razbl api.cloud.flashforge.com
