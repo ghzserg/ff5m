@@ -526,7 +526,8 @@ stepper: stepper_x, stepper_y, stepper_z
                 sync
             fi
         else
-            find /opt/PROGRAM/control/ -name NationsCommand -exec {} -r \;
+            A=$(find /opt/PROGRAM/control/ -name NationsCommand |head -1)
+            $A -r || $A -r
         fi
     fi
     sync
