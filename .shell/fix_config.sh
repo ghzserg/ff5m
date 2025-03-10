@@ -30,6 +30,7 @@ remove_base()
     rm /etc/init.d/S00fix
     rm /etc/init.d/S99moon
     rm /etc/init.d/S98camera
+    rm /etc/init.d/S99camera
     rm /etc/init.d/S98zssh
     rm /etc/init.d/K99moon
     rm -f /etc/init.d/prepare.sh
@@ -189,6 +190,7 @@ fix_config()
     [ -f /opt/config/mod_data/nozzle.cfg ] || echo "">/opt/config/mod_data/nozzle.cfg
 
     [ -f /etc/init.d/S50sshd ] && rm -f /etc/init.d/S50sshd
+    [ -f /etc/init.d/S98camera ] && rm -f /etc/init.d/S98camera
     [ -f /etc/init.d/S55date ] && rm -f /etc/init.d/S55date
     [ -f /bin/dropbearmulti ] && rm -f /bin/dropbearmulti
 
